@@ -1,0 +1,24 @@
+{
+  "name": "tomasklingen.github.io",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "browser-sync": "^2.6.5",
+    "gulp": "^3.8.11"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tomasklingen/tomasklingen.github.io"
+  },
+  "author": "Tomas Klingen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tomasklingen/tomasklingen.github.io/issues"
+  },
+  "homepage": "https://github.com/tomasklingen/tomasklingen.github.io"
+}

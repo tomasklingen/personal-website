@@ -1,24 +1,26 @@
 {
   "name": "tomasklingen.github.io",
+  "author": "Tomas Klingen",
   "version": "1.0.0",
-  "description": "",
+  "description": "Portfolio website Tomas Klingen",
   "main": "index.js",
-  "dependencies": {},
-  "devDependencies": {
-    "browser-sync": "^2.6.5",
-    "gulp": "^3.8.11"
-  },
+  "type": "module",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/tomasklingen/tomasklingen.github.io"
   },
-  "author": "Tomas Klingen",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/tomasklingen/tomasklingen.github.io/issues"
   },
-  "homepage": "https://github.com/tomasklingen/tomasklingen.github.io"
+  "homepage": "https://github.com/tomasklingen/tomasklingen.github.io",
+  "devDependencies": {
+    "vite": "^4.1.4"
+  }
 }

@@ -21,6 +21,6 @@
   },
   "homepage": "https://github.com/tomasklingen/tomasklingen.github.io",
   "devDependencies": {
-    "vite": "^4.1.4"
+    "vite": "^4.3.9"
   }
 }

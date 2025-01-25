@@ -1,26 +1,50 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <meta charset="utf-8" />
     <title>Tomas Klingen</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-</head>
 
+</head>
 <body>
-    <div class="container">
-        <video poster="//i.imgur.com/7DWtLtth.jpg" preload="auto" autoplay="autoplay" muted="muted" loop="loop">
+    <div class="min-h-screen flex items-center justify-center relative w-full h-full overflow-hidden bg-gray-900 text-white">
+        <video class="absolute top-0 left-0 w-full h-full object-cover" poster="//i.imgur.com/7DWtLtth.jpg" preload="auto" autoplay="autoplay" muted="muted" loop="loop">
             <source src="//i.imgur.com/7DWtLtt.webm" type="video/webm">
             <source src="//i.imgur.com/7DWtLtt.mp4" type="video/mp4">
         </video>
-
-        <div class="text-container">
-            <h1><a href="https://www.linkedin.com/in/tomasklingen">Tomas Klingen</a></h1>
-            <h2>Front-end web developer</h2>
-            <h3>Utrecht, Netherlands</h3>
+        <div class="absolute inset-0 flex flex-col items-end justify-center">
+            <div class="text-right space-y-4">
+                <h1 class="text-4xl font-bold mb-2 bg-neutral-900 p-5">
+                    <a href="https://www.linkedin.com/in/tomasklingen" class="hover:text-gray-300 transition">
+                        Tomas Klingen
+                    </a>
+                </h1>
+                <h2 class="text-2xl text-gray-400 bg-neutral-900 p-5">Front-end Web Developer</h2>
+                <h3 class="text-lg text-gray-500 bg-neutral-900 p-5">Nieuwegein, Netherlands</h3>
+                <div class="flex space-x-2">
+                    <a href="https://www.linkedin.com/in/tomasklingen" target="_blank" title="LinkedIn"
+                       class="p-2 bg-neutral-900 hover:bg-neutral-700 transition-colors duration-200 rounded-md group">
+                        <svg class="icon w-6 h-6 text-white group-hover:text-white transition-all duration-200"
+                             viewBox="0 0 24 24" aria-hidden="true">
+                            <path fill="currentColor" d="M19 0h-14c-2.762 0-5 2.238-5 5v14c0 2.762 2.238 5 5 5h14c2.762 0 5-2.238 5-5v-14c0-2.762-2.238-5-5-5zm-12 19h-3v-10h3v10zm-1.5-11.233c-.966 0-1.75-.783-1.75-1.75s.784-1.75 1.75-1.75 1.75.783 1.75 1.75-.783 1.75-1.75 1.75zm13.5 11.233h-3v-5.528c0-1.317-.027-3.012-1.841-3.012-1.843 0-2.127 1.439-2.127 2.918v5.622h-3v-10h2.878v1.354h.041c.4-.757 1.379-1.554 2.841-1.554 3.035 0 3.594 2.002 3.594 4.606v5.594z"/>
+                        </svg>
+                    </a>
+                    <a href="https://github.com/tomasklingen" target="_blank" title="GitHub"
+                       class="p-2 bg-neutral-900 hover:bg-neutral-700 transition-colors duration-200 rounded-md group">
+                        <svg class="icon w-6 h-6 text-white group-hover:text-white transition-all duration-200"
+                             viewBox="0 0 24 24" aria-hidden="true">
+                            <path fill="currentColor" d="M12 .5c-6.624 0-12 5.376-12 12 0 5.306 3.438 9.806 8.207 11.387.6.113.793-.262.793-.583 0-.288-.011-1.048-.016-2.056-3.338.727-4.042-1.609-4.042-1.609-.546-1.386-1.333-1.755-1.333-1.755-1.086-.744.082-.729.082-.729 1.201.084 1.833 1.234 1.833 1.234 1.067 1.83 2.798 1.3 3.482.996.108-.773.42-1.301.762-1.601-2.665-.305-5.466-1.335-5.466-5.933 0-1.311.469-2.383 1.235-3.221-.124-.305-.536-1.527.117-3.184 0 0 1.008-.323 3.301 1.23.96-.267 1.987-.4 3.009-.404 1.022.004 2.049.137 3.012.404 2.289-1.554 3.294-1.23 3.294-1.23.656 1.657.244 2.879.12 3.184.77.838 1.233 1.91 1.233 3.221 0 4.609-2.805 5.624-5.475 5.921.43.371.814 1.104.814 2.223 0 1.606-.014 2.899-.014 3.293 0 .324.192.698.799.58 4.765-1.583 8.198-6.081 8.198-11.384 0-6.624-5.376-12-12-12z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
 </body>
-
 </html>

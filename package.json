@@ -1,25 +1,30 @@
 {
-  "name": "tomasklingen.github.io",
-  "author": "Tomas Klingen",
-  "version": "1.0.0",
-  "description": "Portfolio website Tomas Klingen",
-  "type": "module",
-  "private": true,
-  "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/tomasklingen/tomasklingen.github.io"
-  },
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/tomasklingen/tomasklingen.github.io/issues"
-  },
-  "homepage": "https://github.com/tomasklingen/tomasklingen.github.io",
-  "devDependencies": {
-    "vite": "^6.0.7"
-  }
+	"name": "tomasklingen.github.io",
+	"author": "Tomas Klingen",
+	"version": "1.0.0",
+	"description": "Portfolio website Tomas Klingen",
+	"type": "module",
+	"private": true,
+	"scripts": {
+		"dev": "bunx vite",
+		"build": "bunx vite build",
+		"preview": "bunx vite preview"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/tomasklingen/tomasklingen.github.io"
+	},
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/tomasklingen/tomasklingen.github.io/issues"
+	},
+	"homepage": "https://github.com/tomasklingen/tomasklingen.github.io",
+	"devDependencies": {
+		"@biomejs/biome": "1.9.4",
+		"vite": "^6.0.7"
+	},
+	"dependencies": {
+		"@tailwindcss/vite": "^4.0.0",
+		"tailwindcss": "^4.0.0"
+	}
 }

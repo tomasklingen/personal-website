@@ -21,10 +21,10 @@
 	"homepage": "https://github.com/tomasklingen/tomasklingen.github.io",
 	"devDependencies": {
 		"@biomejs/biome": "1.9.4",
-		"vite": "^6.0.7"
+		"vite": "^6.2.2"
 	},
 	"dependencies": {
-		"@tailwindcss/vite": "^4.0.0",
-		"tailwindcss": "^4.0.0"
+		"@tailwindcss/vite": "^4.0.14",
+		"tailwindcss": "^4.0.14"
 	}
 }

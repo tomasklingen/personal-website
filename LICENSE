@@ -1,6 +1,15 @@
-The MIT License (MIT)
+# LICENSE
 
-Copyright (c) 2025 Tomas
+This repository contains both code and personal content, which are licensed under different terms:
+
+## Code License (MIT License)
+
+The code components of this repository, including React components, utility functions, build scripts, and other software elements, are licensed under the MIT License:
+
+```
+MIT License
+
+Copyright (c) 2025 Tomas Klingen
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -19,4 +28,22 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+```
 
+## Content License (Creative Commons Attribution-NonCommercial 4.0 International)
+
+All personal content, including but not limited to text, images, portfolio items, personal descriptions, project descriptions, and other non-code elements, are licensed under the Creative Commons Attribution-NonCommercial 4.0 International License.
+
+This means you are free to:
+- Share — copy and redistribute the material in any medium or format
+- Adapt — remix, transform, and build upon the material
+
+Under the following terms:
+- Attribution — You must give appropriate credit, provide a link to the license, and indicate if changes were made.
+- NonCommercial — You may not use the material for commercial purposes.
+
+For the full license text, visit: https://creativecommons.org/licenses/by-nc/4.0/legalcode
+
+## Third-Party Components
+
+This project may include third-party open-source software components, each of which has its own license. These licenses are typically included in the respective source files or directories.

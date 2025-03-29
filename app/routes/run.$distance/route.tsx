@@ -3,8 +3,22 @@ import { generatePaceEntries } from '../../running/utils'
 import type { Route } from './+types/route'
 import { PaceTable } from './PaceTable'
 
-export async function clientLoader(loaderArgs: Route.ClientLoaderArgs) {
-	const config = distanceConfig[loaderArgs.params.distance as Distance]
+export function meta({ data }: Route.MetaArgs) {
+	return [
+		{ title: `${data.title} Running Pace Calculation Table | Tomas Klingen` },
+		{
+			name: 'description',
+			content: `Calculate your ideal running pace for the ${data.title} distance. Find your perfect pace per kilometer and mile for ${data.title} races and training.`,
+		},
+		{
+			name: 'keywords',
+			content: `running pace, ${data.title} pace, running calculator, pace per km, pace per mile, race pace`,
+		},
+	]
+}
+
+export async function loader({ params }: Route.LoaderArgs) {
+	const config = distanceConfig[params.distance as Distance]
 
 	if (!config) {
 		throw new Response('Not Found', { status: 404 })
@@ -21,12 +35,12 @@ export async function clientLoader(loaderArgs: Route.ClientLoaderArgs) {
 	return { ...config, entries }
 }
 
-export default function RunDistance(props: Route.ComponentProps) {
-	if (!props.loaderData) {
-		return null
-	}
+export async function clientLoader({ serverLoader }: Route.ClientLoaderArgs) {
+	return serverLoader()
+}
 
+export default function RunDistance(props: Route.ComponentProps) {
 	const { title, entries } = props.loaderData
 
-	return <PaceTable title={`${title} Pace Table`} entries={entries} />
+	return <PaceTable title={`${title} Running Paces`} entries={entries} />
 }

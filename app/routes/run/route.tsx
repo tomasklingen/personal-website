@@ -1,8 +1,15 @@
+import picoUrl from '@picocss/pico/css/pico.classless.css?url'
 import { NavLink, Outlet, redirect, useLocation } from 'react-router'
-import { links } from '~/running/data'
+import { links as runningLinks } from '~/running/data'
+import type { Route } from './+types/route'
 import './run.css'
 
-import type { Route } from './+types/route'
+export const links: Route.LinksFunction = () => [
+	{
+		rel: 'stylesheet',
+		href: picoUrl,
+	},
+]
 
 export function clientLoader({ params }: Route.ClientActionArgs) {
 	if (Object.keys(params).length === 0) {
@@ -22,7 +29,7 @@ export default function RunRoute() {
 
 			<nav>
 				<ul>
-					{links.map(({ to, label }) => (
+					{runningLinks.map(({ to, label }) => (
 						<li key={to}>
 							<NavLink to={to}>{label}</NavLink>
 						</li>

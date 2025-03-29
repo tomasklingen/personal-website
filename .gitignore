@@ -1,2 +1,8 @@
+.DS_Store
+.zed
 node_modules/
-dist/
+
+# React Router
+/.react-router/
+/build/
+/dist

@@ -1,0 +1,11 @@
+@import url("https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.classless.min.css");
+
+nav ul {
+	li {
+		flex: 1;
+	}
+	a {
+		/* transform: rotate(45deg); */
+		white-space: nowrap;
+	}
+}

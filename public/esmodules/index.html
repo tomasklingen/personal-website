@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+	<meta charset='UTF-8'>
+	<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+	<title>ES Modules vs Traditional Scripts</title>
+	<style>
+		body { font-family: sans-serif; line-height: 1.6 }
+		section { border: 1px solid #ccc; padding: 1em; margin-bottom: 1em }
+		h2 { margin-top: 0; border-bottom: 1px solid #eee; padding-bottom: 0.5em }
+		code { background-color: #f4f4f4; padding: 0.2em 0.4em; border-radius: 3px }
+		p { margin: 0.5em 0 }
+	</style>
+</head>
+<body>
+
+	<h1>ES Modules vs Traditional Scripts Demonstration</h1>
+	<p>Open the browser's developer console (F12) to see the execution order logs.</p>
+
+	<!-- Section 1: Traditional Scripts -->
+	<section>
+		<h2>Old Way: Traditional <code>&lt;script&gt;</code> (<code>type="text/javascript"</code>)</h2>
+		<p>
+			These scripts load and execute synchronously by default (unless <code>async</code> or <code>defer</code> is used), potentially blocking page rendering.
+			They share the global scope (<code>window</code>), leading to potential variable name collisions and implicit dependencies based on load order.
+		</p>
+		<div id='output-old'>
+			<p><strong>Output from Traditional Scripts:</strong></p>
+		</div>
+		<!-- Traditional scripts are loaded and executed in order -->
+		<!-- Script 2 relies on Script 1 having already run and modified the global scope -->
+		<script src='js/old_script_1.js' type='text/javascript'></script>
+		<script src='js/old_script_2.js' type='text/javascript'></script>
+	</section>
+
+	<!-- Section 2: ES Modules -->
+	<section>
+		<h2>New Way: ES Modules (<code>type="module"</code>)</h2>
+		<p>
+			Modules load asynchronously (like <code>defer</code> by default) and non-blocking. They have their own private scope.
+			Dependencies are explicit using <code>import</code> and <code>export</code>, improving organization and reducing conflicts. The browser builds a dependency graph.
+			Module code runs in strict mode automatically.
+		</p>
+		<div id='output-new'>
+			<p><strong>Output from ES Modules:</strong></p>
+		</div>
+		<!-- Only the entry point module needs to be included -->
+		<!-- The browser handles loading imported dependencies (module_utils.js) -->
+		<!-- Modules are fetched asynchronously, parsed, and executed after the HTML is parsed, in order -->
+		<script src='js/main_module.js' type='module'></script>
+	</section>
+
+	<h2>Key Differences & Benefits of ES Modules:</h2>
+	<ul>
+		<li><strong>Scope:</strong> Traditional scripts pollute the global scope. Modules have their own scope, preventing naming collisions.</li>
+		<li><strong>Loading:</strong> Traditional scripts block rendering by default. Modules are deferred by default (fetch asynchronously, execute after HTML parsing).</li>
+		<li><strong>Dependencies:</strong> Traditional script dependencies are implicit (based on order). Modules use explicit <code>import</code>/<code>export</code>, making dependencies clear and manageable.</li>
+		<li><strong>Modularity (SRP, ISP):</strong> Modules encourage breaking code into smaller, focused units (Single Responsibility Principle) with clear interfaces (Interface Segregation Principle), improving organization and reusability (DRY).</li>
+		<li><strong>Maintainability & Scalability:</strong> Explicit dependencies and encapsulation make module-based code easier to understand, test, refactor, and scale (KISS, Testability).</li>
+		<li><strong>Strict Mode:</strong> Modules run in strict mode automatically, catching common coding errors.</li>
+		<li><strong>Evaluation:</strong> Module code is evaluated only once, even if imported multiple times. Traditional scripts run every time they are encountered (unless guarded).</li>
+	</ul>
+
+</body>
+</html>

@@ -37,7 +37,7 @@
         <div class="button-group" role="group" id="distance-group">
             <button data-distance="1k">1K</button>
             <button data-distance="1mile">1 Mile</button>
-            <button data-distance="5k" class="active">5K</button>
+            <button data-distance="5k">5K</button>
             <button data-distance="10k">10K</button>
             <button data-distance="half">Half Marathon</button>
             <button data-distance="full">Marathon</button>
@@ -379,49 +379,6 @@
             <p>© 2025 Running Paces - Tomas Klingen</p>
         </footer>
     </main>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const buttonGroup = document.getElementById('distance-group');
-            const sections = document.querySelectorAll('.distance-section');
-            const buttons = buttonGroup.querySelectorAll('button');
-            
-            function updateView(distance) {
-                const targetDistance = distance || '5k';
-                
-                // Update URL hash without triggering hashchange
-                if (location.hash !== '#' + targetDistance) {
-                    history.replaceState(null, '', '#' + targetDistance);
-                }
-
-                // Update button states
-                buttons.forEach(btn => {
-                    btn.classList.toggle('active', btn.dataset.distance === targetDistance);
-                });
-
-                // Update sections
-                sections.forEach(section => {
-                    section.classList.toggle('active', section.id === targetDistance);
-                });
-            }
-
-            // Handle initial load and hash changes
-            window.addEventListener('hashchange', () => {
-                const distance = location.hash.slice(1);
-                updateView(distance);
-            });
-
-            // Handle button clicks
-            buttonGroup.addEventListener('click', function(e) {
-                if (e.target.tagName === 'BUTTON') {
-                    const distance = e.target.dataset.distance;
-                    location.hash = '#' + distance;
-                }
-            });
-
-            // Initial view
-            updateView(location.hash.slice(1));
-        });
-    </script>
+    <script src="./navigate.ts" type="module"></script>
 </body>
 </html>

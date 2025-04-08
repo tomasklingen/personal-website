@@ -23,6 +23,7 @@
 	"homepage": "https://github.com/tomasklingen/tomasklingen.github.io",
 	"devDependencies": {
 		"@biomejs/biome": "1.9.4",
+		"sitemap": "^8.0.0",
 		"vite": "^6.2.3"
 	},
 	"dependencies": {

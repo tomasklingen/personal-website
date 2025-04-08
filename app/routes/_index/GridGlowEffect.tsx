@@ -44,6 +44,7 @@ export const GridGlowEffect: React.FC = () => {
 			{/* Background grid pattern */}
 			<div className="absolute inset-0 z-10 opacity-70">
 				<svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+					<title>background grid pattern</title>
 					<defs>
 						<pattern
 							id="grid"

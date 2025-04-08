@@ -1,5 +1,5 @@
 import picoUrl from '@picocss/pico/css/pico.classless.css?url'
-import { NavLink, Outlet, redirect, useLocation } from 'react-router'
+import { NavLink, Outlet, replace } from 'react-router'
 import { links as runningLinks } from '~/running/data'
 import type { Route } from './+types/route'
 import './run.css'
@@ -18,8 +18,6 @@ export function clientLoader({ params }: Route.ClientActionArgs) {
 }
 
 export default function RunRoute() {
-	const location = useLocation()
-
 	return (
 		<main>
 			<header>

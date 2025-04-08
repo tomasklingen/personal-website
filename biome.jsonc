@@ -16,8 +16,12 @@
 			"complexity": {
 				"noForEach": "off"
 			},
+			"correctness": {
+				"noUnusedImports": "error",
+				"noUnusedVariables": "warn"
+			},
 			"a11y": {
-				"all": false
+				"recommended": true
 			}
 		}
 	},

@@ -87,32 +87,37 @@ export const Home: React.FC = () => {
 							Skills & Expertise
 						</h3>
 						<div className="grid grid-cols-2 gap-3">
-							<div className="bg-neutral-700/50 p-4 rounded">
-								<h4 className="font-medium text-gray-300 mb-2">
-									Frontend
+							<div className="bg-neutral-700/50 p-4 rounded border-l-4 border-blue-500/60 hover:border-blue-500 transition-colors duration-200 group">
+								<h4 className="font-medium text-gray-300 mb-2 flex items-center">
+									<strong className="mr-2">💻</strong>
+									Tech
 								</h4>
 								<p className="text-gray-400 text-sm">
 									TypeScript, React, Angular, RxJS
 								</p>
 							</div>
-							<div className="bg-neutral-700/50 p-4 rounded">
-								<h4 className="font-medium text-gray-300 mb-2">
+							<div className="bg-neutral-700/50 p-4 rounded border-l-4 border-purple-500/60 hover:border-purple-500 transition-colors duration-200 group">
+								<h4 className="font-medium text-gray-300 mb-2 flex items-center">
+									<strong className="mr-2">🎯</strong>
 									Coding Style
 								</h4>
 								<p className="text-gray-400 text-sm">
-									Maintainable, Testable, Performant, Consise
+									Maintainable, Testable, Performant, Concise
 								</p>
 							</div>
-							<div className="bg-neutral-700/50 p-4 rounded">
-								<h4 className="font-medium text-gray-300 mb-2">
+							<div className="bg-neutral-700/50 p-4 rounded border-l-4 border-green-500/60 hover:border-green-500 transition-colors duration-200 group">
+								<h4 className="font-medium text-gray-300 mb-2 flex items-center">
+									<strong className="mr-2">🛠️</strong>
 									Tools
 								</h4>
 								<p className="text-gray-400 text-sm">
-									Vite, Webpack, Jest, Vitest, CI/CD
+									Vite, Webpack, Jest, Vitest, Gitlab, Github Actions,
+									CI/CD
 								</p>
 							</div>
-							<div className="bg-neutral-700/50 p-4 rounded">
-								<h4 className="font-medium text-gray-300 mb-2">
+							<div className="bg-neutral-700/50 p-4 rounded border-l-4 border-rose-500/60 hover:border-rose-500 transition-colors duration-200 group">
+								<h4 className="font-medium text-gray-300 mb-2 flex items-center">
+									<strong className="mr-2">👨‍🔬</strong>
 									Approach
 								</h4>
 								<p className="text-gray-400 text-sm">
@@ -133,10 +138,8 @@ export const Home: React.FC = () => {
 									href="/run"
 									className="group flex items-center text-gray-300 hover:text-white transition-colors duration-200"
 								>
-									<span className="mr-2 text-gray-400 group-hover:text-gray-200">
-										→
-									</span>
-									<span className="border-b border-gray-700 group-hover:border-gray-400 pb-px">
+									<span className="w-4 h-4 mr-2">🏃</span>
+									<span className="border-b border-gray-700 group-hover:border-emerald-500/40 pb-px">
 										Running Pace Calculator (React Router)
 									</span>
 								</a>

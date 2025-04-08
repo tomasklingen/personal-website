@@ -1,6 +1,7 @@
 import type React from 'react'
 import { GridGlowEffect } from './GridGlowEffect'
 import { BlueskyIcon, GithubIcon, LinkedinIcon } from './SocialIcons'
+import avatar from '~/resources/img/avatar.jpg'
 
 const socialLinks = [
 	{
@@ -32,12 +33,21 @@ export const Home: React.FC = () => {
 			<div className="container mx-auto px-6 py-20 flex flex-col md:flex-row items-center justify-between relative z-10">
 				{/* Left column - Introduction */}
 				<div className="md:w-1/2 mb-10 md:mb-0">
-					<h1 className="text-5xl sm:text-6xl font-bold mb-6 text-white">
-						Tomas Klingen
-					</h1>
-					<h2 className="text-2xl text-gray-300 mb-6">
-						Front-end Web Developer
-					</h2>
+					<div className="flex items-center mb-6 gap-6">
+						<img
+							src={avatar}
+							alt="Tomas Klingen"
+							className="w-28 h-28 rounded-full object-cover border-2 border-neutral-700 shadow-lg"
+						/>
+						<div>
+							<h1 className="text-4xl sm:text-5xl font-bold text-white">
+								Tomas Klingen
+							</h1>
+							<h2 className="text-xl text-gray-300">
+								Front-end Web Developer
+							</h2>
+						</div>
+					</div>
 					<p className="text-lg text-gray-400 mb-8">
 						Crafting responsive, user-centered web experiences with modern
 						technologies. Based in Nieuwegein, Netherlands.

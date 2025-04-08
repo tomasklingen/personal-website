@@ -13,7 +13,7 @@ export const links: Route.LinksFunction = () => [
 
 export function clientLoader({ params }: Route.ClientActionArgs) {
 	if (Object.keys(params).length === 0) {
-		throw redirect('5k')
+		throw replace('5k')
 	}
 }
 

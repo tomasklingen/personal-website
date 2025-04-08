@@ -3,10 +3,9 @@ import { useRef } from 'react'
 import { useGridGlowEffect } from '~/hooks/useGridGlowEffect'
 
 export const GridGlowEffect: React.FC = () => {
-	const cursorRef = useRef<HTMLDivElement>(null)
 	const gridOverlayRef = useRef<HTMLDivElement>(null)
 
-	useGridGlowEffect({ cursorRef, gridOverlayRef })
+	useGridGlowEffect({ gridOverlayRef })
 
 	return (
 		<>
@@ -25,11 +24,9 @@ export const GridGlowEffect: React.FC = () => {
 				className="absolute inset-0 z-5"
 				style={
 					{
-						'--mouse-x': '0.5',
-						'--mouse-y': '0.5',
+						'--mouse-x': '0.2',
+						'--mouse-y': '0.2',
 						maskImage:
-							"url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3Cpattern id='grid' width='40' height='40' patternUnits='userSpaceOnUse'%3E%3Cpath d='M 40 0 L 0 0 0 40' fill='none' stroke='white' stroke-width='1'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23grid)'/%3E%3C/svg%3E\")",
-						WebkitMaskImage:
 							"url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3Cpattern id='grid' width='40' height='40' patternUnits='userSpaceOnUse'%3E%3Cpath d='M 40 0 L 0 0 0 40' fill='none' stroke='white' stroke-width='1'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23grid)'/%3E%3C/svg%3E\")",
 						maskSize: '100% 100%',
 						WebkitMaskSize: '100% 100%',
@@ -57,7 +54,7 @@ export const GridGlowEffect: React.FC = () => {
 							<path
 								d="M 40 0 L 0 0 0 40"
 								fill="none"
-								stroke="rgba(255, 255, 255, 0.15)"
+								stroke="rgba(255, 255, 255, 0.45)"
 								strokeWidth="0.5"
 							/>
 						</pattern>
@@ -65,17 +62,6 @@ export const GridGlowEffect: React.FC = () => {
 					<rect width="100%" height="100%" fill="url(#grid)" />
 				</svg>
 			</div>
-
-			{/* Cursor glow effect */}
-			<div
-				ref={cursorRef}
-				className="pointer-events-none fixed w-48 h-48 rounded-full bg-white/5 mix-blend-overlay blur-2xl transform -translate-x-1/2 -translate-y-1/2 z-20"
-				style={{
-					boxShadow:
-						'0 0 40px 20px rgba(255, 255, 255, 0.1), 0 0 60px 30px rgba(255, 80, 20, 0.07)',
-					transition: 'transform 0.05s ease-out',
-				}}
-			/>
 		</>
 	)
 }

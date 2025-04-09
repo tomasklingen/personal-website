@@ -1,7 +1,7 @@
 import type React from 'react'
 import { GridGlowEffect } from './GridGlowEffect'
 import { BlueskyIcon, GithubIcon, LinkedinIcon } from './SocialIcons'
-import avatar from '~/resources/img/avatar.jpg'
+import avatar from '~/resources/img/avatar.avif'
 
 const socialLinks = [
 	{

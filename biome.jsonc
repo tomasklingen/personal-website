@@ -20,6 +20,10 @@
 				"noUnusedImports": "error",
 				"noUnusedVariables": "warn"
 			},
+			"suspicious": {
+				"recommended": true,
+				"useAwait": "error"
+			},
 			"a11y": {
 				"recommended": true
 			}

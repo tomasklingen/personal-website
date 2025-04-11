@@ -1,8 +1,8 @@
-import type { PluginOption } from 'vite'
-import { Readable } from 'node:stream'
 import { writeFile } from 'node:fs/promises'
 import { join } from 'node:path'
+import { Readable } from 'node:stream'
 import { SitemapStream, streamToPromise } from 'sitemap'
+import type { PluginOption } from 'vite'
 
 type Options = {
 	hostname: string

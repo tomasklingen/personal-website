@@ -15,10 +15,25 @@ export const useGridGlowEffect = ({
 	const rafRef = useRef<number | null>(null)
 	const mousePos = useRef<MousePosition>({ x: 0, y: 0 })
 	const lastUpdatedPos = useRef<MousePosition>({ x: 0, y: 0 })
+	const idleTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
 	useEffect(() => {
 		const handleMouseMove = (e: MouseEvent) => {
 			mousePos.current = { x: e.clientX, y: e.clientY }
+
+			// Set opacity to 1 when mouse moves
+			if (gridOverlayRef.current) {
+				gridOverlayRef.current.style.opacity = '1'
+			}
+
+			if (idleTimerRef.current) {
+				clearTimeout(idleTimerRef.current)
+			}
+			idleTimerRef.current = setTimeout(() => {
+				if (gridOverlayRef.current) {
+					gridOverlayRef.current.style.opacity = '0'
+				}
+			}, 1500)
 		}
 
 		const updateGlowEffect = () => {
@@ -59,6 +74,9 @@ export const useGridGlowEffect = ({
 			window.removeEventListener('mousemove', handleMouseMove)
 			if (rafRef.current) {
 				cancelAnimationFrame(rafRef.current)
+			}
+			if (idleTimerRef.current) {
+				clearTimeout(idleTimerRef.current)
 			}
 		}
 	}, [gridOverlayRef])

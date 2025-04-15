@@ -1,9 +1,0 @@
-nav ul {
-	li {
-		flex: 1;
-	}
-	a {
-		/* transform: rotate(45deg); */
-		white-space: nowrap;
-	}
-}

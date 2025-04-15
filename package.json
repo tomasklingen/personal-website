@@ -27,7 +27,6 @@
 		"vite": "^6.2.3"
 	},
 	"dependencies": {
-		"@picocss/pico": "^2.1.1",
 		"@react-router/dev": "^7.4.1",
 		"@react-router/fs-routes": "^7.4.1",
 		"@react-router/node": "^7.4.1",

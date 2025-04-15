@@ -1,7 +1,7 @@
 import type React from 'react'
+import avatar from '~/resources/img/avatar.avif'
 import { GridGlowEffect } from './GridGlowEffect'
 import { BlueskyIcon, GithubIcon, LinkedinIcon } from './SocialIcons'
-import avatar from '~/resources/img/avatar.avif'
 
 const socialLinks = [
 	{
@@ -26,7 +26,7 @@ const socialLinks = [
 
 export const Home: React.FC = () => {
 	return (
-		<div className="min-h-screen relative w-full overflow-hidden bg-gradient-to-br from-neutral-950 via-neutral-900 to-neutral-800 text-white">
+		<div className="min-h-screen relative w-full overflow-hidden bg-gradient-to-br dark:from-neutral-950 dark:via-neutral-900 dark:to-neutral-800 dark:text-white">
 			<GridGlowEffect />
 
 			{/* Main content */}
@@ -40,10 +40,10 @@ export const Home: React.FC = () => {
 							className="w-28 h-28 rounded-full object-cover border-2 border-neutral-700 shadow-lg"
 						/>
 						<div>
-							<h1 className="text-4xl sm:text-5xl font-bold text-white">
+							<h1 className="text-4xl sm:text-5xl font-bold">
 								Tomas Klingen
 							</h1>
-							<h2 className="text-xl text-gray-300">
+							<h2 className="text-xl text-gray-500 dark:text-gray-300">
 								Front-end Web Developer
 							</h2>
 						</div>

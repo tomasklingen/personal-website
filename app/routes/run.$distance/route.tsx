@@ -17,7 +17,7 @@ export function meta({ data }: Route.MetaArgs) {
 	]
 }
 
-export async function loader({ params }: Route.LoaderArgs) {
+export function loader({ params }: Route.LoaderArgs) {
 	const config = distanceConfig[params.distance as Distance]
 
 	if (!config) {
@@ -35,7 +35,7 @@ export async function loader({ params }: Route.LoaderArgs) {
 	return { ...config, entries }
 }
 
-export async function clientLoader({ serverLoader }: Route.ClientLoaderArgs) {
+export function clientLoader({ serverLoader }: Route.ClientLoaderArgs) {
 	return serverLoader()
 }
 

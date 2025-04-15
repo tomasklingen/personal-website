@@ -6,12 +6,10 @@ interface MousePosition {
 }
 
 interface UseGridGlowEffectProps {
-	cursorRef: React.RefObject<HTMLDivElement | null>
 	gridOverlayRef: React.RefObject<HTMLDivElement | null>
 }
 
 export const useGridGlowEffect = ({
-	cursorRef,
 	gridOverlayRef,
 }: UseGridGlowEffectProps) => {
 	const rafRef = useRef<number | null>(null)
@@ -21,12 +19,6 @@ export const useGridGlowEffect = ({
 	useEffect(() => {
 		const handleMouseMove = (e: MouseEvent) => {
 			mousePos.current = { x: e.clientX, y: e.clientY }
-
-			// Apply cursor position directly without RAF for responsive feel
-			if (cursorRef.current) {
-				cursorRef.current.style.left = `${mousePos.current.x}px`
-				cursorRef.current.style.top = `${mousePos.current.y}px`
-			}
 		}
 
 		const updateGlowEffect = () => {
@@ -42,8 +34,8 @@ export const useGridGlowEffect = ({
 						gridOverlayRef.current.getBoundingClientRect()
 
 					// Calculate normalized position (0 to 1)
-					const normalizedX = mousePos.current.x / width
-					const normalizedY = mousePos.current.y / height
+					const normalizedX = (mousePos.current.x / width).toFixed(3)
+					const normalizedY = (mousePos.current.y / height).toFixed(3)
 
 					// Update the CSS custom properties for the grid overlay
 					gridOverlayRef.current.style.setProperty(
@@ -69,5 +61,5 @@ export const useGridGlowEffect = ({
 				cancelAnimationFrame(rafRef.current)
 			}
 		}
-	}, [cursorRef, gridOverlayRef])
+	}, [gridOverlayRef])
 }

@@ -1,4 +1,4 @@
-import { type Distance, distanceConfig } from '~/running/data'
+import { distanceConfig } from '~/running/data'
 import { generatePaceEntries } from '../../running/utils'
 import type { Route } from './+types/route'
 import { PaceTable } from './PaceTable'
@@ -8,17 +8,17 @@ export function meta({ data }: Route.MetaArgs) {
 		{ title: `${data.title} Running Pace Calculation Table | Tomas Klingen` },
 		{
 			name: 'description',
-			content: `Calculate your ideal running pace for the ${data.title} distance. Find your perfect pace per kilometer and mile for ${data.title} races and training.`,
+			content: `Find your ideal running pace for the ${data.shortLabel} distance using the pacing charts. Find your perfect pace per kilometer and mile for ${data.title} races and training.`,
 		},
 		{
 			name: 'keywords',
-			content: `running pace, ${data.title} pace, running calculator, pace per km, pace per mile, race pace`,
+			content: `running pace, ${data.title} pace, pace chart, running calculator, pace per km, pace per mile, race pace`,
 		},
 	]
 }
 
 export function loader({ params }: Route.LoaderArgs) {
-	const config = distanceConfig[params.distance as Distance]
+	const config = distanceConfig.find(({ slug }) => slug === params.distance)
 
 	if (!config) {
 		throw new Response('Not Found', { status: 404 })

@@ -1,6 +1,6 @@
 import picoUrl from '@picocss/pico/css/pico.classless.css?url'
 import { NavLink, Outlet, replace } from 'react-router'
-import { links as runningLinks } from '~/running/data'
+import { distanceConfig } from '~/running/data'
 import type { Route } from './+types/route'
 import './run.css'
 
@@ -27,9 +27,9 @@ export default function RunRoute() {
 
 			<nav>
 				<ul>
-					{runningLinks.map(({ to, label }) => (
-						<li key={to}>
-							<NavLink to={to}>{label}</NavLink>
+					{distanceConfig.map(({ slug, shortLabel }) => (
+						<li key={slug}>
+							<NavLink to={slug}>{shortLabel}</NavLink>
 						</li>
 					))}
 				</ul>

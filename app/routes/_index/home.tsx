@@ -62,11 +62,11 @@ export const Home: React.FC = () => {
 				{/* Right column - Skills & Projects */}
 				<div className="md:w-1/2 space-y-6">
 					{/* Skills Card */}
-					<div className="bg-neutral-800/50 backdrop-blur-sm p-8 rounded-lg border border-neutral-700 shadow-xl">
+					<div className="bg-neutral-800/50 backdrop-blur-sm p-3 md:p-8 rounded-lg border border-neutral-700 shadow-xl">
 						<h3 className="text-xl font-semibold mb-4 text-gray-200">
 							Skills & Expertise
 						</h3>
-						<div className="grid grid-cols-2 gap-3">
+						<div className="grid grid-cols-2 gap-1.5 md:gap-4">
 							<div className="bg-neutral-700/50 p-4 rounded border-l-4 border-blue-500/60 hover:border-blue-500 transition-colors duration-200 group">
 								<h4 className="font-medium text-gray-300 mb-2 flex items-center">
 									<strong className="mr-2">💻</strong>

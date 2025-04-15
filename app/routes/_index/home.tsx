@@ -1,42 +1,31 @@
 import type React from 'react'
+import { GridGlowEffect } from './GridGlowEffect'
 
 export const Home: React.FC = () => {
 	return (
-		<div className="min-h-screen flex items-center justify-center relative w-full h-full overflow-hidden bg-gray-900 text-white">
-			<video
-				className="absolute top-0 left-0 w-full h-full object-cover"
-				poster="//i.imgur.com/7DWtLtth.jpg"
-				preload="auto"
-				autoPlay
-				muted
-				loop
-			>
-				<source src="//i.imgur.com/7DWtLtt.webm" type="video/webm" />
-				<source src="//i.imgur.com/7DWtLtt.mp4" type="video/mp4" />
-			</video>
+		<div className="min-h-screen relative w-full overflow-hidden bg-gradient-to-br from-neutral-950 via-neutral-900 to-neutral-800 text-white">
+			<GridGlowEffect />
 
-			<div className="absolute inset-0 flex flex-col items-end justify-center">
-				<div className="text-right space-y-4">
-					<h1 className="text-4xl font-bold mb-2 bg-neutral-900 p-5">
-						<a
-							href="https://www.linkedin.com/in/tomasklingen"
-							className="hover:text-gray-300 transition"
-						>
-							Tomas Klingen
-						</a>
+			{/* Main content */}
+			<div className="container mx-auto px-6 py-20 flex flex-col md:flex-row items-center justify-between relative z-10">
+				{/* Left column - Introduction */}
+				<div className="md:w-1/2 mb-10 md:mb-0">
+					<h1 className="text-5xl sm:text-6xl font-bold mb-6 text-white">
+						Tomas Klingen
 					</h1>
-					<h2 className="text-2xl text-gray-400 bg-neutral-900 p-5">
+					<h2 className="text-2xl text-gray-300 mb-6">
 						Front-end Web Developer
 					</h2>
-					<h3 className="text-lg text-gray-500 bg-neutral-900 p-5">
-						Nieuwegein, Netherlands
-					</h3>
-					<div className="flex space-x-2">
+					<p className="text-lg text-gray-400 mb-8">
+						Crafting responsive, user-centered web experiences with modern
+						technologies. Based in Nieuwegein, Netherlands.
+					</p>
+					<div className="flex space-x-4">
 						<a
 							href="https://bsky.app/profile/tomasklingen.bsky.social"
 							target="_blank"
 							title="Bluesky"
-							className="p-2 bg-neutral-900 hover:bg-neutral-700 transition-colors duration-200 rounded-md group"
+							className="p-3 bg-neutral-800 hover:bg-neutral-700 transition-colors duration-200 rounded-md group"
 							rel="noreferrer"
 						>
 							<svg
@@ -55,7 +44,7 @@ export const Home: React.FC = () => {
 							href="https://www.linkedin.com/in/tomasklingen"
 							target="_blank"
 							title="LinkedIn"
-							className="p-2 bg-neutral-900 hover:bg-neutral-700 transition-colors duration-200 rounded-md group"
+							className="p-3 bg-neutral-800 hover:bg-neutral-700 transition-colors duration-200 rounded-md group"
 							rel="noreferrer"
 						>
 							<svg
@@ -73,7 +62,7 @@ export const Home: React.FC = () => {
 							href="https://github.com/tomasklingen"
 							target="_blank"
 							title="GitHub"
-							className="p-2 bg-neutral-900 hover:bg-neutral-700 transition-colors duration-200 rounded-md group"
+							className="p-3 bg-neutral-800 hover:bg-neutral-700 transition-colors duration-200 rounded-md group"
 							rel="noreferrer"
 						>
 							<svg
@@ -87,6 +76,72 @@ export const Home: React.FC = () => {
 								/>
 							</svg>
 						</a>
+					</div>
+				</div>
+
+				{/* Right column - Skills & Projects */}
+				<div className="md:w-1/2 space-y-6">
+					{/* Skills Card */}
+					<div className="bg-neutral-800/50 backdrop-blur-sm p-8 rounded-lg border border-neutral-700 shadow-xl">
+						<h3 className="text-xl font-semibold mb-4 text-gray-200">
+							Skills & Expertise
+						</h3>
+						<div className="grid grid-cols-2 gap-3">
+							<div className="bg-neutral-700/50 p-4 rounded">
+								<h4 className="font-medium text-gray-300 mb-2">
+									Frontend
+								</h4>
+								<p className="text-gray-400 text-sm">
+									TypeScript, React, Angular, RxJS
+								</p>
+							</div>
+							<div className="bg-neutral-700/50 p-4 rounded">
+								<h4 className="font-medium text-gray-300 mb-2">
+									Coding Style
+								</h4>
+								<p className="text-gray-400 text-sm">
+									Maintainable, Testable, Performant, Consise
+								</p>
+							</div>
+							<div className="bg-neutral-700/50 p-4 rounded">
+								<h4 className="font-medium text-gray-300 mb-2">
+									Tools
+								</h4>
+								<p className="text-gray-400 text-sm">
+									Vite, Webpack, Jest, Vitest, CI/CD
+								</p>
+							</div>
+							<div className="bg-neutral-700/50 p-4 rounded">
+								<h4 className="font-medium text-gray-300 mb-2">
+									Approach
+								</h4>
+								<p className="text-gray-400 text-sm">
+									Attention to Detail, Problem Solving
+								</p>
+							</div>
+						</div>
+					</div>
+
+					{/* Projects Card */}
+					<div className="bg-neutral-800/50 backdrop-blur-sm p-6 rounded-lg border border-neutral-700 shadow-xl">
+						<h3 className="text-xl font-semibold mb-3 text-gray-200">
+							Projects
+						</h3>
+						<ul className="space-y-2">
+							<li>
+								<a
+									href="/run"
+									className="group flex items-center text-gray-300 hover:text-white transition-colors duration-200"
+								>
+									<span className="mr-2 text-gray-400 group-hover:text-gray-200">
+										→
+									</span>
+									<span className="border-b border-gray-700 group-hover:border-gray-400 pb-px">
+										Running Pace Calculator (React Router)
+									</span>
+								</a>
+							</li>
+						</ul>
 					</div>
 				</div>
 			</div>

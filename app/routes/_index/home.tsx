@@ -49,8 +49,9 @@ export const Home: React.FC = () => {
 						</div>
 					</div>
 					<p className="text-lg text-gray-400 mb-8">
-						Crafting responsive, user-centered web experiences with modern
-						technologies. Based in Nieuwegein, Netherlands.
+						Crafting user-centered web experiences with modern
+						technologies and highly maintainable code quality. Based in
+						Nieuwegein, Netherlands.
 					</p>
 					<div className="flex space-x-4">
 						{socialLinks.map((link) => (

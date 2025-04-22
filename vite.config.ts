@@ -2,14 +2,18 @@ import { reactRouter } from '@react-router/dev/vite'
 import tailwindcss from '@tailwindcss/vite'
 import { defineConfig } from 'vite'
 import tsconfigPaths from 'vite-tsconfig-paths'
+import { HOST } from './app/const'
 import { urls } from './react-router.config'
 import { sitemapPlugin } from './vite-plugin-sitemap'
 
-export default defineConfig({
-	plugins: [
-		tailwindcss(),
-		tsconfigPaths(),
-		reactRouter(),
-		sitemapPlugin({ hostname: 'https://tomasklingen.nl', urls }),
-	],
+export default defineConfig(({ mode }) => {
+	return {
+		base: mode === 'production' ? HOST : '/',
+		plugins: [
+			tailwindcss(),
+			tsconfigPaths(),
+			reactRouter(),
+			sitemapPlugin({ hostname: HOST, urls }),
+		],
+	}
 })

@@ -1,4 +1,11 @@
-import { Links, Meta, Outlet, Scripts, ScrollRestoration } from 'react-router'
+import {
+	Links,
+	Meta,
+	Outlet,
+	Scripts,
+	ScrollRestoration,
+	useLocation,
+} from 'react-router'
 
 import type { Route } from './+types/root'
 import './app.css'
@@ -22,7 +29,13 @@ export const links: Route.LinksFunction = () => [
 ]
 
 export function meta() {
-	return [{ title: 'Tomas Klingen - Front-end Web Developer 👨‍💻🎧' }]
+	return [
+		{ title: 'Tomas Klingen - Front-end Web Developer 👨‍💻🎧' },
+		{
+			name: 'author',
+			content: 'Tomas Klingen',
+		},
+	]
 }
 
 export function Layout({ children }: { children: React.ReactNode }) {
@@ -36,6 +49,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 				/>
 				<Meta />
 				<Links />
+				<CanonicalLink />
 			</head>
 			<body className="min-h-screen bg-neutral-100 dark:bg-neutral-900">
 				{children}
@@ -43,6 +57,19 @@ export function Layout({ children }: { children: React.ReactNode }) {
 				<Scripts />
 			</body>
 		</html>
+	)
+}
+
+function CanonicalLink() {
+	const location = useLocation()
+	const canonicalPath = location.pathname.replace(/\/$/, '')
+	const host = import.meta.env.BASE_URL.replace(/\/$/, '')
+
+	return (
+		<link
+			rel="canonical"
+			href={`${host}${canonicalPath}${location.search}`}
+		/>
 	)
 }
 

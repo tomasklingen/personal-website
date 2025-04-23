@@ -5,7 +5,7 @@ import { BlueskyIcon, GithubIcon, LinkedinIcon } from './SocialIcons'
 
 const socialLinks = [
 	{
-		href: 'https://bsky.app/profile/tomasklingen.bsky.social',
+		href: 'https://bsky.app/profile/tomasklingen.nl',
 		title: 'Bluesky',
 		IconComponent: BlueskyIcon,
 		'aria-label': 'Visit Tomas Klingen on Bluesky',

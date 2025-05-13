@@ -64,13 +64,11 @@ function CanonicalLink() {
 	const location = useLocation()
 	const canonicalPath = location.pathname.replace(/\/$/, '')
 	const host = import.meta.env.BASE_URL.replace(/\/$/, '')
+	const href = `${host}${canonicalPath}${location.search}`
 
-	return (
-		<link
-			rel="canonical"
-			href={`${host}${canonicalPath}${location.search}`}
-		/>
-	)
+	if (!href) return null
+
+	return <link rel="canonical" href={href} />
 }
 
 export default function App() {

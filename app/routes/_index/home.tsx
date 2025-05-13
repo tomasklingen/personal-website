@@ -2,6 +2,7 @@ import type React from 'react'
 import avatar from '~/resources/img/avatar.avif'
 import { GridGlowEffect } from './GridGlowEffect'
 import { BlueskyIcon, GithubIcon, LinkedinIcon } from './SocialIcons'
+import { Link } from 'react-router'
 
 const socialLinks = [
 	{
@@ -30,9 +31,9 @@ export const Home: React.FC = () => {
 			<GridGlowEffect />
 
 			{/* Main content */}
-			<div className="container mx-auto px-6 py-20 flex flex-col md:flex-row items-center justify-between relative z-10">
+			<div className="container mx-auto px-6 lg:px-40 py-20 flex flex-col items-center justify-between relative z-10">
 				{/* Left column - Introduction */}
-				<div className="md:w-1/2 mb-10 md:mb-0">
+				<div className="mb-10">
 					<div className="flex items-center mb-6 gap-6">
 						<img
 							src={avatar}
@@ -41,91 +42,80 @@ export const Home: React.FC = () => {
 						/>
 						<div>
 							<h1 className="text-4xl sm:text-5xl font-bold">
-								Tomas Klingen
+								Hi 👋 I'm Tomas Klingen
 							</h1>
-							<h2 className="text-xl text-gray-500 dark:text-gray-300">
-								Front-end Web Developer
-							</h2>
 						</div>
 					</div>
+					<h2 className="text-xl text-gray-500 dark:text-gray-300 mb-6">
+						A Front-end Web Developer from the Netherlands
+					</h2>
+
 					<p className="text-lg text-gray-400 mb-8">
-						Crafting user-centered web experiences with modern
-						technologies and highly maintainable code quality. Based in
-						Nieuwegein, Netherlands.
+						Welcome to my personal spot on the web! I enjoy crafting web
+						experiences using modern technologies, with a strong focus on
+						creating highly maintainable and quality code. In my free time
+						you can find me cycling,{' '}
+						<Link to="/run" className="underline">
+							running
+						</Link>
+						, or doing Crossfit. I'm based in Nieuwegein, Netherlands.
 					</p>
-					<div className="flex space-x-4">
+					<div className="flex space-x-4 justify-center">
 						{socialLinks.map((link) => (
 							<SocialLink key={link.href} {...link} />
 						))}
 					</div>
 				</div>
 
-				{/* Right column - Skills & Projects */}
-				<div className="md:w-1/2 space-y-6">
+				{/* Skills & Projects Block */}
+				<div className="space-y-6">
 					{/* Skills Card */}
 					<div className="bg-neutral-800/50 backdrop-blur-sm p-3 md:p-8 rounded-lg border border-neutral-700 shadow-xl">
 						<h3 className="text-xl font-semibold mb-4 text-gray-200">
-							Skills & Expertise
+							My Go-To Tech & Methods
 						</h3>
 						<div className="grid grid-cols-2 gap-1.5 md:gap-4">
 							<div className="bg-neutral-700/50 p-4 rounded border-l-4 border-blue-500/60 hover:border-blue-500 transition-colors duration-200 group">
 								<h4 className="font-medium text-gray-300 mb-2 flex items-center">
 									<strong className="mr-2">💻</strong>
-									Tech
+									My Favorite Tech
 								</h4>
 								<p className="text-gray-400 text-sm">
-									TypeScript, React, Angular, RxJS
+									I primarily work with TypeScript, React, Angular,
+									Node, Deno and RxJS.
 								</p>
 							</div>
 							<div className="bg-neutral-700/50 p-4 rounded border-l-4 border-purple-500/60 hover:border-purple-500 transition-colors duration-200 group">
 								<h4 className="font-medium text-gray-300 mb-2 flex items-center">
 									<strong className="mr-2">🎯</strong>
-									Coding Style
+									How I Like to Code
 								</h4>
 								<p className="text-gray-400 text-sm">
-									Maintainable, Testable, Performant, Concise
+									I focus on writing code that's maintainable,
+									testable, performs well, and is easy to understand.
 								</p>
 							</div>
 							<div className="bg-neutral-700/50 p-4 rounded border-l-4 border-green-500/60 hover:border-green-500 transition-colors duration-200 group">
 								<h4 className="font-medium text-gray-300 mb-2 flex items-center">
 									<strong className="mr-2">🛠️</strong>
-									Tools
+									Tools of the Trade
 								</h4>
 								<p className="text-gray-400 text-sm">
-									Vite, Webpack, Jest, Vitest, Gitlab, Github Actions,
-									CI/CD
+									My daily drivers include Vite, Webpack, Jest, Vitest,
+									and CI/CD tools like Gitlab & Github Actions.
 								</p>
 							</div>
 							<div className="bg-neutral-700/50 p-4 rounded border-l-4 border-rose-500/60 hover:border-rose-500 transition-colors duration-200 group">
 								<h4 className="font-medium text-gray-300 mb-2 flex items-center">
-									<strong className="mr-2">👨‍🔬</strong>
-									Approach
+									<strong className="mr-2">👨‍💻</strong>
+									My Approach
 								</h4>
 								<p className="text-gray-400 text-sm">
-									Attention to Detail, Problem Solving
+									I believe in paying close attention to detail and
+									enjoy tackling tricky problems.
 								</p>
 							</div>
 						</div>
-					</div>
-
-					{/* Projects Card */}
-					<div className="bg-neutral-800/50 backdrop-blur-sm p-6 rounded-lg border border-neutral-700 shadow-xl">
-						<h3 className="text-xl font-semibold mb-3 text-gray-200">
-							Projects
-						</h3>
-						<ul className="space-y-2">
-							<li>
-								<a
-									href="/run"
-									className="group flex items-center text-gray-300 hover:text-white transition-colors duration-200"
-								>
-									<span className="w-4 h-4 mr-2">🏃</span>
-									<span className="border-b border-gray-700 group-hover:border-emerald-500/40 pb-px">
-										Running Pace Calculator (React Router)
-									</span>
-								</a>
-							</li>
-						</ul>
 					</div>
 				</div>
 			</div>

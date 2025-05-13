@@ -1,4 +1,4 @@
-import { Link, NavLink, Outlet, replace } from 'react-router'
+import { Link, NavLink, Outlet, redirect } from 'react-router'
 import { distanceConfig } from '~/running/data'
 import type { Route } from './+types/route'
 
@@ -6,7 +6,7 @@ export const links: Route.LinksFunction = () => []
 
 export function clientLoader({ params }: Route.ClientActionArgs) {
 	if (Object.keys(params).length === 0) {
-		throw replace('5k')
+		throw redirect('5k')
 	}
 }
 

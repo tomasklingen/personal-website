@@ -1,8 +1,8 @@
 import type React from 'react'
+import { Link } from 'react-router'
 import avatar from '~/resources/img/avatar.avif'
 import { GridGlowEffect } from './GridGlowEffect'
 import { BlueskyIcon, GithubIcon, LinkedinIcon } from './SocialIcons'
-import { Link } from 'react-router'
 
 const socialLinks = [
 	{
@@ -42,7 +42,7 @@ export const Home: React.FC = () => {
 						/>
 						<div>
 							<h1 className="text-4xl sm:text-5xl font-bold">
-								Hi 👋 I'm Tomas Klingen
+								Hi 👋 I'm Tomas
 							</h1>
 						</div>
 					</div>

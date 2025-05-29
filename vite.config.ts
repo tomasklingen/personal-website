@@ -6,9 +6,8 @@ import { HOST } from './app/const'
 import { urls } from './react-router.config'
 import { sitemapPlugin } from './vite-plugin-sitemap'
 
-export default defineConfig(({ mode }) => {
+export default defineConfig(() => {
 	return {
-		base: mode === 'production' ? HOST : '/',
 		plugins: [
 			tailwindcss(),
 			tsconfigPaths(),

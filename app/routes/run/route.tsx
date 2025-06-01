@@ -6,7 +6,7 @@ export const links: Route.LinksFunction = () => []
 
 export function clientLoader({ params }: Route.ClientActionArgs) {
 	if (Object.keys(params).length === 0) {
-		throw redirect('5k')
+		throw redirect('5k/')
 	}
 }
 
@@ -33,7 +33,7 @@ export default function RunRoute() {
 					{distanceConfig.map(({ slug, shortLabel }) => (
 						<li key={slug}>
 							<NavLink
-								to={slug}
+								to={`${slug}/`}
 								className={({ isActive }) =>
 									`px-3 py-1 rounded transition-colors font-medium ${isActive ? 'bg-emerald-700 text-white dark:bg-emerald-400 dark:text-neutral-900' : 'text-emerald-700 dark:text-emerald-400 hover:bg-emerald-100 dark:hover:bg-emerald-900/40'}`
 								}

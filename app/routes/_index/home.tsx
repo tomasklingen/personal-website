@@ -55,7 +55,7 @@ export const Home: React.FC = () => {
 						experiences using modern technologies, with a strong focus on
 						creating highly maintainable and quality code. In my free time
 						you can find me cycling,{' '}
-						<Link to="/run" className="underline">
+						<Link to="/run/" className="underline">
 							running
 						</Link>
 						, or doing Crossfit. I'm based in Nieuwegein, Netherlands.

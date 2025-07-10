@@ -1,0 +1,3 @@
+[submodule "app/thoughts"]
+	path = app/thoughts
+	url = https://github.com/tomasklingen/til.git

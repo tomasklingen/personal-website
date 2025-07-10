@@ -4,10 +4,8 @@ import type { Route } from './+types/route'
 import { PaceTable } from './PaceTable'
 
 export function meta({ data }: Route.MetaArgs) {
-	if(!data) {
-		return [
-			{ title: '404 - Page Not Found | Tomas Klingen' },
-		]
+	if (!data) {
+		return [{ title: '404 - Page Not Found | Tomas Klingen' }]
 	}
 
 	return [

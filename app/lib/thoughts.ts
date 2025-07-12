@@ -10,7 +10,7 @@ export type ThoughtPost = {
 	dateCreated: Date
 }
 
-const THOUGHTS_DIR = path.join(process.cwd(), 'app/thoughts')
+const THOUGHTS_DIR = path.join(process.cwd(), 'thoughts')
 
 /**
  * Get all markdown files from the thoughts directory

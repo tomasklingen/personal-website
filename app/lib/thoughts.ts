@@ -27,7 +27,7 @@ function getAllMarkdownFiles(dir: string): string[] {
 
 			if (stat.isDirectory()) {
 				walkDir(fullPath)
-			} else if (item.endsWith('.md')) {
+			} else if (item.endsWith('.md') && item !== 'README.md') {
 				files.push(fullPath)
 			}
 		}

@@ -13,7 +13,7 @@ export type ThoughtPost = {
 const THOUGHTS_DIR = path.join(process.cwd(), 'thoughts')
 
 /**
- * Get all markdown files from the thoughts directory
+ * Get all markdown and MDX files from the thoughts directory
  */
 function getAllMarkdownFiles(dir: string): string[] {
 	const files: string[] = []
@@ -27,7 +27,7 @@ function getAllMarkdownFiles(dir: string): string[] {
 
 			if (stat.isDirectory()) {
 				walkDir(fullPath)
-			} else if (item.endsWith('.md') && item !== 'README.md') {
+			} else if ((item.endsWith('.md') || item.endsWith('.mdx')) && item !== 'README.md') {
 				files.push(fullPath)
 			}
 		}
@@ -53,7 +53,7 @@ function extractMetadata(
 
 	// Generate slug from filename or directory structure
 	const relativePath = path.relative(THOUGHTS_DIR, filePath)
-	const slug = path.basename(relativePath, '.md')
+	const slug = path.basename(relativePath, path.extname(relativePath))
 
 	// Extract title from first # heading or use filename
 	const titleMatch = content.match(/^#\s+(.+)$/m)

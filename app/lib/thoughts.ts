@@ -27,7 +27,10 @@ function getAllMarkdownFiles(dir: string): string[] {
 
 			if (stat.isDirectory()) {
 				walkDir(fullPath)
-			} else if ((item.endsWith('.md') || item.endsWith('.mdx')) && item !== 'README.md') {
+			} else if (
+				(item.endsWith('.md') || item.endsWith('.mdx')) &&
+				item !== 'README.md'
+			) {
 				files.push(fullPath)
 			}
 		}

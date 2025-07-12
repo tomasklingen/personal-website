@@ -10,7 +10,8 @@
 		"build": "react-router build",
 		"preview": "bunx vite preview",
 		"check-fix": "bunx biome check --fix",
-		"typecheck": "react-router typegen && tsc"
+		"typecheck": "react-router typegen && tsc",
+		"prepare": "husky"
 	},
 	"repository": {
 		"type": "git",
@@ -23,6 +24,7 @@
 	"homepage": "https://github.com/tomasklingen/tomasklingen.github.io",
 	"devDependencies": {
 		"@biomejs/biome": "2.1.1",
+		"husky": "^9.1.7",
 		"sitemap": "^8.0.0",
 		"vite": "^7.0.4"
 	},

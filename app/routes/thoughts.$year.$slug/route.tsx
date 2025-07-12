@@ -56,7 +56,7 @@ export default function ThoughtDetail(props: Route.ComponentProps) {
 				</time>
 			</header>
 
-			<div className="prose prose-neutral dark:prose-invert max-w-none">
+			<div className="max-w-none">
 				<MDXContent content={thought.content} />
 			</div>
 		</article>

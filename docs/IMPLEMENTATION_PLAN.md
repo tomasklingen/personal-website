@@ -19,7 +19,7 @@
 - Tailwind CSS and Biome formatting in place
 
 **Submodule Status:**
-- Git submodule exists: `app/thoughts/` (active, on main branch)
+- Git submodule exists: `thoughts/` (active, on main branch)
 - Contains sample content: `README.md`, `github/gh-cli.md`
 - Empty route directories already exist: `app/routes/til._index/`, `app/routes/til.$slug/`
 - Content structure appears ready for TIL posts

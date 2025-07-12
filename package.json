@@ -49,6 +49,7 @@
 		"react-dom": "^19.1.0",
 		"react-router": "^7.6.3",
 		"react-router-devtools": "^5.0.6",
+		"rehype-highlight": "^7.0.2",
 		"tailwindcss": "^4.1.11",
 		"typescript": "^5.8.3",
 		"vite-tsconfig-paths": "^5.1.4"

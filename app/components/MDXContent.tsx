@@ -2,6 +2,7 @@ import { evaluate } from '@mdx-js/mdx'
 import { MDXProvider } from '@mdx-js/react'
 import React from 'react'
 import * as runtime from 'react/jsx-runtime'
+import rehypeHighlight from 'rehype-highlight'
 
 type MDXContentProps = {
 	content: string
@@ -25,6 +26,7 @@ export const MDXContent: React.FC<MDXContentProps> = ({
 				const { default: Component } = await evaluate(content, {
 					...runtime,
 					development: false,
+					rehypePlugins: [rehypeHighlight],
 				})
 
 				setMDXComponent(() => Component)

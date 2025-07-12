@@ -1,5 +1,5 @@
-import { MDXProvider } from '@mdx-js/react'
 import { compile } from '@mdx-js/mdx'
+import { MDXProvider } from '@mdx-js/react'
 import React from 'react'
 
 type MDXContentProps = {
@@ -10,8 +10,13 @@ type MDXContentProps = {
 /**
  * Component to render MDX content
  */
-export const MDXContent: React.FC<MDXContentProps> = ({ content, className }) => {
-	const [Component, setComponent] = React.useState<React.ComponentType | null>(null)
+export const MDXContent: React.FC<MDXContentProps> = ({
+	content,
+	className,
+}) => {
+	const [Component, setComponent] = React.useState<React.ComponentType | null>(
+		null,
+	)
 	const [error, setError] = React.useState<string | null>(null)
 
 	React.useEffect(() => {
@@ -21,11 +26,11 @@ export const MDXContent: React.FC<MDXContentProps> = ({ content, className }) =>
 					outputFormat: 'function-body',
 					development: false,
 				})
-				
+
 				// Create a function from the compiled code
 				const fn = new Function('React', compiled.toString())
 				const MDXComponent = fn(React)
-				
+
 				setComponent(() => MDXComponent)
 				setError(null)
 			} catch (err) {

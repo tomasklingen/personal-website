@@ -1,5 +1,7 @@
 import type { MetaFunction } from 'react-router'
+import { getAllThoughts } from '~/lib/thoughts'
 import avatar from '~/resources/img/avatar.avif'
+import type { Route } from './+types/route'
 import { Home as HomeComponent } from './home'
 
 export const meta: MetaFunction = () => {
@@ -25,6 +27,15 @@ export const meta: MetaFunction = () => {
 	]
 }
 
-export default function Home() {
-	return <HomeComponent />
+export function loader() {
+	const thoughts = getAllThoughts()
+	return { recentThoughts: thoughts.slice(0, 3) }
+}
+
+export function clientLoader({ serverLoader }: Route.ClientLoaderArgs) {
+	return serverLoader()
+}
+
+export default function Home(props: Route.ComponentProps) {
+	return <HomeComponent recentThoughts={props.loaderData.recentThoughts} />
 }

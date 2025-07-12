@@ -26,6 +26,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+          with:
+            submodules: recursive # Ensures all submodules are checked out
+            fetch-depth: 0 # Fetches the entire history for submodules
 
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2

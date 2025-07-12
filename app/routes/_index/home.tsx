@@ -1,5 +1,6 @@
 import type React from 'react'
 import { Link } from 'react-router'
+import { formatDate } from '~/lib/date'
 import type { ThoughtPost } from '~/lib/thoughts'
 import avatar from '~/resources/img/avatar.avif'
 import { GridGlowEffect } from './GridGlowEffect'
@@ -105,14 +106,7 @@ export const Home: React.FC<HomeProps> = ({ recentThoughts }) => {
 											dateTime={thought.dateCreated.toISOString()}
 											className="text-sm text-gray-400"
 										>
-											{thought.dateCreated.toLocaleDateString(
-												undefined,
-												{
-													year: 'numeric',
-													month: 'short',
-													day: 'numeric',
-												},
-											)}
+											{formatDate(thought.dateCreated, 'short')}
 										</time>
 									</article>
 								))}

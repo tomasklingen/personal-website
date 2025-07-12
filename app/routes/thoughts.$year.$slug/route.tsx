@@ -1,4 +1,5 @@
 import { MDXContent } from '~/components/MDXContent'
+import { formatDate } from '~/lib/date'
 import { getAllThoughts } from '~/lib/thoughts'
 import type { Route } from './+types/route'
 
@@ -48,11 +49,7 @@ export default function ThoughtDetail(props: Route.ComponentProps) {
 					dateTime={thought.dateCreated.toISOString()}
 					className="text-sm text-neutral-500 dark:text-neutral-400"
 				>
-					{thought.dateCreated.toLocaleDateString(undefined, {
-						year: 'numeric',
-						month: 'long',
-						day: 'numeric',
-					})}
+					{formatDate(thought.dateCreated)}
 				</time>
 			</header>
 

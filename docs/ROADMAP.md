@@ -1,30 +1,37 @@
-# TIL project
+# Thoughts Feature - COMPLETED ✅
 
-## Product Requirements Document
+## Overview
+The thoughts feature has been successfully implemented as a lightweight personal blog/TIL system for sharing insights and learnings.
 
-### 1. Vision & Goal
-*   **Vision:** A lightweight, personal blog to document and share "Today I Learned" (TIL) snippets.
-*   **Goal:** Create a simple, low-maintenance platform for personal knowledge management and sharing, focused on technical topics.
+## Implemented Features ✅
+- **Thoughts index page** (`/thoughts/`) - Browse all posts chronologically
+- **Individual post pages** (`/thoughts/[year]/[slug]/`) - Full MDX rendering with syntax highlighting
+- **Homepage integration** - Recent thoughts displayed on main page
+- **Git submodule workflow** - Content managed in separate repository
+- **Dark mode support** - Consistent theming throughout
+- **Centralized date formatting** - Amsterdam timezone with weekday display
 
-### 2. Content
-*   **Format:** MDX (Markdown + JSX), allowing for text, code blocks, images, and embedded React components.
-*   **Source:** Content will be managed in a dedicated git submodule.
-*   **Organization:** Posts will be organized by date within the submodule.
+## Technical Implementation ✅
+- **Content Loading** - `app/lib/thoughts.ts` handles file discovery and metadata extraction
+- **MDX Rendering** - `app/components/MDXContent.tsx` with syntax highlighting
+- **Route Structure** - File-based routing with SSG prerendering
+- **Test Coverage** - Comprehensive tests with Vitest
+- **Type Safety** - Full TypeScript support
 
-### 3. Technical Stack
-*   **Framework:** Built on the existing React foundation.
-*   **Deployment:** Static site generated (SSG) and served via GitHub Pages.
-*   **Routing:** React Router v7 configured for SSG (prerender) mode.
-*   **Content Rendering:** MDX for blog posts.
+## Content Management ✅
+- Content stored in git submodule: `thoughts/`
+- Supports standard MDX files without requiring frontmatter
+- Automatic metadata extraction from file structure and content
+- Clean URL structure based on creation date and filename
 
-### 4. Features & Pages
-*   **Homepage (`/`):** Will display a list of the most recent TIL posts (e.g., the latest 3-5).
-*   **All TILs Page (`/thoughts`):** A reverse-chronological list of all TILs. Each item in the list will link to the full post.
-*   **TIL Detail Page:**
-    *   **URL Structure:** `/thoughts/[year]/[slug]` (e.g., `/thoughts/2025/my-first-til`).
-    *   **Content:** Renders and displays the full content of the MDX file for that post.
+The thoughts feature is now live and ready for content creation!
 
-### 5. Out of Scope (for now)
-*   User comments and reactions.
-*   Social media sharing buttons.
-*   Complex search or filtering functionality.
+## Future Enhancements (Ideas)
+- **Tags/Categories** - Add frontmatter support for organizing posts by topic
+- **Search Functionality** - Simple text search across all thoughts
+- **RSS Feed** - Generate RSS/Atom feed for subscribers
+- **Related Posts** - Show similar content based on tags or keywords
+- **Reading Time** - Calculate and display estimated reading time
+- **Series Support** - Group related posts into multi-part series
+- **Draft Support** - Frontmatter-based draft flag for unpublished posts
+- **Custom Metadata** - Author, description, and other SEO fields via frontmatter

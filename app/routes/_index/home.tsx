@@ -1,5 +1,6 @@
 import type React from 'react'
 import { Link } from 'react-router'
+import type { ThoughtPost } from '~/lib/thoughts'
 import avatar from '~/resources/img/avatar.avif'
 import { GridGlowEffect } from './GridGlowEffect'
 import { BlueskyIcon, GithubIcon, LinkedinIcon } from './SocialIcons'
@@ -25,7 +26,11 @@ const socialLinks = [
 	},
 ]
 
-export const Home: React.FC = () => {
+type HomeProps = {
+	recentThoughts: ThoughtPost[]
+}
+
+export const Home: React.FC<HomeProps> = ({ recentThoughts }) => {
 	return (
 		<div className="min-h-screen relative w-full overflow-hidden bg-gradient-to-br dark:from-neutral-950 dark:via-neutral-900 dark:to-neutral-800 dark:text-white">
 			<GridGlowEffect />
@@ -66,6 +71,55 @@ export const Home: React.FC = () => {
 						))}
 					</div>
 				</div>
+
+				{/* Recent Thoughts Section */}
+				{recentThoughts.length > 0 && (
+					<div className="mb-8 w-full">
+						<div className="bg-neutral-800/50 backdrop-blur-sm p-6 md:p-8 rounded-lg border border-neutral-700 shadow-xl">
+							<div className="flex items-center justify-between mb-6">
+								<h3 className="text-xl font-semibold text-gray-200">
+									Recent Thoughts
+								</h3>
+								<Link
+									to="/thoughts/"
+									className="text-emerald-400 hover:text-emerald-300 transition-colors text-sm font-medium"
+								>
+									View all →
+								</Link>
+							</div>
+							<div className="space-y-4">
+								{recentThoughts.map((thought) => (
+									<article
+										key={`${thought.year}-${thought.slug}`}
+										className="bg-neutral-700/30 p-4 rounded-lg hover:bg-neutral-700/50 transition-colors"
+									>
+										<h4 className="font-medium text-gray-200 mb-2">
+											<Link
+												to={`/thoughts/${thought.year}/${thought.slug}/`}
+												className="hover:text-emerald-400 transition-colors"
+											>
+												{thought.title}
+											</Link>
+										</h4>
+										<time
+											dateTime={thought.dateCreated.toISOString()}
+											className="text-sm text-gray-400"
+										>
+											{thought.dateCreated.toLocaleDateString(
+												undefined,
+												{
+													year: 'numeric',
+													month: 'short',
+													day: 'numeric',
+												},
+											)}
+										</time>
+									</article>
+								))}
+							</div>
+						</div>
+					</div>
+				)}
 
 				{/* Skills & Projects Block */}
 				<div className="space-y-6">

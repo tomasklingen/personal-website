@@ -1,5 +1,6 @@
 import type React from 'react'
 import { Link } from 'react-router'
+import { Tags } from '~/components/Tags'
 import { formatDate } from '~/lib/date'
 import type { ThoughtPost } from '~/lib/thoughts'
 import avatar from '~/resources/img/avatar.avif'
@@ -108,6 +109,9 @@ export const Home: React.FC<HomeProps> = ({ recentThoughts }) => {
 										>
 											{formatDate(thought.dateCreated, 'short')}
 										</time>
+										{thought.tags && thought.tags.length > 0 && (
+											<Tags tags={thought.tags} className="mt-2" />
+										)}
 									</article>
 								))}
 							</div>

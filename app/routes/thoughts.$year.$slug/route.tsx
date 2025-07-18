@@ -1,4 +1,5 @@
 import { MDXContent } from '~/components/MDXContent'
+import { Tags } from '~/components/Tags'
 import { formatDate } from '~/lib/date'
 import { getAllThoughts } from '~/lib/thoughts'
 import type { Route } from './+types/route'
@@ -51,6 +52,9 @@ export default function ThoughtDetail(props: Route.ComponentProps) {
 				>
 					{formatDate(thought.dateCreated)}
 				</time>
+				{thought.tags && thought.tags.length > 0 && (
+					<Tags tags={thought.tags} className="mt-4" />
+				)}
 			</header>
 
 			<div className="max-w-none dark:text-neutral-300">

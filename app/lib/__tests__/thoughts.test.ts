@@ -31,6 +31,14 @@ describe('thoughts library', () => {
 				expect(typeof thought.content).toBe('string')
 				expect(typeof thought.filePath).toBe('string')
 				expect(thought.dateCreated).toBeInstanceOf(Date)
+
+				// Tags are optional
+				if (thought.tags) {
+					expect(Array.isArray(thought.tags)).toBe(true)
+					for (const tag of thought.tags) {
+						expect(typeof tag).toBe('string')
+					}
+				}
 			}
 		})
 

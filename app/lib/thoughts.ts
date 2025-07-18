@@ -1,5 +1,6 @@
 import fs from 'node:fs'
 import path from 'node:path'
+import matter from 'gray-matter'
 
 export type ThoughtPost = {
 	slug: string
@@ -8,6 +9,7 @@ export type ThoughtPost = {
 	content: string
 	filePath: string
 	dateCreated: Date
+	tags?: string[]
 }
 
 const THOUGHTS_DIR = path.join(process.cwd(), 'thoughts')
@@ -46,7 +48,10 @@ function getAllMarkdownFiles(dir: string): string[] {
 function extractMetadata(
 	filePath: string,
 	content: string,
-): Pick<ThoughtPost, 'slug' | 'year' | 'title' | 'dateCreated'> {
+): Pick<ThoughtPost, 'slug' | 'year' | 'title' | 'dateCreated' | 'tags'> {
+	// Parse frontmatter
+	const { data: frontmatter, content: markdownContent } = matter(content)
+
 	// Get file stats for creation date
 	const stats = fs.statSync(filePath)
 	const dateCreated = stats.birthtime
@@ -58,15 +63,19 @@ function extractMetadata(
 	const relativePath = path.relative(THOUGHTS_DIR, filePath)
 	const slug = path.basename(relativePath, path.extname(relativePath))
 
-	// Extract title from first # heading or use filename
-	const titleMatch = content.match(/^#\s+(.+)$/m)
-	const title = titleMatch?.[1] ?? slug.replace(/-/g, ' ')
+	// Extract title from frontmatter, first # heading, or use filename
+	const titleMatch = markdownContent.match(/^#\s+(.+)$/m)
+	const title = frontmatter.title ?? titleMatch?.[1] ?? slug.replace(/-/g, ' ')
+
+	// Extract tags from frontmatter
+	const tags = Array.isArray(frontmatter.tags) ? frontmatter.tags : undefined
 
 	return {
 		slug,
 		year,
 		title,
 		dateCreated,
+		tags,
 	}
 }
 
@@ -84,9 +93,12 @@ export function getAllThoughts(): ThoughtPost[] {
 		const content = fs.readFileSync(filePath, 'utf-8')
 		const metadata = extractMetadata(filePath, content)
 
+		// Extract content without frontmatter for display
+		const { content: markdownContent } = matter(content)
+
 		return {
 			...metadata,
-			content,
+			content: markdownContent,
 			filePath,
 		}
 	})

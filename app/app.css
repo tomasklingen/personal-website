@@ -2,8 +2,7 @@
 
 @theme {
 	--font-sans:
-		Seravek, "Gill Sans Nova", Ubuntu, Calibri, "DejaVu Sans", source-sans-pro,
-		sans-serif;
+		Avenir, Montserrat, Corbel, "URW Gothic", source-sans-pro, sans-serif;
 	--font-mono:
 		ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, Consolas,
 		"DejaVu Sans Mono", monospace;

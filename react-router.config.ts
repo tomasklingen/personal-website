@@ -6,7 +6,9 @@ const thoughts = getAllThoughts()
 
 // Get all unique tags
 const allTags = new Set(
-	thoughts.flatMap(thought => thought.tags?.map(tag => tag.toLowerCase()) ?? [])
+	thoughts.flatMap(
+		(thought) => thought.tags?.map((tag) => tag.toLowerCase()) ?? [],
+	),
 )
 
 export const urls = [
@@ -14,7 +16,9 @@ export const urls = [
 	...distanceConfig.map(({ slug }) => `/run/${slug}/`),
 	'/thoughts/',
 	...thoughts.map(({ year, slug }) => `/thoughts/${year}/${slug}/`),
-	...Array.from(allTags).map(tag => `/thoughts/tags/${encodeURIComponent(tag)}/`),
+	...Array.from(allTags).map(
+		(tag) => `/thoughts/tags/${encodeURIComponent(tag)}/`,
+	),
 ]
 
 export default {

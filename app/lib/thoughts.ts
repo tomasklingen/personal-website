@@ -52,9 +52,15 @@ function extractMetadata(
 	// Parse frontmatter
 	const { data: frontmatter, content: markdownContent } = matter(content)
 
-	// Get file stats for creation date
-	const stats = fs.statSync(filePath)
-	const dateCreated = stats.birthtime
+	// Get date from frontmatter or file stats
+	let dateCreated: Date
+	if (frontmatter.date instanceof Date) {
+		dateCreated = frontmatter.date
+	} else {
+		// Fallback to file creation date
+		const stats = fs.statSync(filePath)
+		dateCreated = stats.birthtime
+	}
 
 	// Extract year from date
 	const year = dateCreated.getFullYear().toString()

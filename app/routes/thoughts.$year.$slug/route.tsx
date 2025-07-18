@@ -42,7 +42,7 @@ export default function ThoughtDetail(props: Route.ComponentProps) {
 	return (
 		<article className="max-w-4xl mx-auto p-6">
 			<header className="mb-8">
-				<h1 className="text-3xl font-bold text-neutral-900 dark:text-white mb-2">
+				<h1 className="text-3xl font-bold text-neutral-900 dark:text-neutral-300 mb-2">
 					{thought.title}
 				</h1>
 				<time
@@ -53,7 +53,7 @@ export default function ThoughtDetail(props: Route.ComponentProps) {
 				</time>
 			</header>
 
-			<div className="max-w-none">
+			<div className="max-w-none dark:text-neutral-300">
 				<MDXContent content={thought.content} />
 			</div>
 		</article>

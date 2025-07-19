@@ -1,4 +1,5 @@
 import type { MetaFunction } from 'react-router'
+import { generateJsonLdMeta, generatePersonSchema } from '~/lib/structured-data'
 import { getAllThoughts } from '~/lib/thoughts'
 import avatar from '~/resources/img/avatar.avif'
 import type { Route } from './+types/route'
@@ -24,6 +25,7 @@ export const meta: MetaFunction = () => {
 			property: 'og:image',
 			content: avatar,
 		},
+		generateJsonLdMeta(generatePersonSchema()),
 	]
 }
 

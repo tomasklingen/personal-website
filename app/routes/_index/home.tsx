@@ -76,7 +76,7 @@ export const Home: React.FC<HomeProps> = ({ recentThoughts }) => {
 				{/* Recent Thoughts Section */}
 				{recentThoughts.length > 0 && (
 					<div className="mb-8 w-full">
-						<div className="bg-neutral-800/50 backdrop-blur-sm p-6 md:p-8 rounded-lg border border-neutral-700 shadow-xl">
+						<div className="bg-neutral-800/50 backdrop-blur-sm p-4 md:p-8 rounded-lg border border-neutral-700 shadow-xl">
 							<div className="flex items-center justify-between mb-6">
 								<h3 className="text-xl font-semibold text-gray-200">
 									Recent Thoughts
@@ -106,19 +106,19 @@ export const Home: React.FC<HomeProps> = ({ recentThoughts }) => {
 				{/* Skills & Projects Block */}
 				<div className="space-y-6">
 					{/* Skills Card */}
-					<div className="bg-neutral-800/50 backdrop-blur-sm p-3 md:p-8 rounded-lg border border-neutral-700 shadow-xl">
+					<div className="bg-neutral-800/50 backdrop-blur-sm p-4 md:p-8 rounded-lg border border-neutral-700 shadow-xl">
 						<h3 className="text-xl font-semibold mb-4 text-gray-200">
 							My Go-To Tech & Methods
 						</h3>
-						<div className="grid grid-cols-2 gap-1.5 md:gap-4">
+						<div className="grid sm:grid-cols-2 gap-3 md:gap-4">
 							<div className="bg-neutral-700/50 p-4 rounded border-l-4 border-blue-500/60 hover:border-blue-500 transition-colors duration-200 group">
 								<h4 className="font-medium text-gray-300 mb-2 flex items-center">
 									<strong className="mr-2">💻</strong>
 									My Favorite Tech
 								</h4>
 								<p className="text-gray-400 text-sm">
-									I primarily work with TypeScript, React, Angular,
-									Node, Deno and RxJS.
+									I love working with TypeScript, React, Angular, Node,
+									Svelte, RxJS.
 								</p>
 							</div>
 							<div className="bg-neutral-700/50 p-4 rounded border-l-4 border-purple-500/60 hover:border-purple-500 transition-colors duration-200 group">

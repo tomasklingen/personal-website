@@ -41,7 +41,7 @@ export const ThoughtListItem: React.FC<ThoughtListItemProps> = ({
 							to={`/thoughts/${thought.year}/${thought.slug}/`}
 							className="hover:text-emerald-400 transition-colors"
 						>
-							{thought.title}
+							{thought.title} →
 						</Link>
 					</h4>
 				) : (

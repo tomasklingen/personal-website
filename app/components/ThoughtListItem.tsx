@@ -1,7 +1,7 @@
 import type React from 'react'
-import { Link } from 'react-router'
 import { formatDate } from '~/lib/date'
 import type { ThoughtPost } from '~/lib/thoughts'
+import { Link } from './Link'
 import { Tags } from './Tags'
 
 type ThoughtListItemProps = {
@@ -26,7 +26,7 @@ export const ThoughtListItem: React.FC<ThoughtListItemProps> = ({
 }) => {
 	const isCompact = variant === 'compact'
 	const headingClass = isCompact
-		? 'font-medium text-gray-200 mb-2'
+		? 'font-medium mb-2'
 		: 'text-xl font-semibold text-neutral-900 dark:text-white mb-2'
 	const timeClass = isCompact
 		? 'text-sm text-gray-400'
@@ -39,16 +39,16 @@ export const ThoughtListItem: React.FC<ThoughtListItemProps> = ({
 					<h4 className={headingClass}>
 						<Link
 							to={`/thoughts/${thought.year}/${thought.slug}/`}
-							className="hover:text-emerald-400 transition-colors"
+							variant="default"
 						>
-							{thought.title} →
+							{thought.title}
 						</Link>
 					</h4>
 				) : (
 					<h2 className={headingClass}>
 						<Link
 							to={`/thoughts/${thought.year}/${thought.slug}/`}
-							className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
+							variant="default"
 						>
 							{thought.title}
 						</Link>
@@ -76,30 +76,19 @@ export const ThoughtListItem: React.FC<ThoughtListItemProps> = ({
 							<Link
 								key={tag}
 								to={`/thoughts/tags/${encodeURIComponent(tag.toLowerCase())}`}
-								className={`inline-block px-2 py-1 rounded text-sm font-medium transition-colors ${
+								variant="tag"
+								className={
 									highlightedTag &&
 									tag.toLowerCase() === highlightedTag.toLowerCase()
 										? 'bg-emerald-200 dark:bg-emerald-800 text-emerald-900 dark:text-emerald-100'
-										: 'bg-emerald-100 dark:bg-emerald-900/30 text-emerald-800 dark:text-emerald-200 hover:bg-emerald-200 dark:hover:bg-emerald-900/50'
-								}`}
+										: undefined
+								}
 							>
 								{tag}
 							</Link>
 						))}
 					</div>
 				))}
-
-			{/* Read more link */}
-			{showReadMore && (
-				<div className="text-neutral-600 dark:text-neutral-300">
-					<Link
-						to={`/thoughts/${thought.year}/${thought.slug}/`}
-						className="text-emerald-600 dark:text-emerald-400 hover:underline font-medium"
-					>
-						Read more →
-					</Link>
-				</div>
-			)}
 		</article>
 	)
 }

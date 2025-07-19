@@ -28,11 +28,8 @@ export default function ThoughtsIndex(props: Route.ComponentProps) {
 	return (
 		<div className="max-w-4xl mx-auto p-6">
 			<header className="mb-8">
-				<h1 className="text-3xl font-bold text-neutral-900 dark:text-white mb-2">
-					All Thoughts
-				</h1>
-				<p className="text-neutral-600 dark:text-neutral-400">
-					A collection of insights and learnings from my journey.
+				<p className="text-neutral-600 dark:text-neutral-300">
+					A small collection of insights and bits of things I learned.
 				</p>
 			</header>
 
@@ -46,7 +43,7 @@ export default function ThoughtsIndex(props: Route.ComponentProps) {
 						<ThoughtListItem
 							key={`${thought.year}-${thought.slug}`}
 							thought={thought}
-							className="border border-neutral-200 dark:border-neutral-700 rounded-lg p-6 hover:shadow-md transition-shadow"
+							className="py-2"
 							showReadMore={true}
 						/>
 					))}

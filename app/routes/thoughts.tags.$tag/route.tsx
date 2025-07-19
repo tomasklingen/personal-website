@@ -1,6 +1,6 @@
 import { Link } from 'react-router'
 import { ThoughtListItem } from '~/components/ThoughtListItem'
-import { getAllThoughts, type ThoughtPost } from '~/lib/thoughts'
+import { getAllThoughts } from '~/lib/thoughts'
 import type { Route } from './+types/route'
 
 export function loader({ params }: Route.ClientLoaderArgs) {
@@ -39,7 +39,7 @@ export default function TagPage({ loaderData }: Route.ComponentProps) {
 				</Link>
 				<h1 className="text-3xl font-bold text-neutral-900 dark:text-neutral-100">
 					Thoughts tagged:{' '}
-					<span className="text-emerald-600 dark:text-emerald-400">
+					<span className="text-emerald-600 dark:text-emerald-300">
 						{tag}
 					</span>
 				</h1>
@@ -57,11 +57,11 @@ export default function TagPage({ loaderData }: Route.ComponentProps) {
 				</div>
 			) : (
 				<div className="space-y-6">
-					{thoughts.map((thought: ThoughtPost) => (
+					{thoughts.map((thought) => (
 						<ThoughtListItem
 							key={`${thought.year}-${thought.slug}`}
 							thought={thought}
-							className="border-b border-neutral-200 dark:border-neutral-700 pb-6 last:border-b-0"
+							className="py-2"
 							highlightedTag={tag}
 						/>
 					))}

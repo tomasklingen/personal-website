@@ -41,7 +41,7 @@ export default function ThoughtDetail(props: Route.ComponentProps) {
 	const thought = props.loaderData
 
 	return (
-		<article className="max-w-4xl mx-auto p-6">
+		<article className="mx-auto py-6">
 			<header className="mb-8">
 				<h1 className="text-3xl font-bold text-neutral-900 dark:text-neutral-200 mb-2">
 					{thought.title}

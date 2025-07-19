@@ -1,4 +1,3 @@
-import { Link } from 'react-router'
 import { ThoughtListItem } from '~/components/ThoughtListItem'
 import { getAllThoughts } from '~/lib/thoughts'
 import type { Route } from './+types/route'
@@ -29,14 +28,8 @@ export default function TagPage({ loaderData }: Route.ComponentProps) {
 	const { tag, thoughts } = loaderData
 
 	return (
-		<div className="max-w-4xl mx-auto px-4">
+		<div className="mx-auto py-6">
 			<div className="mb-8">
-				<Link
-					to="/thoughts"
-					className="text-emerald-600 dark:text-emerald-400 hover:underline text-sm mb-4 inline-block"
-				>
-					← Back to all thoughts
-				</Link>
 				<h1 className="text-3xl font-bold text-neutral-900 dark:text-neutral-100">
 					Thoughts tagged:{' '}
 					<span className="text-emerald-600 dark:text-emerald-300">

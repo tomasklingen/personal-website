@@ -1,24 +1,27 @@
-import { Outlet } from 'react-router'
-import { Link } from '~/components/Link'
+import { Link, Outlet } from 'react-router'
 import type { Route } from './+types/route'
 
 export const links: Route.LinksFunction = () => []
 
 export default function ThoughtsRoute() {
 	return (
-		<main className="container mx-auto flex flex-col transition-colors">
-			<header className="shadow p-4 flex flex-col gap-2 md:flex-row md:items-center md:justify-between border-b border-neutral-200 dark:border-neutral-700">
-				<div className="flex items-center gap-4">
-					<Link to="/" variant="nav">
-						&larr; Home
-					</Link>
-					<h1 className="text-2xl font-bold text-neutral-900 dark:text-neutral-200">
-						Thoughts and learnings
-					</h1>
-				</div>
+		<main className="container max-w-3xl mx-auto flex flex-col transition-colors py-4">
+			<header className="p-4 flex items-center justify-between">
+				<Link
+					to="/"
+					className="font-bold text-neutral-900 dark:text-neutral-200 hover:text-neutral-500 dark:hover:text-neutral-100"
+				>
+					Tomas Klingen
+				</Link>
+				<Link
+					to="/thoughts"
+					className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-500 dark:hover:text-neutral-200"
+				>
+					Thoughts
+				</Link>
 			</header>
 
-			<section className="flex-1">
+			<section className="flex-1 px-4">
 				<Outlet />
 			</section>
 

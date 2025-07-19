@@ -26,7 +26,7 @@ export default function ThoughtsIndex(props: Route.ComponentProps) {
 	const { thoughts } = props.loaderData
 
 	return (
-		<div className="max-w-4xl mx-auto p-6">
+		<div className="mx-auto py-6">
 			<header className="mb-8">
 				<p className="text-neutral-600 dark:text-neutral-300">
 					A small collection of insights and bits of things I learned.

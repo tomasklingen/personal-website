@@ -17,7 +17,7 @@ export function meta({ data }: Route.MetaArgs) {
 
 	const blogPostingSchema = generateBlogPostingSchema({
 		title: data.title,
-		url: `https://tomasklingen.github.io/thoughts/${data.year}/${data.slug}`,
+		url: `https://tomasklingen.nl/thoughts/${data.year}/${data.slug}`,
 		datePublished: data.dateCreated.toISOString(),
 		description: `A collection of insights and learnings on ${data.title}.`,
 	})

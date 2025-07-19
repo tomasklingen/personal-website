@@ -1,9 +1,12 @@
+import avatar from '~/resources/img/avatar.avif'
+
 export function generatePersonSchema() {
 	return {
 		'@context': 'https://schema.org',
 		'@type': 'Person',
 		name: 'Tomas Klingen',
-		url: 'https://tomasklingen.github.io',
+		url: 'https://tomasklingen.nl',
+		image: `https://tomasklingen.nl${avatar}`,
 		jobTitle: 'Front-end Web Developer',
 		description:
 			'Passionate Front-end Web Developer based in the Netherlands with expertise in React, Angular, TypeScript, and crafting modern, user-centric web applications.',
@@ -32,10 +35,15 @@ export function generateBlogPostingSchema({
 		'@type': 'BlogPosting',
 		headline: title,
 		url,
+		image: `https://tomasklingen.nl${avatar}`,
 		datePublished,
 		...(dateModified && { dateModified }),
 		...(description && { description }),
-		author: 'https://tomasklingen.github.io',
+		author: {
+			'@type': 'Person',
+			url: 'https://tomasklingen.nl',
+			name: 'Tomas Klingen',
+		},
 		mainEntityOfPage: {
 			'@type': 'WebPage',
 			'@id': url,

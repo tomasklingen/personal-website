@@ -7,3 +7,4 @@ node_modules/
 /.react-router/
 /build/
 /dist
+.cache/

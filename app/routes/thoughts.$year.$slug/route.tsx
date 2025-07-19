@@ -1,6 +1,10 @@
 import { PrecompiledMDXContent } from '~/components/PrecompiledMDXContent'
 import { Tags } from '~/components/Tags'
 import { formatDate } from '~/lib/date'
+import {
+	generateBlogPostingSchema,
+	generateJsonLdMeta,
+} from '~/lib/structured-data'
 import { getAllThoughts } from '~/lib/thoughts'
 import type { Route } from './+types/route'
 
@@ -11,12 +15,20 @@ export function meta({ data }: Route.MetaArgs) {
 		return [{ title: '404 - Thought Not Found | Tomas Klingen' }]
 	}
 
+	const blogPostingSchema = generateBlogPostingSchema({
+		title: data.title,
+		url: `https://tomasklingen.github.io/thoughts/${data.year}/${data.slug}`,
+		datePublished: data.dateCreated.toISOString(),
+		description: `A collection of insights and learnings on ${data.title}.`,
+	})
+
 	return [
 		{ title: `${data.title} | Thoughts | Tomas Klingen` },
 		{
 			name: 'description',
 			content: `A collection of insights and learnings on ${data.title}.`,
 		},
+		generateJsonLdMeta(blogPostingSchema),
 	]
 }
 

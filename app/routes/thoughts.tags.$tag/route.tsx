@@ -2,14 +2,14 @@ import { ThoughtListItem } from '~/components/ThoughtListItem'
 import { getAllThoughts } from '~/lib/thoughts'
 import type { Route } from './+types/route'
 
-export function loader({ params }: Route.ClientLoaderArgs) {
+export async function loader({ params }: Route.ClientLoaderArgs) {
 	const { tag } = params
 
 	if (!tag) {
 		throw new Response('Tag not found', { status: 404 })
 	}
 
-	const allThoughts = getAllThoughts()
+	const allThoughts = await getAllThoughts()
 	const filteredThoughts = allThoughts.filter((thought) =>
 		thought.tags?.some((t) => t.toLowerCase() === tag.toLowerCase()),
 	)

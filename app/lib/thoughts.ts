@@ -1,18 +1,43 @@
 import fs from 'node:fs'
 import path from 'node:path'
+import { evaluate } from '@mdx-js/mdx'
 import matter from 'gray-matter'
+import React from 'react'
+import * as runtime from 'react/jsx-runtime'
+import { renderToString } from 'react-dom/server'
+import rehypeHighlight from 'rehype-highlight'
 
 export type ThoughtPost = {
 	slug: string
 	year: string
 	title: string
 	content: string
+	compiledContent: string
 	filePath: string
 	dateCreated: Date
 	tags?: string[]
 }
 
 const THOUGHTS_DIR = path.join(process.cwd(), 'thoughts')
+
+/**
+ * Compile MDX content to HTML string
+ */
+async function compileMDXContent(content: string): Promise<string> {
+	try {
+		const { default: Component } = await evaluate(content, {
+			...runtime,
+			development: false,
+			rehypePlugins: [rehypeHighlight],
+		})
+
+		// Render the React component to HTML string
+		return renderToString(React.createElement(Component))
+	} catch (error) {
+		console.error('MDX compilation error:', error)
+		return `<div style="color: red; padding: 1rem; background: #fee;">Error compiling content: ${error instanceof Error ? error.message : 'Unknown error'}</div>`
+	}
+}
 
 /**
  * Get all markdown and MDX files from the thoughts directory
@@ -88,26 +113,32 @@ function extractMetadata(
 /**
  * Load all thought posts
  */
-export function getAllThoughts(): ThoughtPost[] {
+export async function getAllThoughts(): Promise<ThoughtPost[]> {
 	if (!fs.existsSync(THOUGHTS_DIR)) {
 		return []
 	}
 
 	const markdownFiles = getAllMarkdownFiles(THOUGHTS_DIR)
 
-	const thoughts = markdownFiles.map((filePath) => {
-		const content = fs.readFileSync(filePath, 'utf-8')
-		const metadata = extractMetadata(filePath, content)
+	const thoughts = await Promise.all(
+		markdownFiles.map(async (filePath) => {
+			const content = fs.readFileSync(filePath, 'utf-8')
+			const metadata = extractMetadata(filePath, content)
 
-		// Extract content without frontmatter for display
-		const { content: markdownContent } = matter(content)
+			// Extract content without frontmatter for display
+			const { content: markdownContent } = matter(content)
 
-		return {
-			...metadata,
-			content: markdownContent,
-			filePath,
-		}
-	})
+			// Compile MDX content to JSX
+			const compiledContent = await compileMDXContent(markdownContent)
+
+			return {
+				...metadata,
+				content: markdownContent,
+				compiledContent,
+				filePath,
+			}
+		}),
+	)
 
 	// Sort by date created (newest first)
 	return thoughts.sort(
@@ -118,22 +149,14 @@ export function getAllThoughts(): ThoughtPost[] {
 /**
  * Get a specific thought by slug and year
  */
-export function getThoughtBySlug(
+export async function getThoughtBySlug(
 	year: string,
 	slug: string,
-): ThoughtPost | null {
-	const thoughts = getAllThoughts()
+): Promise<ThoughtPost | null> {
+	const thoughts = await getAllThoughts()
 	return (
 		thoughts.find(
 			(thought) => thought.year === year && thought.slug === slug,
 		) || null
 	)
-}
-
-/**
- * Get recent thoughts (for homepage)
- */
-export function getRecentThoughts(limit = 5): ThoughtPost[] {
-	const thoughts = getAllThoughts()
-	return thoughts.slice(0, limit)
 }

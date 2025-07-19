@@ -1,27 +1,24 @@
 import { describe, expect, it } from 'vitest'
-import {
-	getAllThoughts,
-	getRecentThoughts,
-	getThoughtBySlug,
-} from '../thoughts'
+import { getAllThoughts, getThoughtBySlug } from '../thoughts'
 
 describe('thoughts library', () => {
 	describe('getAllThoughts', () => {
-		it('should load thoughts from the submodule', () => {
-			const thoughts = getAllThoughts()
+		it('should load thoughts from the submodule', async () => {
+			const thoughts = await getAllThoughts()
 
 			expect(thoughts).toBeInstanceOf(Array)
 			expect(thoughts.length).toBeGreaterThan(0)
 		})
 
-		it('should return thoughts with required properties', () => {
-			const thoughts = getAllThoughts()
+		it('should return thoughts with required properties', async () => {
+			const thoughts = await getAllThoughts()
 
 			for (const thought of thoughts) {
 				expect(thought).toHaveProperty('slug')
 				expect(thought).toHaveProperty('year')
 				expect(thought).toHaveProperty('title')
 				expect(thought).toHaveProperty('content')
+				expect(thought).toHaveProperty('compiledContent')
 				expect(thought).toHaveProperty('filePath')
 				expect(thought).toHaveProperty('dateCreated')
 
@@ -29,6 +26,7 @@ describe('thoughts library', () => {
 				expect(typeof thought.year).toBe('string')
 				expect(typeof thought.title).toBe('string')
 				expect(typeof thought.content).toBe('string')
+				expect(typeof thought.compiledContent).toBe('string')
 				expect(typeof thought.filePath).toBe('string')
 				expect(thought.dateCreated).toBeInstanceOf(Date)
 
@@ -42,8 +40,8 @@ describe('thoughts library', () => {
 			}
 		})
 
-		it('should sort thoughts by date (newest first)', () => {
-			const thoughts = getAllThoughts()
+		it('should sort thoughts by date (newest first)', async () => {
+			const thoughts = await getAllThoughts()
 
 			if (thoughts.length > 1) {
 				for (let i = 0; i < thoughts.length - 1; i++) {
@@ -58,13 +56,13 @@ describe('thoughts library', () => {
 	})
 
 	describe('getThoughtBySlug', () => {
-		it('should find existing thought by year and slug', () => {
-			const allThoughts = getAllThoughts()
+		it('should find existing thought by year and slug', async () => {
+			const allThoughts = await getAllThoughts()
 
 			if (allThoughts.length > 0) {
 				const firstThought = allThoughts[0]
 				if (firstThought) {
-					const found = getThoughtBySlug(
+					const found = await getThoughtBySlug(
 						firstThought.year,
 						firstThought.slug,
 					)
@@ -76,36 +74,9 @@ describe('thoughts library', () => {
 			}
 		})
 
-		it('should return null for non-existent thought', () => {
-			const found = getThoughtBySlug('9999', 'non-existent-slug')
+		it('should return null for non-existent thought', async () => {
+			const found = await getThoughtBySlug('9999', 'non-existent-slug')
 			expect(found).toBeNull()
-		})
-	})
-
-	describe('getRecentThoughts', () => {
-		it('should return limited number of thoughts', () => {
-			const recent = getRecentThoughts(3)
-
-			expect(recent).toBeInstanceOf(Array)
-			expect(recent.length).toBeLessThanOrEqual(3)
-		})
-
-		it('should return most recent thoughts first', () => {
-			const allThoughts = getAllThoughts()
-			const recent = getRecentThoughts(2)
-
-			if (allThoughts.length >= 2 && recent.length >= 2) {
-				expect(recent[0]?.slug).toBe(allThoughts[0]?.slug)
-				expect(recent[1]?.slug).toBe(allThoughts[1]?.slug)
-			}
-		})
-
-		it('should use default limit of 5', () => {
-			const recent = getRecentThoughts()
-			const allThoughts = getAllThoughts()
-
-			const expectedLength = Math.min(5, allThoughts.length)
-			expect(recent.length).toBe(expectedLength)
 		})
 	})
 })

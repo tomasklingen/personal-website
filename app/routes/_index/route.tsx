@@ -27,8 +27,8 @@ export const meta: MetaFunction = () => {
 	]
 }
 
-export function loader() {
-	const thoughts = getAllThoughts()
+export async function loader() {
+	const thoughts = await getAllThoughts()
 	return { recentThoughts: thoughts.slice(0, 3) }
 }
 

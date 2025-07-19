@@ -1,4 +1,4 @@
-import { MDXContent } from '~/components/MDXContent'
+import { PrecompiledMDXContent } from '~/components/PrecompiledMDXContent'
 import { Tags } from '~/components/Tags'
 import { formatDate } from '~/lib/date'
 import { getAllThoughts } from '~/lib/thoughts'
@@ -20,8 +20,8 @@ export function meta({ data }: Route.MetaArgs) {
 	]
 }
 
-export function loader({ params }: Route.LoaderArgs) {
-	const thoughts = getAllThoughts()
+export async function loader({ params }: Route.LoaderArgs) {
+	const thoughts = await getAllThoughts()
 	const thought = thoughts.find(
 		(t) => t.year === params.year && t.slug === params.slug,
 	)
@@ -60,7 +60,7 @@ export default function ThoughtDetail(props: Route.ComponentProps) {
 			</header>
 
 			<div className="max-w-none dark:text-neutral-300">
-				<MDXContent content={thought.content} />
+				<PrecompiledMDXContent htmlContent={thought.compiledContent} />
 			</div>
 		</article>
 	)

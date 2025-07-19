@@ -12,8 +12,8 @@ export function meta() {
 	]
 }
 
-export function loader() {
-	return { thoughts: getAllThoughts() }
+export async function loader() {
+	return { thoughts: await getAllThoughts() }
 }
 
 export function clientLoader({ serverLoader }: Route.ClientLoaderArgs) {

@@ -2,7 +2,7 @@ import type { Config } from '@react-router/dev/config'
 import { getAllThoughts } from './app/lib/thoughts'
 import { distanceConfig } from './app/running/data'
 
-const thoughts = getAllThoughts()
+const thoughts = await getAllThoughts()
 
 // Get all unique tags
 const allTags = new Set(

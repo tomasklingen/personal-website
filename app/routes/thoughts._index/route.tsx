@@ -1,5 +1,4 @@
-import { Link } from 'react-router'
-import { formatDate } from '~/lib/date'
+import { ThoughtListItem } from '~/components/ThoughtListItem'
 import { getAllThoughts } from '~/lib/thoughts'
 import type { Route } from './+types/route'
 
@@ -44,35 +43,12 @@ export default function ThoughtsIndex(props: Route.ComponentProps) {
 			) : (
 				<div className="space-y-6">
 					{thoughts.map((thought) => (
-						<article
+						<ThoughtListItem
 							key={`${thought.year}-${thought.slug}`}
+							thought={thought}
 							className="border border-neutral-200 dark:border-neutral-700 rounded-lg p-6 hover:shadow-md transition-shadow"
-						>
-							<header className="mb-3">
-								<h2 className="text-xl font-semibold text-neutral-900 dark:text-white mb-2">
-									<Link
-										to={`/thoughts/${thought.year}/${thought.slug}/`}
-										className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
-									>
-										{thought.title}
-									</Link>
-								</h2>
-								<time
-									dateTime={thought.dateCreated.toISOString()}
-									className="text-sm text-neutral-500 dark:text-neutral-400"
-								>
-									{formatDate(thought.dateCreated)}
-								</time>
-							</header>
-							<div className="text-neutral-600 dark:text-neutral-300">
-								<Link
-									to={`/thoughts/${thought.year}/${thought.slug}/`}
-									className="text-emerald-600 dark:text-emerald-400 hover:underline font-medium"
-								>
-									Read more →
-								</Link>
-							</div>
-						</article>
+							showReadMore={true}
+						/>
 					))}
 				</div>
 			)}

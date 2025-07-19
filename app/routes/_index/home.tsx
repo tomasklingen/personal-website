@@ -1,7 +1,6 @@
 import type React from 'react'
 import { Link } from 'react-router'
-import { Tags } from '~/components/Tags'
-import { formatDate } from '~/lib/date'
+import { ThoughtListItem } from '~/components/ThoughtListItem'
 import type { ThoughtPost } from '~/lib/thoughts'
 import avatar from '~/resources/img/avatar.avif'
 import { GridGlowEffect } from './GridGlowEffect'
@@ -91,28 +90,13 @@ export const Home: React.FC<HomeProps> = ({ recentThoughts }) => {
 							</div>
 							<div className="space-y-4">
 								{recentThoughts.map((thought) => (
-									<article
+									<ThoughtListItem
 										key={`${thought.year}-${thought.slug}`}
+										thought={thought}
 										className="bg-neutral-700/30 p-4 rounded-lg hover:bg-neutral-700/50 transition-colors"
-									>
-										<h4 className="font-medium text-gray-200 mb-2">
-											<Link
-												to={`/thoughts/${thought.year}/${thought.slug}/`}
-												className="hover:text-emerald-400 transition-colors"
-											>
-												{thought.title}
-											</Link>
-										</h4>
-										<time
-											dateTime={thought.dateCreated.toISOString()}
-											className="text-sm text-gray-400"
-										>
-											{formatDate(thought.dateCreated, 'short')}
-										</time>
-										{thought.tags && thought.tags.length > 0 && (
-											<Tags tags={thought.tags} className="mt-2" />
-										)}
-									</article>
+										variant="compact"
+										dateFormat="short"
+									/>
 								))}
 							</div>
 						</div>

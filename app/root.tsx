@@ -2,7 +2,6 @@ import { Links, Meta, Outlet, Scripts, ScrollRestoration } from 'react-router'
 
 import type { Route } from './+types/root'
 import './app.css'
-import 'highlight.js/styles/github-dark.css'
 
 export const links: Route.LinksFunction = () => [
 	{

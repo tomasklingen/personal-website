@@ -1,0 +1,3 @@
+/* Syntax highlighting themes - conditional based on color scheme */
+@import "highlight.js/styles/github.css" (prefers-color-scheme: light);
+@import "highlight.js/styles/github-dark.css" (prefers-color-scheme: dark);

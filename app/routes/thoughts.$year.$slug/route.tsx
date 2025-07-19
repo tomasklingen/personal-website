@@ -4,6 +4,8 @@ import { formatDate } from '~/lib/date'
 import { getAllThoughts } from '~/lib/thoughts'
 import type { Route } from './+types/route'
 
+import './blogpost.css'
+
 export function meta({ data }: Route.MetaArgs) {
 	if (!data) {
 		return [{ title: '404 - Thought Not Found | Tomas Klingen' }]

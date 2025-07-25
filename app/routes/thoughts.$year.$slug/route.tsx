@@ -23,7 +23,7 @@ export function meta({ data }: Route.MetaArgs) {
 	})
 
 	return [
-		{ title: `${data.title} | Thoughts | Tomas Klingen` },
+		{ title: `${data.title} - Tomas Klingen` },
 		{
 			name: 'description',
 			content: `A collection of insights and learnings on ${data.title}.`,

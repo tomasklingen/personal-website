@@ -7,6 +7,7 @@ import { Home as HomeComponent } from './home'
 
 export const meta: MetaFunction = () => {
 	return [
+		{ title: 'Tomas Klingen - Front-end Web Developer' },
 		{
 			name: 'description',
 			content:

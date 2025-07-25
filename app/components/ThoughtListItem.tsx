@@ -36,14 +36,14 @@ export const ThoughtListItem: React.FC<ThoughtListItemProps> = ({
 		<article className={className}>
 			<header className={showReadMore ? 'mb-3' : 'mb-2'}>
 				{isCompact ? (
-					<h4 className={headingClass}>
+					<h3 className={headingClass}>
 						<Link
 							to={`/thoughts/${thought.year}/${thought.slug}/`}
 							variant="default"
 						>
 							{thought.title}
 						</Link>
-					</h4>
+					</h3>
 				) : (
 					<h2 className={headingClass}>
 						<Link

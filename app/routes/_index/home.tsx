@@ -113,40 +113,40 @@ export const Home: React.FC<HomeProps> = ({ recentThoughts }) => {
 						</h2>
 						<div className="grid sm:grid-cols-2 gap-3 md:gap-4">
 							<div className="bg-neutral-100/90 dark:bg-neutral-700/50 p-4 rounded-md dark:border-l-4 border-blue-500/60 hover:border-blue-500 transition-colors duration-200 group">
-								<h4 className="font-medium dark:text-gray-300 mb-2 flex items-center">
+								<h3 className="font-medium dark:text-gray-300 mb-2 flex items-center">
 									<strong className="mr-2">💻</strong>
 									My Favorite Tech
-								</h4>
+								</h3>
 								<p className="dark:text-gray-400 text-sm">
 									I love working with TypeScript, React, Angular, Node,
 									Svelte, RxJS.
 								</p>
 							</div>
 							<div className="bg-neutral-100/90 dark:bg-neutral-700/50 p-4 rounded-md dark:border-l-4 border-purple-500/60 hover:border-purple-500 transition-colors duration-200 group">
-								<h4 className="font-medium dark:text-gray-300 mb-2 flex items-center">
+								<h3 className="font-medium dark:text-gray-300 mb-2 flex items-center">
 									<strong className="mr-2">🎯</strong>
 									How I Like to Code
-								</h4>
+								</h3>
 								<p className="dark:text-gray-400 text-sm">
 									I focus on writing code that's maintainable,
 									testable, performs well, and is easy to understand.
 								</p>
 							</div>
 							<div className="bg-neutral-100/90 dark:bg-neutral-700/50 p-4 rounded-md dark:border-l-4 border-green-500/60 hover:border-green-500 transition-colors duration-200 group">
-								<h4 className="font-medium dark:text-gray-300 mb-2 flex items-center">
+								<h3 className="font-medium dark:text-gray-300 mb-2 flex items-center">
 									<strong className="mr-2">🛠️</strong>
 									Tools of the Trade
-								</h4>
+								</h3>
 								<p className="dark:text-gray-400 text-sm">
 									My daily drivers include Vite, Webpack, Jest, Vitest,
 									and CI/CD tools like Gitlab & Github Actions.
 								</p>
 							</div>
 							<div className="bg-neutral-100/90 dark:bg-neutral-700/50 p-4 rounded-md dark:border-l-4 border-rose-500/60 hover:border-rose-500 transition-colors duration-200 group">
-								<h4 className="font-medium dark:text-gray-300 mb-2 flex items-center">
+								<h3 className="font-medium dark:text-gray-300 mb-2 flex items-center">
 									<strong className="mr-2">👨‍💻</strong>
 									My Approach
-								</h4>
+								</h3>
 								<p className="dark:text-gray-400 text-sm">
 									I believe in paying close attention to detail and
 									enjoy tackling tricky problems.

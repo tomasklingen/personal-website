@@ -22,6 +22,7 @@ export const Home: React.FC<HomeProps> = ({ recentThoughts }) => {
 							src={avatar}
 							alt="Tomas Klingen"
 							className="w-28 h-28 rounded-full object-cover dark:border-2 dark:border-neutral-700 shadow-lg"
+							style={{ viewTransitionName: 'avatar' }}
 						/>
 						<div>
 							<h1 className="text-4xl sm:text-5xl font-bold">
@@ -67,6 +68,7 @@ export const Home: React.FC<HomeProps> = ({ recentThoughts }) => {
 									to="/thoughts/"
 									variant="default"
 									className="text-sm"
+									viewTransition
 								>
 									View all →
 								</Link>

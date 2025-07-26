@@ -12,7 +12,7 @@ type HomeProps = {
 
 export const Home: React.FC<HomeProps> = ({ recentThoughts }) => {
 	return (
-		<div className="relative w-full py-20 overflow-hidden  dark:text-white">
+		<div className="relative w-full pt-12 overflow-hidden  dark:text-white">
 			{/* Main content */}
 			<div className="container mx-auto px-6 lg:px-40 flex flex-col items-center justify-between relative">
 				{/* Left column - Introduction */}

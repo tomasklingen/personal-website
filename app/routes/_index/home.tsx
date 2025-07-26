@@ -76,7 +76,7 @@ export const Home: React.FC<HomeProps> = ({ recentThoughts }) => {
 				{/* Recent Thoughts Section */}
 				{recentThoughts.length > 0 && (
 					<div className="mb-8 w-full">
-						<div className="bg-amber-400/70 dark:bg-neutral-800/50 backdrop-blur-sm p-4 md:p-8 rounded-lg border-neutral-700 shadow-xl">
+						<div className="md:bg-amber-400/70 md:dark:bg-neutral-800/50 md:backdrop-blur-sm md:p-8 rounded-lg border-neutral-700 md:shadow-xl">
 							<div className="flex items-center justify-between my-1 mb-4">
 								<h2 className="text-xl font-semibold dark:text-gray-200">
 									Recent Thoughts 💡
@@ -94,7 +94,7 @@ export const Home: React.FC<HomeProps> = ({ recentThoughts }) => {
 									<ThoughtListItem
 										key={`${thought.year}-${thought.slug}`}
 										thought={thought}
-										className="bg-neutral-100 dark:bg-neutral-700/50 p-4 rounded-md transition-colors"
+										className="bg-neutral-100 dark:bg-neutral-700/80 p-4 rounded-md transition-colors"
 										variant="compact"
 										dateFormat="short"
 									/>
@@ -107,12 +107,12 @@ export const Home: React.FC<HomeProps> = ({ recentThoughts }) => {
 				{/* Skills & Projects Block */}
 				<div className="space-y-6">
 					{/* Skills Card */}
-					<div className="bg-neutral-300 dark:bg-neutral-800/50 backdrop-blur-sm p-4 md:p-8 rounded-lg border-neutral-700 shadow-xl">
+					<div className="md:bg-neutral-300 md:dark:bg-neutral-800/50 md:backdrop-blur-sm md:p-8 rounded-lg border-neutral-700 md:shadow-xl">
 						<h2 className="text-xl font-semibold  my-1 mb-4">
 							How I Work
 						</h2>
 						<div className="grid sm:grid-cols-2 gap-3 md:gap-4">
-							<div className="bg-neutral-100/90 dark:bg-neutral-700/50 p-4 rounded-md dark:border-l-4 border-blue-500/60 hover:border-blue-500 transition-colors duration-200 group">
+							<div className="bg-neutral-100/90 dark:bg-neutral-700/90 p-4 rounded-md dark:border-l-4 border-blue-500/60 hover:border-blue-500 transition-colors duration-200 group">
 								<h3 className="font-medium dark:text-gray-300 mb-2 flex items-center">
 									<strong className="mr-2">💻</strong>
 									My Favorite Tech
@@ -122,7 +122,7 @@ export const Home: React.FC<HomeProps> = ({ recentThoughts }) => {
 									Svelte, RxJS.
 								</p>
 							</div>
-							<div className="bg-neutral-100/90 dark:bg-neutral-700/50 p-4 rounded-md dark:border-l-4 border-purple-500/60 hover:border-purple-500 transition-colors duration-200 group">
+							<div className="bg-neutral-100/90 dark:bg-neutral-700/90 p-4 rounded-md dark:border-l-4 border-purple-500/60 hover:border-purple-500 transition-colors duration-200 group">
 								<h3 className="font-medium dark:text-gray-300 mb-2 flex items-center">
 									<strong className="mr-2">🎯</strong>
 									How I Like to Code
@@ -132,7 +132,7 @@ export const Home: React.FC<HomeProps> = ({ recentThoughts }) => {
 									testable, performs well, and is easy to understand.
 								</p>
 							</div>
-							<div className="bg-neutral-100/90 dark:bg-neutral-700/50 p-4 rounded-md dark:border-l-4 border-green-500/60 hover:border-green-500 transition-colors duration-200 group">
+							<div className="bg-neutral-100/90 dark:bg-neutral-700/90 p-4 rounded-md dark:border-l-4 border-green-500/60 hover:border-green-500 transition-colors duration-200 group">
 								<h3 className="font-medium dark:text-gray-300 mb-2 flex items-center">
 									<strong className="mr-2">🛠️</strong>
 									Tools of the Trade
@@ -142,7 +142,7 @@ export const Home: React.FC<HomeProps> = ({ recentThoughts }) => {
 									and CI/CD tools like Gitlab & Github Actions.
 								</p>
 							</div>
-							<div className="bg-neutral-100/90 dark:bg-neutral-700/50 p-4 rounded-md dark:border-l-4 border-rose-500/60 hover:border-rose-500 transition-colors duration-200 group">
+							<div className="bg-neutral-100/90 dark:bg-neutral-700/90 p-4 rounded-md dark:border-l-4 border-rose-500/60 hover:border-rose-500 transition-colors duration-200 group">
 								<h3 className="font-medium dark:text-gray-300 mb-2 flex items-center">
 									<strong className="mr-2">👨‍💻</strong>
 									My Approach

@@ -10,12 +10,13 @@ import {
 import type { Route } from './+types/root'
 import './app.css'
 import { Footer } from './components/Footer'
+import favicon from './resources/favicon.ico'
 import { GridGlowEffect } from './routes/_index/GridGlowEffect'
 
 export const links: Route.LinksFunction = () => [
 	{
 		rel: 'icon',
-		href: '/favicon.ico',
+		href: favicon,
 		sizes: '48x48',
 	},
 ]

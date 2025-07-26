@@ -40,6 +40,10 @@ export const ThoughtListItem: React.FC<ThoughtListItemProps> = ({
 						<Link
 							to={`/thoughts/${thought.year}/${thought.slug}/`}
 							variant="default"
+							viewTransition
+							style={{
+								viewTransitionName: `thought-title-${thought.slug}`,
+							}}
 						>
 							{thought.title}
 						</Link>
@@ -49,6 +53,10 @@ export const ThoughtListItem: React.FC<ThoughtListItemProps> = ({
 						<Link
 							to={`/thoughts/${thought.year}/${thought.slug}/`}
 							variant="default"
+							viewTransition
+							style={{
+								viewTransitionName: `thought-title-${thought.slug}`,
+							}}
 						>
 							{thought.title}
 						</Link>
@@ -57,6 +65,7 @@ export const ThoughtListItem: React.FC<ThoughtListItemProps> = ({
 				<time
 					dateTime={thought.dateCreated.toISOString()}
 					className={timeClass}
+					style={{ viewTransitionName: `thought-date-${thought.slug}` }}
 				>
 					{formatDate(
 						thought.dateCreated,
@@ -69,9 +78,16 @@ export const ThoughtListItem: React.FC<ThoughtListItemProps> = ({
 			{thought.tags &&
 				thought.tags.length > 0 &&
 				(isCompact ? (
-					<Tags tags={thought.tags} className="mt-2" />
+					<Tags
+						tags={thought.tags}
+						className="mt-2"
+						style={{ viewTransitionName: `thought-tags-${thought.slug}` }}
+					/>
 				) : (
-					<div className="flex flex-wrap gap-2 my-3">
+					<div
+						className="flex flex-wrap gap-2 my-3"
+						style={{ viewTransitionName: `thought-tags-${thought.slug}` }}
+					>
 						{thought.tags.map((tag) => (
 							<Link
 								key={tag}

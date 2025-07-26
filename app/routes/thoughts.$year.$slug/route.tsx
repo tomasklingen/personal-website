@@ -57,17 +57,25 @@ export default function ThoughtDetail(props: Route.ComponentProps) {
 	return (
 		<article className="mx-auto py-6">
 			<header className="mb-8">
-				<h1 className="text-3xl font-bold text-neutral-900 dark:text-neutral-200 mb-2">
+				<h1
+					style={{ viewTransitionName: `thought-title-${thought.slug}` }}
+					className="text-3xl font-bold text-neutral-900 dark:text-neutral-200 mb-2"
+				>
 					{thought.title}
 				</h1>
 				<time
 					dateTime={thought.dateCreated.toISOString()}
 					className="text-sm text-neutral-500 dark:text-neutral-400"
+					style={{ viewTransitionName: `thought-date-${thought.slug}` }}
 				>
 					{formatDate(thought.dateCreated)}
 				</time>
 				{thought.tags && thought.tags.length > 0 && (
-					<Tags tags={thought.tags} className="mt-4" />
+					<Tags
+						tags={thought.tags}
+						className="mt-4"
+						style={{ viewTransitionName: `thought-tags-${thought.slug}` }}
+					/>
 				)}
 			</header>
 

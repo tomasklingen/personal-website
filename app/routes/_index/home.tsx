@@ -58,7 +58,7 @@ export const Home: React.FC<HomeProps> = ({ recentThoughts }) => {
 				{/* Recent Thoughts Section */}
 				{recentThoughts.length > 0 && (
 					<div className="mb-8 w-full">
-						<div className="md:bg-amber-400/70 md:dark:bg-neutral-900/50 md:backdrop-blur-xs md:p-8 rounded-lg border-neutral-700 md:shadow-xl">
+						<div className="md:bg-amber-400/70 md:dark:bg-neutral-900/50 md:backdrop-blur-xs md:p-8 md:-mx-8 rounded-lg border-neutral-700 md:shadow-xl">
 							<div className="flex items-center justify-between my-1 mb-4">
 								<h2 className="text-xl font-semibold dark:text-gray-200">
 									Recent Thoughts 💡
@@ -89,7 +89,7 @@ export const Home: React.FC<HomeProps> = ({ recentThoughts }) => {
 				{/* Skills & Projects Block */}
 				<div className="space-y-6">
 					{/* Skills Card */}
-					<div className="md:bg-neutral-300 md:dark:bg-neutral-900/50 md:backdrop-blur-xs md:p-8 rounded-lg border-neutral-700 md:shadow-xl">
+					<div className="md:bg-neutral-300 md:dark:bg-neutral-900/50 md:backdrop-blur-xs md:p-8 md:-mx-8 rounded-lg border-neutral-700 md:shadow-xl">
 						<h2 className="text-xl font-semibold  my-1 mb-4">
 							How I Work
 						</h2>

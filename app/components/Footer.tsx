@@ -4,7 +4,7 @@ import { SocialLinkComponent } from './SocialLink'
 
 export const Footer: React.FC = () => {
 	return (
-		<footer className="md:bg-neutral-950 text-center text-neutral-500 dark:text-neutral-400 text-sm">
+		<footer className="text-center text-neutral-500 dark:text-neutral-400 text-sm">
 			<div className="container mx-auto px-6 lg:px-40 p-4">
 				<div className="flex flex-col items-center gap-3">
 					<div className="flex space-x-2">

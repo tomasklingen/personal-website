@@ -59,7 +59,7 @@ export default function App() {
 	return (
 		<div className="flex-1 relative z-10">
 			{isHomePage && <GridGlowEffect />}
-			<div className="min-h-screen flex flex-col relative">
+			<div className="flex flex-col relative">
 				<Outlet />
 			</div>
 			<Footer />

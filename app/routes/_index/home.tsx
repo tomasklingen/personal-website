@@ -1,7 +1,7 @@
 import type React from 'react'
 import { Link } from '~/components/Link'
 import { ThoughtListItem } from '~/components/ThoughtListItem'
-import type { ThoughtPost } from '~/lib/thoughts'
+import type { ThoughtPostSummary } from '~/lib/thoughts'
 import avatar from '~/resources/img/avatar.avif'
 import { GridGlowEffect } from './GridGlowEffect'
 import { BlueskyIcon, GithubIcon, LinkedinIcon } from './SocialIcons'
@@ -28,7 +28,7 @@ const socialLinks = [
 ]
 
 type HomeProps = {
-	recentThoughts: ThoughtPost[]
+	recentThoughts: ThoughtPostSummary[]
 }
 
 export const Home: React.FC<HomeProps> = ({ recentThoughts }) => {

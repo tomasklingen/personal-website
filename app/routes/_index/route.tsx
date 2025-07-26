@@ -1,6 +1,6 @@
 import type { MetaFunction } from 'react-router'
 import { generateJsonLdMeta, generatePersonSchema } from '~/lib/structured-data'
-import { getAllThoughts } from '~/lib/thoughts'
+import { getAllThoughtsSummary } from '~/lib/thoughts'
 import avatar from '~/resources/img/avatar.avif'
 import type { Route } from './+types/route'
 import { Home as HomeComponent } from './home'
@@ -31,7 +31,7 @@ export const meta: MetaFunction = () => {
 }
 
 export async function loader() {
-	const thoughts = await getAllThoughts()
+	const thoughts = await getAllThoughtsSummary()
 	return { recentThoughts: thoughts.slice(0, 3) }
 }
 

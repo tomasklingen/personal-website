@@ -18,6 +18,14 @@ export type ThoughtPost = {
 	tags?: string[]
 }
 
+export type ThoughtPostSummary = {
+	slug: string
+	year: string
+	title: string
+	dateCreated: Date
+	tags?: string[]
+}
+
 const THOUGHTS_DIR = path.join(process.cwd(), 'thoughts')
 
 // In-memory cache for compiled thoughts
@@ -271,6 +279,20 @@ export async function getAllThoughts(): Promise<ThoughtPost[]> {
 	debugLog(`✅ Compiled ${thoughts.length} thoughts in ${duration}ms`)
 
 	return sortedThoughts
+}
+
+/**
+ * Get all thought summaries (without content and compiledContent for listing pages)
+ */
+export async function getAllThoughtsSummary(): Promise<ThoughtPostSummary[]> {
+	const thoughts = await getAllThoughts()
+	return thoughts.map((thought) => ({
+		slug: thought.slug,
+		year: thought.year,
+		title: thought.title,
+		dateCreated: thought.dateCreated,
+		tags: thought.tags,
+	}))
 }
 
 /**

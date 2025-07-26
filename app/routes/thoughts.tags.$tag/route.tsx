@@ -1,5 +1,5 @@
 import { ThoughtListItem } from '~/components/ThoughtListItem'
-import { getAllThoughts } from '~/lib/thoughts'
+import { getAllThoughtsSummary } from '~/lib/thoughts'
 import type { Route } from './+types/route'
 
 export async function loader({ params }: Route.ClientLoaderArgs) {
@@ -9,7 +9,7 @@ export async function loader({ params }: Route.ClientLoaderArgs) {
 		throw new Response('Tag not found', { status: 404 })
 	}
 
-	const allThoughts = await getAllThoughts()
+	const allThoughts = await getAllThoughtsSummary()
 	const filteredThoughts = allThoughts.filter((thought) =>
 		thought.tags?.some((t) => t.toLowerCase() === tag.toLowerCase()),
 	)
@@ -18,10 +18,6 @@ export async function loader({ params }: Route.ClientLoaderArgs) {
 		tag,
 		thoughts: filteredThoughts,
 	}
-}
-
-export function clientLoader({ serverLoader }: Route.ClientLoaderArgs) {
-	return serverLoader()
 }
 
 export default function TagPage({ loaderData }: Route.ComponentProps) {

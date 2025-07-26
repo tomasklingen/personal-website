@@ -1,5 +1,5 @@
 import { ThoughtListItem } from '~/components/ThoughtListItem'
-import { getAllThoughts } from '~/lib/thoughts'
+import { getAllThoughtsSummary } from '~/lib/thoughts'
 import type { Route } from './+types/route'
 
 export function meta() {
@@ -13,7 +13,7 @@ export function meta() {
 }
 
 export async function loader() {
-	return { thoughts: await getAllThoughts() }
+	return { thoughts: await getAllThoughtsSummary() }
 }
 
 export function clientLoader({ serverLoader }: Route.ClientLoaderArgs) {

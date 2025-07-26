@@ -1,11 +1,11 @@
 import type React from 'react'
 import { formatDate } from '~/lib/date'
-import type { ThoughtPost } from '~/lib/thoughts'
+import type { ThoughtPostSummary } from '~/lib/thoughts'
 import { Link } from './Link'
 import { Tags } from './Tags'
 
 type ThoughtListItemProps = {
-	thought: ThoughtPost
+	thought: ThoughtPostSummary
 	className?: string
 	showReadMore?: boolean
 	highlightedTag?: string

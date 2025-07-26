@@ -4,18 +4,19 @@ import { Link } from './Link'
 type TagsProps = {
 	tags: string[]
 	className?: string
+	style?: React.CSSProperties
 }
 
 /**
  * Component to display tags as clickable links
  */
-export const Tags: React.FC<TagsProps> = ({ tags, className = '' }) => {
+export const Tags: React.FC<TagsProps> = ({ tags, className = '', style }) => {
 	if (!tags || tags.length === 0) {
 		return null
 	}
 
 	return (
-		<div className={`flex flex-wrap gap-2 ${className}`}>
+		<div className={`flex flex-wrap gap-2 ${className}`} style={style}>
 			{tags.map((tag) => (
 				<Link
 					key={tag}

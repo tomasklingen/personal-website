@@ -1,7 +1,16 @@
-import { Links, Meta, Outlet, Scripts, ScrollRestoration } from 'react-router'
+import {
+	Links,
+	Meta,
+	Outlet,
+	Scripts,
+	ScrollRestoration,
+	useLocation,
+} from 'react-router'
 
 import type { Route } from './+types/root'
 import './app.css'
+import { Footer } from './components/Footer'
+import { GridGlowEffect } from './routes/_index/GridGlowEffect'
 
 export const links: Route.LinksFunction = () => [
 	{
@@ -43,5 +52,16 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-	return <Outlet />
+	const location = useLocation()
+	const isHomePage = location.pathname === '/'
+
+	return (
+		<div className="flex-1 relative z-10">
+			{isHomePage && <GridGlowEffect />}
+			<div className="min-h-screen flex flex-col relative">
+				<Outlet />
+			</div>
+			<Footer />
+		</div>
+	)
 }

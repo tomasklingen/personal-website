@@ -48,10 +48,6 @@ export default function RunRoute() {
 			<section className="flex-1">
 				<Outlet />
 			</section>
-
-			<footer className="bg-white dark:bg-neutral-900 border-t border-neutral-200 dark:border-neutral-800 p-4 text-center text-neutral-500 dark:text-neutral-400 text-sm">
-				<p>© {new Date().getFullYear()} Running Paces - Tomas Klingen</p>
-			</footer>
 		</main>
 	)
 }

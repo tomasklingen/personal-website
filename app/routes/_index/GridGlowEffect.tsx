@@ -10,12 +10,12 @@ export const GridGlowEffect: React.FC = () => {
 	return (
 		<>
 			{/* Fiery glow background */}
-			<div className="absolute inset-0 z-0 overflow-hidden bg-radial from-red-950/10 via-transparent-70% to-transparent" />
+			<div className="absolute inset-0 -z-30 overflow-hidden bg-radial from-red-950/10 via-transparent-70% to-transparent pointer-events-none" />
 
 			{/* Grid with glow effect */}
 			<div
 				ref={gridOverlayRef}
-				className="absolute inset-0 z-5 transition-opacity duration-1500 ease-in opacity-0"
+				className="absolute inset-0 -z-20 transition-opacity duration-1500 ease-in opacity-0 pointer-events-none"
 				style={
 					{
 						'--mouse-x': '0.2',
@@ -32,7 +32,7 @@ export const GridGlowEffect: React.FC = () => {
 			/>
 
 			{/* Background grid pattern */}
-			<div className="absolute inset-0 z-10 opacity-70">
+			<div className="absolute inset-0 -z-10 opacity-70 pointer-events-none">
 				{/* biome-ignore lint/a11y/noSvgWithoutTitle: unimportant background img */}
 				<svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
 					<defs>

@@ -60,14 +60,18 @@ const blogPostingSchema = generateBlogPostingSchema({
 	title,
 	url: postUrl,
 	datePublished: dateCreated.toISOString(),
-	...(thought.data.lastModified && { dateModified: thought.data.lastModified.toISOString() }),
-	description: thought.data.description || `${title} - A thought by Tomas Klingen`,
+	...(thought.data.lastModified && {
+		dateModified: thought.data.lastModified.toISOString(),
+	}),
+	description:
+		thought.data.description || `${title} - A thought by Tomas Klingen`,
 })
 ---
 
-<Layout 
+<Layout
 	title={`${title} - Tomas Klingen`}
-	description={thought.data.description || `${title} - A thought by Tomas Klingen`}
+	description={thought.data.description ||
+		`${title} - A thought by Tomas Klingen`}
 	structuredData={blogPostingSchema}
 >
 	<ThoughtsLayout>

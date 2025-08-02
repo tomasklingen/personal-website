@@ -27,9 +27,15 @@ const {
 		<link rel="icon" href="/favicon.ico" sizes="48x48" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
-		{structuredData && (
-			<script type="application/ld+json" is:inline set:html={JSON.stringify(structuredData)} />
-		)}
+		{
+			structuredData && (
+				<script
+					type="application/ld+json"
+					is:inline
+					set:html={JSON.stringify(structuredData)}
+				/>
+			)
+		}
 		<ClientRouter />
 		<script is:inline>
 			// Dark mode detection script - runs immediately to prevent flash

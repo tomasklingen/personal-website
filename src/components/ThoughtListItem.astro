@@ -33,71 +33,77 @@ const timeClass = isCompact
 
 <article class={className}>
 	<header class={showReadMore ? 'mb-3' : 'mb-2'}>
-		{isCompact ? (
-			<h3 class={headingClass}>
-				<Link
-					href={`/thoughts/${thought.year}/${thought.slug}/`}
-					variant="default"
-					style={{
-						viewTransitionName: `thought-title-${thought.slug}`,
-					}}
-				>
-					{thought.title}
-				</Link>
-			</h3>
-		) : (
-			<h2 class={headingClass}>
-				<Link
-					href={`/thoughts/${thought.year}/${thought.slug}/`}
-					variant="default"
-					style={{
-						viewTransitionName: `thought-title-${thought.slug}`,
-					}}
-				>
-					{thought.title}
-				</Link>
-			</h2>
-		)}
+		{
+			isCompact ? (
+				<h3 class={headingClass}>
+					<Link
+						href={`/thoughts/${thought.year}/${thought.slug}/`}
+						variant="default"
+						style={{
+							viewTransitionName: `thought-title-${thought.slug}`,
+						}}
+					>
+						{thought.title}
+					</Link>
+				</h3>
+			) : (
+				<h2 class={headingClass}>
+					<Link
+						href={`/thoughts/${thought.year}/${thought.slug}/`}
+						variant="default"
+						style={{
+							viewTransitionName: `thought-title-${thought.slug}`,
+						}}
+					>
+						{thought.title}
+					</Link>
+				</h2>
+			)
+		}
 		<time
 			datetime={thought.dateCreated.toISOString()}
 			class={timeClass}
-			style={{viewTransitionName: `thought-date-${thought.slug}`}}
+			style={{ viewTransitionName: `thought-date-${thought.slug}` }}
 		>
-			{formatDate(
-				thought.dateCreated,
-				dateFormat === 'short' ? 'short' : undefined,
-			)}
+			{
+				formatDate(
+					thought.dateCreated,
+					dateFormat === 'short' ? 'short' : undefined
+				)
+			}
 		</time>
 	</header>
 
 	{/* Tags */}
-	{thought.tags && thought.tags.length > 0 && (
-		isCompact ? (
-			<Tags
-				tags={thought.tags}
-				class="mt-2"
-				style={{viewTransitionName: `thought-tags-${thought.slug}`}}
-			/>
-		) : (
-			<div
-				class="flex flex-wrap gap-2 my-3"
-				style={{viewTransitionName: `thought-tags-${thought.slug}`}}
-			>
-				{thought.tags.map((tag: string) => (
-					<Link
-						href={`/thoughts/tags/${encodeURIComponent(tag.toLowerCase())}`}
-						variant="tag"
-						class={
-							highlightedTag &&
-							tag.toLowerCase() === highlightedTag.toLowerCase()
-								? 'bg-emerald-200 dark:bg-emerald-800 text-emerald-900 dark:text-emerald-100'
-								: undefined
-						}
-					>
-						{tag}
-					</Link>
-				))}
-			</div>
-		)
-	)}
+	{
+		thought.tags &&
+			thought.tags.length > 0 &&
+			(isCompact ? (
+				<Tags
+					tags={thought.tags}
+					class="mt-2"
+					style={{ viewTransitionName: `thought-tags-${thought.slug}` }}
+				/>
+			) : (
+				<div
+					class="flex flex-wrap gap-2 my-3"
+					style={{ viewTransitionName: `thought-tags-${thought.slug}` }}
+				>
+					{thought.tags.map((tag: string) => (
+						<Link
+							href={`/thoughts/tags/${encodeURIComponent(tag.toLowerCase())}`}
+							variant="tag"
+							class={
+								highlightedTag &&
+								tag.toLowerCase() === highlightedTag.toLowerCase()
+									? 'bg-emerald-200 dark:bg-emerald-800 text-emerald-900 dark:text-emerald-100'
+									: undefined
+							}
+						>
+							{tag}
+						</Link>
+					))}
+				</div>
+			))
+	}
 </article>

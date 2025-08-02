@@ -8,24 +8,30 @@ import { getAllThoughtsSummary } from '~/lib/thoughts'
 const thoughts = await getAllThoughtsSummary()
 ---
 
-<Layout title="Thoughts - Tomas Klingen" description="A collection of thoughts and learnings from Tomas Klingen">
+<Layout
+	title="Thoughts - Tomas Klingen"
+	description="A collection of thoughts and learnings from Tomas Klingen"
+>
 	<div class="flex-1 relative z-10">
 		<div class="flex flex-col relative">
 			<ThoughtsLayout>
-				<header class="mb-12">
-					<h1 class="text-4xl font-bold mb-4 dark:text-white">Thoughts 💡</h1>
-					<p class="text-xl text-gray-600 dark:text-gray-300">A collection of thoughts, learnings, and insights.</p>
+				<header class="mb-10">
+					<p class="text-md text-gray-600 dark:text-gray-300">
+						A small collection of insights and bits of things I learned.
+					</p>
 				</header>
-				
-				<section class="space-y-8">
-					{thoughts.map((thought) => (
-						<ThoughtListItem 
-							thought={thought}
-							class="border-b border-gray-200 dark:border-gray-700 pb-6"
-							variant="default"
-							dateFormat="default"
-						/>
-					))}
+
+				<section class="space-y-6">
+					{
+						thoughts.map((thought) => (
+							<ThoughtListItem
+								thought={thought}
+								class="py-2"
+								variant="default"
+								dateFormat="default"
+							/>
+						))
+					}
 				</section>
 			</ThoughtsLayout>
 		</div>

@@ -2,7 +2,10 @@ import { defineCollection, z } from 'astro:content'
 import { glob } from 'astro/loaders'
 
 const thoughtsCollection = defineCollection({
-	loader: glob({ pattern: '**/*.md', base: './thoughts' }),
+	loader: glob({
+		pattern: ['**/*.md', '!README.md'],
+		base: './thoughts',
+	}),
 	schema: z.object({
 		title: z.string().optional(),
 		date: z.date().optional(),

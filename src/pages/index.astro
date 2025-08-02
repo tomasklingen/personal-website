@@ -7,12 +7,14 @@ import SocialLink from '../components/SocialLink.astro'
 import ThoughtListItem from '../components/ThoughtListItem.astro'
 import Layout from '../layouts/Layout.astro'
 import { socialLinks } from '../lib/social'
+import { generatePersonSchema } from '../lib/structured-data'
 import { getAllThoughtsSummary } from '../lib/thoughts'
 
 const recentThoughts = (await getAllThoughtsSummary()).slice(0, 3)
+const personSchema = generatePersonSchema()
 ---
 
-<Layout>
+<Layout structuredData={personSchema}>
 	<div class="flex-1 relative z-10">
 		<div class="flex flex-col relative">
 			<div class="relative w-full pt-12 overflow-hidden dark:text-white">

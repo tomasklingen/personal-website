@@ -6,6 +6,7 @@ import Prose from '~/components/Prose.astro'
 import Layout from '~/layouts/Layout.astro'
 import ThoughtsLayout from '~/layouts/ThoughtsLayout.astro'
 import { formatDate } from '~/lib/date'
+import { generateBlogPostingSchema } from '~/lib/structured-data'
 import { getAllThoughts, type ThoughtPost } from '~/lib/thoughts'
 
 interface Props {
@@ -51,9 +52,24 @@ const title = thought.data.title || thought.id.replace(/-/g, ' ')
 const slug = thought.id.includes('/')
 	? (thought.id.split('/').pop() ?? thought.id)
 	: thought.id
+
+// Generate BlogPosting schema for SEO
+const year = dateCreated.getFullYear().toString()
+const postUrl = `https://tomasklingen.nl/thoughts/${year}/${slug}`
+const blogPostingSchema = generateBlogPostingSchema({
+	title,
+	url: postUrl,
+	datePublished: dateCreated.toISOString(),
+	...(thought.data.lastModified && { dateModified: thought.data.lastModified.toISOString() }),
+	description: thought.data.description || `${title} - A thought by Tomas Klingen`,
+})
 ---
 
-<Layout>
+<Layout 
+	title={`${title} - Tomas Klingen`}
+	description={thought.data.description || `${title} - A thought by Tomas Klingen`}
+	structuredData={blogPostingSchema}
+>
 	<ThoughtsLayout>
 		<article class="mx-auto py-6">
 			<header class="mb-8">

@@ -1,6 +1,6 @@
 .DS_Store
 .zed
-.vscode/settings.json
+.vscode/
 node_modules/
 
 /dist

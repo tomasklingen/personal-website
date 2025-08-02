@@ -6,8 +6,7 @@
 		"useIgnoreFile": true
 	},
 	"formatter": {
-		"enabled": true,
-		"indentStyle": "tab"
+		"enabled": false
 	},
 	"linter": {
 		"enabled": true,
@@ -29,12 +28,11 @@
 			}
 		}
 	},
-	"javascript": {
-		"formatter": {
-			"quoteStyle": "single",
-			"semicolons": "asNeeded",
-			"indentStyle": "tab",
-			"indentWidth": 3
+	"assist": {
+		"actions": {
+			"source": {
+				"organizeImports": "off"
+			}
 		}
 	},
 	"files": {

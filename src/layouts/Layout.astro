@@ -1,4 +1,7 @@
 ---
+import { ViewTransitions } from 'astro:transitions'
+import '../styles/global.css'
+
 interface Props {
 	title?: string
 	description?: string
@@ -22,125 +25,17 @@ const {
 		<link rel="icon" href="/favicon.ico" sizes="48x48" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
+		<ViewTransitions />
+		<script is:inline>
+			// Dark mode detection script - runs immediately to prevent flash
+			if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+				document.documentElement.classList.add('dark')
+			} else {
+				document.documentElement.classList.remove('dark')
+			}
+		</script>
 	</head>
 	<body class="min-h-screen bg-neutral-100 dark:bg-neutral-900">
 		<slot />
 	</body>
 </html>
-
-<style is:global>
-	html {
-		font-family: system-ui, sans-serif;
-	}
-	
-	body {
-		margin: 0;
-		padding: 0;
-		min-height: 100vh;
-		background: white;
-		color: #333;
-	}
-
-	/* Basic prose styles */
-	.prose {
-		line-height: 1.7;
-	}
-	
-	.prose h1,
-	.prose h2,
-	.prose h3,
-	.prose h4,
-	.prose h5,
-	.prose h6 {
-		margin-top: 2rem;
-		margin-bottom: 1rem;
-		font-weight: 600;
-		line-height: 1.3;
-	}
-	
-	.prose h1 { font-size: 2.25rem; }
-	.prose h2 { font-size: 1.875rem; }
-	.prose h3 { font-size: 1.5rem; }
-	
-	.prose p {
-		margin-bottom: 1.25rem;
-	}
-	
-	.prose a {
-		color: #2563eb;
-		text-decoration: underline;
-	}
-	
-	.prose a:hover {
-		color: #1d4ed8;
-	}
-	
-	.prose ul,
-	.prose ol {
-		margin: 1.25rem 0;
-		padding-left: 1.625rem;
-	}
-	
-	.prose li {
-		margin: 0.5rem 0;
-	}
-	
-	.prose pre {
-		background: #f8f9fa;
-		border: 1px solid #e9ecef;
-		border-radius: 0.375rem;
-		padding: 1rem;
-		overflow-x: auto;
-		margin: 1.5rem 0;
-	}
-	
-	.prose code {
-		background: #f8f9fa;
-		padding: 0.125rem 0.25rem;
-		border-radius: 0.25rem;
-		font-size: 0.875rem;
-	}
-	
-	.prose pre code {
-		background: transparent;
-		padding: 0;
-	}
-	
-	.prose blockquote {
-		border-left: 4px solid #e5e7eb;
-		padding-left: 1rem;
-		margin: 1.5rem 0;
-		color: #6b7280;
-	}
-
-	/* Utility classes */
-	.max-w-4xl { max-width: 56rem; }
-	.mx-auto { margin-left: auto; margin-right: auto; }
-	.px-4 { padding-left: 1rem; padding-right: 1rem; }
-	.py-8 { padding-top: 2rem; padding-bottom: 2rem; }
-	.mb-4 { margin-bottom: 1rem; }
-	.mb-8 { margin-bottom: 2rem; }
-	.mt-12 { margin-top: 3rem; }
-	.pt-8 { padding-top: 2rem; }
-	.text-4xl { font-size: 2.25rem; }
-	.font-bold { font-weight: 700; }
-	.flex { display: flex; }
-	.items-center { align-items: center; }
-	.gap-4 { gap: 1rem; }
-	.gap-2 { gap: 0.5rem; }
-	.flex-wrap { flex-wrap: wrap; }
-	.text-gray-600 { color: #6b7280; }
-	.text-gray-700 { color: #374151; }
-	.bg-gray-100 { background-color: #f3f4f6; }
-	.px-2 { padding-left: 0.5rem; padding-right: 0.5rem; }
-	.py-1 { padding-top: 0.25rem; padding-bottom: 0.25rem; }
-	.rounded { border-radius: 0.25rem; }
-	.text-sm { font-size: 0.875rem; }
-	.border-t { border-top-width: 1px; }
-	.border-gray-200 { border-color: #e5e7eb; }
-	.text-blue-600 { color: #2563eb; }
-	.hover\\:text-blue-800:hover { color: #1e40af; }
-	.transition-colors { transition-property: color; transition-duration: 150ms; }
-	.prose-lg { font-size: 1.125rem; }
-	.max-w-none { max-width: none; }
-</style>

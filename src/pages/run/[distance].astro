@@ -39,19 +39,16 @@ interface Props {
 const { title, entries, slug } = Astro.props
 ---
 
-<Layout 
+<Layout
 	title={`${title} Running Pace Calculation Table - Tomas Klingen`}
 	description={`Find your ideal running pace for the ${title} distance using the pacing charts. Find your perfect pace per kilometer and mile for ${title} races and training.`}
 >
 	<main class="container mx-auto flex flex-col transition-colors">
-		<header class="shadow p-4 flex flex-col gap-2 md:flex-row md:items-center md:justify-between border-b border-neutral-200 dark:border-neutral-700">
+		<header
+			class="shadow p-4 flex flex-col gap-2 md:flex-row md:items-center md:justify-between border-b border-neutral-200 dark:border-neutral-700"
+		>
 			<div class="flex items-center gap-4">
-				<Link
-					href="/"
-					variant="nav"
-				>
-					&larr; Home
-				</Link>
+				<Link href="/" variant="nav"> &larr; Home </Link>
 				<h1 class="text-2xl font-bold text-neutral-900 dark:text-white">
 					Running Paces
 				</h1>
@@ -59,22 +56,26 @@ const { title, entries, slug } = Astro.props
 			<hr class="my-2 md:hidden border-neutral-200 dark:border-neutral-800" />
 		</header>
 
-		<nav class="bg-white dark:bg-neutral-900 border-b border-neutral-200 dark:border-neutral-800 p-2">
+		<nav
+			class="bg-white dark:bg-neutral-900 border-b border-neutral-200 dark:border-neutral-800 p-2"
+		>
 			<ul class="flex flex-wrap gap-2">
-				{distanceConfig.map(({ slug: configSlug, shortLabel }) => (
-					<li>
-						<Link
-							href={`/run/${configSlug}/`}
-							class={`px-3 py-1 rounded transition-colors font-medium ${
-								configSlug === slug 
-									? 'bg-emerald-700 text-white dark:bg-emerald-400 dark:text-neutral-900' 
-									: 'text-emerald-700 dark:text-emerald-400 hover:bg-emerald-100 dark:hover:bg-emerald-900/40'
-							}`}
-						>
-							{shortLabel}
-						</Link>
-					</li>
-				))}
+				{
+					distanceConfig.map(({ slug: configSlug, shortLabel }) => (
+						<li>
+							<Link
+								href={`/run/${configSlug}/`}
+								class={`px-3 py-1 rounded transition-colors font-medium ${
+									configSlug === slug
+										? 'bg-emerald-700 text-white dark:bg-emerald-400 dark:text-neutral-900'
+										: 'text-emerald-700 dark:text-emerald-400 hover:bg-emerald-100 dark:hover:bg-emerald-900/40'
+								}`}
+							>
+								{shortLabel}
+							</Link>
+						</li>
+					))
+				}
 			</ul>
 		</nav>
 

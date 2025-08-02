@@ -48,23 +48,21 @@ const recentThoughts = (await getAllThoughtsSummary()).slice(0, 3)
 							, or doing Crossfit.
 						</p>
 						<div class="flex space-x-4 justify-center">
-							{
-								<SocialLink
-									social={socialLinks.bluesky}
-									class="p-3 bg-neutral-600 dark:bg-neutral-800/60 hover:bg-neutral-700 transition-colors duration-200 rounded-md group"
-									iconClass="w-6 h-6 text-white group-hover:text-white transition-all duration-200"
-								/>
-								<SocialLink
-									social={socialLinks.linkedin}
-									class="p-3 bg-neutral-600 dark:bg-neutral-800/60 hover:bg-neutral-700 transition-colors duration-200 rounded-md group"
-									iconClass="w-6 h-6 text-white group-hover:text-white transition-all duration-200"
-								/>
-								<SocialLink
-									social={socialLinks.github}
-									class="p-3 bg-neutral-600 dark:bg-neutral-800/60 hover:bg-neutral-700 transition-colors duration-200 rounded-md group"
-									iconClass="w-6 h-6 text-white group-hover:text-white transition-all duration-200"
-								/>
-							}
+							<SocialLink
+								social={socialLinks.bluesky}
+								class="p-3 bg-neutral-600 dark:bg-neutral-800/60 hover:bg-neutral-700 transition-colors duration-200 rounded-md group"
+								iconClass="w-6 h-6 text-white group-hover:text-white transition-all duration-200"
+							/>
+							<SocialLink
+								social={socialLinks.linkedin}
+								class="p-3 bg-neutral-600 dark:bg-neutral-800/60 hover:bg-neutral-700 transition-colors duration-200 rounded-md group"
+								iconClass="w-6 h-6 text-white group-hover:text-white transition-all duration-200"
+							/>
+							<SocialLink
+								social={socialLinks.github}
+								class="p-3 bg-neutral-600 dark:bg-neutral-800/60 hover:bg-neutral-700 transition-colors duration-200 rounded-md group"
+								iconClass="w-6 h-6 text-white group-hover:text-white transition-all duration-200"
+							/>
 						</div>
 					</div>
 

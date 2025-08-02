@@ -41,8 +41,8 @@ if (!tag) {
 }
 ---
 
-<Layout 
-	title={`Thoughts tagged: ${tag} - Tomas Klingen`} 
+<Layout
+	title={`Thoughts tagged: ${tag} - Tomas Klingen`}
 	description={`${thoughts.length} thoughts tagged with ${tag} by Tomas Klingen`}
 >
 	<div class="flex-1 relative z-10">
@@ -61,23 +61,25 @@ if (!tag) {
 					</p>
 				</header>
 
-				{thoughts.length === 0 ? (
-					<div class="text-center py-12">
-						<p class="text-neutral-500 dark:text-neutral-400">
-							No thoughts found with tag "{tag}"
-						</p>
-					</div>
-				) : (
-					<section class="space-y-6">
-						{thoughts.map((thought) => (
-							<ThoughtListItem
-								thought={thought}
-								class="py-2"
-								highlightedTag={tag}
-							/>
-						))}
-					</section>
-				)}
+				{
+					thoughts.length === 0 ? (
+						<div class="text-center py-12">
+							<p class="text-neutral-500 dark:text-neutral-400">
+								No thoughts found with tag "{tag}"
+							</p>
+						</div>
+					) : (
+						<section class="space-y-6">
+							{thoughts.map((thought) => (
+								<ThoughtListItem
+									thought={thought}
+									class="py-2"
+									highlightedTag={tag}
+								/>
+							))}
+						</section>
+					)
+				}
 			</ThoughtsLayout>
 		</div>
 		<Footer />

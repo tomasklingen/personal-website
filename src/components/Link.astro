@@ -27,6 +27,11 @@ const variantStyles: Record<LinkVariant, string> = {
 }
 ---
 
-<a href={href} class={clsx(variantStyles[variant], className)} style={style} {...props}>
+<a
+	href={href}
+	class={clsx(variantStyles[variant], className)}
+	style={style}
+	{...props}
+>
 	<slot />
 </a>

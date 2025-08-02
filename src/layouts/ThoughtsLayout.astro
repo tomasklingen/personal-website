@@ -1,0 +1,34 @@
+---
+import { Image } from 'astro:assets'
+import avatar from '~/assets/avatar.avif'
+import Link from '~/components/Link.astro'
+---
+
+<main class="container max-w-3xl mx-auto flex flex-col transition-colors py-4">
+	<header class="p-4 flex items-center justify-between">
+		<Link
+			href="/"
+			class="font-bold text-neutral-900 dark:text-neutral-200 hover:text-neutral-500 dark:hover:text-neutral-100 flex items-center gap-3"
+		>
+			<Image
+				src={avatar}
+				alt="Tomas Klingen"
+				class="w-8 h-8 rounded-full object-cover"
+				style={{viewTransitionName: 'avatar'}}
+				width={32}
+				height={32}
+			/>
+			Tomas Klingen
+		</Link>
+		<Link
+			href="/thoughts/"
+			class="text-neutral-600 dark:text-neutral-400 hover:text-neutral-500 dark:hover:text-neutral-200"
+		>
+			Thoughts
+		</Link>
+	</header>
+
+	<section class="flex-1 px-4">
+		<slot />
+	</section>
+</main>

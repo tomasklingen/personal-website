@@ -1,0 +1,28 @@
+---
+import Link from './Link.astro'
+
+interface Props {
+	tags: string[]
+	class?: string
+	style?: Record<string, string>
+}
+
+const { tags, class: className = '', style } = Astro.props
+
+if (!tags || tags.length === 0) {
+	// Return nothing if no tags
+}
+---
+
+{tags && tags.length > 0 && (
+	<div class={`flex flex-wrap gap-2 ${className}`} style={style}>
+		{tags.map((tag: string) => (
+			<Link
+				href={`/thoughts/tags/${encodeURIComponent(tag.toLowerCase())}`}
+				variant="tag"
+			>
+				{tag}
+			</Link>
+		))}
+	</div>
+)}

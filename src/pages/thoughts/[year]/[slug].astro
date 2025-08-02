@@ -2,6 +2,7 @@
 import { render } from 'astro:content'
 import type { GetStaticPaths } from 'astro'
 import Layout from '~/layouts/Layout.astro'
+import ThoughtsLayout from '~/layouts/ThoughtsLayout.astro'
 import { getAllThoughts, type ThoughtPost } from '~/lib/thoughts'
 
 interface Props {
@@ -45,11 +46,11 @@ const title = thought.data.title || thought.id.replace(/-/g, ' ')
 ---
 
 <Layout>
-	<main class="max-w-4xl mx-auto px-4 py-8">
-		<article class="prose prose-lg max-w-none">
+	<ThoughtsLayout>
+		<article class="prose prose-lg max-w-none dark:prose-invert">
 			<header class="mb-8">
 				<h1 class="text-4xl font-bold mb-4">{title}</h1>
-				<div class="flex items-center gap-4 text-gray-600">
+				<div class="flex items-center gap-4 text-gray-600 dark:text-gray-400">
 					<time datetime={dateCreated.toISOString()}>
 						{dateCreated.toLocaleDateString('en-US', {
 							year: 'numeric',
@@ -60,7 +61,7 @@ const title = thought.data.title || thought.id.replace(/-/g, ' ')
 					{thought.data.tags && (
 						<div class="flex flex-wrap gap-2">
 							{thought.data.tags.map((tag) => (
-								<span class="bg-gray-100 text-gray-700 px-2 py-1 rounded text-sm">
+								<span class="bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 px-2 py-1 rounded text-sm">
 									#{tag}
 								</span>
 							))}
@@ -72,13 +73,13 @@ const title = thought.data.title || thought.id.replace(/-/g, ' ')
 			<Content />
 		</article>
 		
-		<nav class="mt-12 pt-8 border-t border-gray-200">
+		<nav class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
 			<a 
 				href="/thoughts/" 
-				class="text-blue-600 hover:text-blue-800 transition-colors"
+				class="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors"
 			>
 				← Back to all thoughts
 			</a>
 		</nav>
-	</main>
+	</ThoughtsLayout>
 </Layout>

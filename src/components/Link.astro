@@ -1,0 +1,32 @@
+---
+import { clsx } from 'clsx'
+
+type LinkVariant = 'default' | 'nav' | 'accent' | 'tag' | 'unstyled'
+
+interface Props {
+	href: string
+	variant?: LinkVariant
+	class?: string | undefined
+	style?: Record<string, string>
+}
+
+const {
+	href,
+	variant = 'default',
+	class: className,
+	style,
+	...props
+} = Astro.props
+
+const variantStyles: Record<LinkVariant, string> = {
+	default: 'hover:underline',
+	nav: 'text-emerald-600 dark:text-emerald-300 hover:underline font-semibold',
+	accent: 'text-emerald-500 dark:text-emerald-300 hover:underline font-medium',
+	tag: 'inline-block px-2 py-1 rounded text-sm font-medium transition-colors bg-emerald-100 dark:bg-emerald-900/30 text-emerald-800 dark:text-emerald-300 hover:bg-emerald-200 dark:hover:bg-emerald-900/50',
+	unstyled: '',
+}
+---
+
+<a href={href} class={clsx(variantStyles[variant], className)} style={style} {...props}>
+	<slot />
+</a>

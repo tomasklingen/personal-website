@@ -1,11 +1,15 @@
 ---
-export interface Props {
+interface Props {
 	title?: string
 	description?: string
+	author?: string
 }
 
-const { title = 'Tomas Klingen', description = 'Portfolio website' } =
-	Astro.props
+const {
+	title = 'Tomas Klingen - Front-end Web Developer 👨‍💻🎧',
+	description = 'Front-end Web Developer from the Netherlands. I enjoy crafting web experiences using modern technologies.',
+	author = 'Tomas Klingen',
+} = Astro.props
 ---
 
 <!doctype html>
@@ -14,11 +18,12 @@ const { title = 'Tomas Klingen', description = 'Portfolio website' } =
 		<meta charset="UTF-8" />
 		<meta name="description" content={description} />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+		<meta name="author" content={author} />
+		<link rel="icon" href="/favicon.ico" sizes="48x48" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 	</head>
-	<body>
+	<body class="min-h-screen bg-neutral-100 dark:bg-neutral-900">
 		<slot />
 	</body>
 </html>

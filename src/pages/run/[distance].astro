@@ -1,0 +1,86 @@
+---
+import type { GetStaticPaths } from 'astro'
+import Footer from '~/components/Footer.astro'
+import Link from '~/components/Link.astro'
+import PaceTable from '~/components/PaceTable.astro'
+import Layout from '~/layouts/Layout.astro'
+import { distanceConfig } from '~/running/data'
+import { generatePaceEntries } from '~/running/utils'
+
+export const getStaticPaths: GetStaticPaths = () => {
+	return distanceConfig.map((config) => {
+		const { startSeconds, increment, count } = config.paceConfig
+		const entries = generatePaceEntries(
+			startSeconds,
+			increment,
+			count,
+			config.distance,
+		)
+
+		return {
+			params: { distance: config.slug },
+			props: { ...config, entries },
+		}
+	})
+}
+
+interface Props {
+	slug: string
+	title: string
+	shortLabel: string
+	distance: number
+	entries: Array<{
+		time: string
+		pacePerKm: string
+		pacePerMile: string
+	}>
+}
+
+const { title, entries, slug } = Astro.props
+---
+
+<Layout 
+	title={`${title} Running Pace Calculation Table - Tomas Klingen`}
+	description={`Find your ideal running pace for the ${title} distance using the pacing charts. Find your perfect pace per kilometer and mile for ${title} races and training.`}
+>
+	<main class="container mx-auto flex flex-col transition-colors">
+		<header class="shadow p-4 flex flex-col gap-2 md:flex-row md:items-center md:justify-between border-b border-neutral-200 dark:border-neutral-700">
+			<div class="flex items-center gap-4">
+				<Link
+					href="/"
+					variant="nav"
+				>
+					&larr; Home
+				</Link>
+				<h1 class="text-2xl font-bold text-neutral-900 dark:text-white">
+					Running Paces
+				</h1>
+			</div>
+			<hr class="my-2 md:hidden border-neutral-200 dark:border-neutral-800" />
+		</header>
+
+		<nav class="bg-white dark:bg-neutral-900 border-b border-neutral-200 dark:border-neutral-800 p-2">
+			<ul class="flex flex-wrap gap-2">
+				{distanceConfig.map(({ slug: configSlug, shortLabel }) => (
+					<li>
+						<Link
+							href={`/run/${configSlug}/`}
+							class={`px-3 py-1 rounded transition-colors font-medium ${
+								configSlug === slug 
+									? 'bg-emerald-700 text-white dark:bg-emerald-400 dark:text-neutral-900' 
+									: 'text-emerald-700 dark:text-emerald-400 hover:bg-emerald-100 dark:hover:bg-emerald-900/40'
+							}`}
+						>
+							{shortLabel}
+						</Link>
+					</li>
+				))}
+			</ul>
+		</nav>
+
+		<section class="flex-1">
+			<PaceTable title={`${title} Running Paces`} entries={entries} />
+		</section>
+	</main>
+	<Footer />
+</Layout>

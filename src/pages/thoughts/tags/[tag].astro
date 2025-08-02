@@ -1,0 +1,85 @@
+---
+import type { GetStaticPaths } from 'astro'
+import Footer from '~/components/Footer.astro'
+import ThoughtListItem from '~/components/ThoughtListItem.astro'
+import Layout from '~/layouts/Layout.astro'
+import ThoughtsLayout from '~/layouts/ThoughtsLayout.astro'
+import { getAllThoughtsSummary } from '~/lib/thoughts'
+
+export const getStaticPaths: GetStaticPaths = async () => {
+	const allThoughts = await getAllThoughtsSummary()
+
+	// Get all unique tags
+	const allTags = new Set<string>()
+	allThoughts.forEach((thought) => {
+		thought.tags?.forEach((tag) => {
+			allTags.add(tag.toLowerCase())
+		})
+	})
+
+	return Array.from(allTags).map((tag) => {
+		const filteredThoughts = allThoughts.filter((thought) =>
+			thought.tags?.some((t) => t.toLowerCase() === tag.toLowerCase()),
+		)
+
+		return {
+			params: { tag },
+			props: { tag, thoughts: filteredThoughts },
+		}
+	})
+}
+
+interface Props {
+	tag: string
+	thoughts: Awaited<ReturnType<typeof getAllThoughtsSummary>>
+}
+
+const { tag, thoughts } = Astro.props
+
+if (!tag) {
+	return new Response('Tag not found', { status: 404 })
+}
+---
+
+<Layout 
+	title={`Thoughts tagged: ${tag} - Tomas Klingen`} 
+	description={`${thoughts.length} thoughts tagged with ${tag} by Tomas Klingen`}
+>
+	<div class="flex-1 relative z-10">
+		<div class="flex flex-col relative">
+			<ThoughtsLayout>
+				<header class="mb-8">
+					<h1 class="text-3xl font-bold text-neutral-900 dark:text-neutral-100">
+						Thoughts tagged:{' '}
+						<span class="text-emerald-600 dark:text-emerald-300">
+							{tag}
+						</span>
+					</h1>
+					<p class="text-neutral-600 dark:text-neutral-400 mt-2">
+						{thoughts.length}{' '}
+						{thoughts.length === 1 ? 'thought' : 'thoughts'} found
+					</p>
+				</header>
+
+				{thoughts.length === 0 ? (
+					<div class="text-center py-12">
+						<p class="text-neutral-500 dark:text-neutral-400">
+							No thoughts found with tag "{tag}"
+						</p>
+					</div>
+				) : (
+					<section class="space-y-6">
+						{thoughts.map((thought) => (
+							<ThoughtListItem
+								thought={thought}
+								class="py-2"
+								highlightedTag={tag}
+							/>
+						))}
+					</section>
+				)}
+			</ThoughtsLayout>
+		</div>
+		<Footer />
+	</div>
+</Layout>

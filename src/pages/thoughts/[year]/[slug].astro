@@ -1,0 +1,84 @@
+---
+import { render } from 'astro:content'
+import type { GetStaticPaths } from 'astro'
+import Layout from '~/layouts/Layout.astro'
+import { getAllThoughts, type ThoughtPost } from '~/lib/thoughts'
+
+interface Props {
+	thought: ThoughtPost
+}
+
+export const getStaticPaths: GetStaticPaths = async () => {
+	const thoughts = await getAllThoughts()
+
+	return thoughts.map((thought) => {
+		// Extract metadata for the path
+		const dateCreated = thought.data.date || new Date('2025-01-01')
+		const year = dateCreated.getFullYear().toString()
+
+		// Handle nested slugs (e.g., "markdown/frontmatter-basics" -> "frontmatter-basics")
+		const slug = thought.id.includes('/')
+			? (thought.id.split('/').pop() ?? thought.id)
+			: thought.id
+
+		return {
+			params: { year, slug },
+			props: { thought },
+		}
+	})
+}
+
+const { thought } = Astro.props
+
+if (!thought) {
+	return new Response(null, {
+		status: 404,
+		statusText: 'Not found',
+	})
+}
+
+const { Content } = await render(thought)
+
+// Extract metadata
+const dateCreated = thought.data.date || new Date()
+const title = thought.data.title || thought.id.replace(/-/g, ' ')
+---
+
+<Layout>
+	<main class="max-w-4xl mx-auto px-4 py-8">
+		<article class="prose prose-lg max-w-none">
+			<header class="mb-8">
+				<h1 class="text-4xl font-bold mb-4">{title}</h1>
+				<div class="flex items-center gap-4 text-gray-600">
+					<time datetime={dateCreated.toISOString()}>
+						{dateCreated.toLocaleDateString('en-US', {
+							year: 'numeric',
+							month: 'long',
+							day: 'numeric',
+						})}
+					</time>
+					{thought.data.tags && (
+						<div class="flex flex-wrap gap-2">
+							{thought.data.tags.map((tag) => (
+								<span class="bg-gray-100 text-gray-700 px-2 py-1 rounded text-sm">
+									#{tag}
+								</span>
+							))}
+						</div>
+					)}
+				</div>
+			</header>
+			
+			<Content />
+		</article>
+		
+		<nav class="mt-12 pt-8 border-t border-gray-200">
+			<a 
+				href="/thoughts/" 
+				class="text-blue-600 hover:text-blue-800 transition-colors"
+			>
+				← Back to all thoughts
+			</a>
+		</nav>
+	</main>
+</Layout>

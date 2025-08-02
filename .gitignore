@@ -3,8 +3,14 @@
 .vscode/settings.json
 node_modules/
 
+/dist
+/build
+
 # React Router
 /.react-router/
-/build/
-/dist
+
 .cache/
+
+# generated types
+.astro/
+

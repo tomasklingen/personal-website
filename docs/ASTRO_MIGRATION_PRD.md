@@ -30,12 +30,6 @@ Migrated React Router SSG application to Astro for improved performance, maintai
 
 ### 🔄 Remaining Tasks:
 
-#### Phase 5: Performance Monitoring (35% remaining)
-- [ ] Lighthouse CI setup
-- [ ] Core Web Vitals tracking
-- [ ] Performance budgets
-- [ ] Performance regression tests
-
 #### Phase 6: Testing and Deployment
 - [ ] Update existing tests for Astro
 - [ ] E2E testing with Playwright

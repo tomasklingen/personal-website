@@ -29,23 +29,8 @@ jobs:
         with:
           submodules: recursive # Ensures all submodules are checked out
           fetch-depth: 0 # Fetches the entire history for submodules
-
-      - name: Setup Bun
-        uses: oven-sh/setup-bun@v2
-
-      - name: Install dependencies
-        run: bun install
-
-      - name: Build
-        run: bun run build
-
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: build/client
+      - name: Install, build, and upload your site
+        uses: withastro/action@v4
 
   deploy:
     needs: build

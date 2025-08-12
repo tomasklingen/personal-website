@@ -31,6 +31,8 @@ jobs:
           fetch-depth: 0 # Fetches the entire history for submodules
       - name: Install, build, and upload your site
         uses: withastro/action@v4
+        with:
+          package-manager: pnpm@latest
 
   deploy:
     needs: build

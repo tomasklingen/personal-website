@@ -28,7 +28,7 @@
 	"homepage": "https://github.com/tomasklingen/tomasklingen.github.io",
 	"devDependencies": {
 		"@astrojs/check": "^0.9.4",
-		"@biomejs/biome": "2.1.1",
+		"@biomejs/biome": "2.1.4",
 		"@tailwindcss/typography": "^0.5.16",
 		"@vitest/ui": "^3.2.4",
 		"husky": "^9.1.7",
@@ -37,23 +37,23 @@
 		"vitest": "^3.2.4"
 	},
 	"dependencies": {
-		"@astrojs/mdx": "^4.3.1",
+		"@astrojs/mdx": "^4.3.3",
 		"@astrojs/react": "^4.3.0",
 		"@astrojs/sitemap": "^3.4.2",
 		"@tailwindcss/postcss": "^4.1.11",
 		"@tailwindcss/vite": "^4.1.11",
 		"@types/mdx": "^2.0.13",
-		"@types/node": "^24.0.13",
-		"@types/react": "^19.1.8",
-		"@types/react-dom": "^19.1.6",
-		"astro": "^5.12.3",
+		"@types/node": "^22.17.1",
+		"@types/react": "^19.1.10",
+		"@types/react-dom": "^19.1.7",
+		"astro": "^5.12.9",
 		"clsx": "^2.1.1",
 		"prettier": "^3.6.2",
 		"prettier-plugin-astro": "^0.14.1",
-		"react": "^19.1.0",
-		"react-dom": "^19.1.0",
+		"react": "^19.1.1",
+		"react-dom": "^19.1.1",
 		"sharp": "^0.34.3",
 		"tailwindcss": "^4.1.11",
-		"typescript": "^5.8.3"
+		"typescript": "^5.9.2"
 	}
 }

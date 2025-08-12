@@ -1,1 +1,1 @@
-Sitemap: https://tomasklingen.nl/sitemap.xml
+Sitemap: https://tomasklingen.nl/sitemap-index.xml

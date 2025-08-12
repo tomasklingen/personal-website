@@ -1,5 +1,4 @@
 ---
-import { ClientRouter } from 'astro:transitions'
 import '../styles/global.css'
 
 interface Props {
@@ -37,7 +36,6 @@ const {
 				/>
 			)
 		}
-		<ClientRouter />
 		<script is:inline>
 			// Dark mode detection script - runs immediately to prevent flash
 			if (

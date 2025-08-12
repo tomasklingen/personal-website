@@ -1,0 +1,56 @@
+---
+import { ClientRouter } from 'astro:transitions'
+import '../styles/global.css'
+
+interface Props {
+	title?: string
+	description?: string
+	author?: string
+	structuredData?: Record<string, unknown>
+}
+
+const {
+	title = 'Tomas Klingen - Front-end Web Developer 👨‍💻🎧',
+	description = 'Front-end Web Developer from the Netherlands. I enjoy crafting web experiences using modern technologies.',
+	author = 'Tomas Klingen',
+	structuredData,
+} = Astro.props
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content={description} />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="author" content={author} />
+		<link rel="icon" href="/favicon.ico" sizes="48x48" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+		{
+			structuredData && (
+				<script
+					type="application/ld+json"
+					is:inline
+					set:html={JSON.stringify(structuredData)}
+				/>
+			)
+		}
+		<ClientRouter />
+		<script is:inline>
+			// Dark mode detection script - runs immediately to prevent flash
+			if (
+				localStorage.theme === 'dark' ||
+				(!('theme' in localStorage) &&
+					window.matchMedia('(prefers-color-scheme: dark)').matches)
+			) {
+				document.documentElement.classList.add('dark')
+			} else {
+				document.documentElement.classList.remove('dark')
+			}
+		</script>
+	</head>
+	<body class="min-h-screen bg-neutral-100 dark:bg-neutral-900">
+		<slot />
+	</body>
+</html>

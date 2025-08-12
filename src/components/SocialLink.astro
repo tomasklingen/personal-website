@@ -1,0 +1,22 @@
+---
+import type { SocialLink } from '~/lib/social'
+
+interface Props {
+	social: SocialLink
+	class?: string
+	iconClass?: string
+}
+
+const { social, class: className = '', iconClass = '' } = Astro.props
+---
+
+<a
+	href={social.href}
+	target="_blank"
+	rel="noreferrer"
+	title={social.title}
+	aria-label={social['aria-label']}
+	class={className}
+>
+	<social.IconComponent className={iconClass} />
+</a>

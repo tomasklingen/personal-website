@@ -8,6 +8,7 @@ export type ThoughtPostSummary = {
 	title: string
 	dateCreated: Date
 	tags?: string[]
+	draft?: boolean
 }
 
 /**
@@ -19,6 +20,7 @@ function extractThoughtMetadata(entry: ThoughtPost): {
 	title: string
 	dateCreated: Date
 	tags: string[]
+	draft: boolean
 } {
 	// Get date from frontmatter or use fallback
 	let dateCreated: Date
@@ -43,12 +45,16 @@ function extractThoughtMetadata(entry: ThoughtPost): {
 	// Extract tags from frontmatter
 	const tags = entry.data.tags ?? []
 
+	// Extract draft status from frontmatter
+	const draft = entry.data.draft ?? false
+
 	return {
 		slug,
 		year,
 		title,
 		dateCreated,
 		tags,
+		draft,
 	}
 }
 

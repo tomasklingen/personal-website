@@ -1,6 +1,6 @@
 ---
-import { render } from 'astro:content'
 import type { GetStaticPaths } from 'astro'
+import { render } from 'astro:content'
 import Footer from '~/components/Footer.astro'
 import Prose from '~/components/Prose.astro'
 import Layout from '~/layouts/Layout.astro'
@@ -83,13 +83,22 @@ const blogPostingSchema = generateBlogPostingSchema({
 				>
 					{title}
 				</h1>
-				<time
-					datetime={dateCreated.toISOString()}
-					class="text-sm text-neutral-500 dark:text-neutral-400"
-					style={{ viewTransitionName: `thought-date-${slug}` }}
-				>
-					{formatDate(dateCreated)}
-				</time>
+				<div class="flex items-center gap-3">
+					<time
+						datetime={dateCreated.toISOString()}
+						class="text-sm text-neutral-500 dark:text-neutral-400"
+						style={{ viewTransitionName: `thought-date-${slug}` }}
+					>
+						{formatDate(dateCreated)}
+					</time>
+					{
+						thought.data.draft && !import.meta.env.PROD && (
+							<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-300">
+								Draft
+							</span>
+						)
+					}
+				</div>
 				{
 					thought.data.tags && thought.data.tags.length > 0 && (
 						<div

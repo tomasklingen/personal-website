@@ -60,18 +60,27 @@ const timeClass = isCompact
 				</h2>
 			)
 		}
-		<time
-			datetime={thought.dateCreated.toISOString()}
-			class={timeClass}
-			style={{ viewTransitionName: `thought-date-${thought.slug}` }}
-		>
+		<div class="flex items-center gap-2">
+			<time
+				datetime={thought.dateCreated.toISOString()}
+				class={timeClass}
+				style={{ viewTransitionName: `thought-date-${thought.slug}` }}
+			>
+				{
+					formatDate(
+						thought.dateCreated,
+						dateFormat === 'short' ? 'short' : undefined,
+					)
+				}
+			</time>
 			{
-				formatDate(
-					thought.dateCreated,
-					dateFormat === 'short' ? 'short' : undefined,
+				thought.draft && !import.meta.env.PROD && (
+					<span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-300">
+						Draft
+					</span>
 				)
 			}
-		</time>
+		</div>
 	</header>
 
 	{/* Tags */}

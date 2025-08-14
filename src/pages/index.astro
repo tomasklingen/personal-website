@@ -4,6 +4,7 @@ import avatar from '../assets/avatar.avif'
 import Footer from '../components/Footer.astro'
 import Link from '../components/Link.astro'
 import SocialLink from '../components/SocialLink.astro'
+import SquigglyDivider from '../components/SquigglyDivider.astro'
 import ThoughtListItem from '../components/ThoughtListItem.astro'
 import Layout from '../layouts/Layout.astro'
 import { socialLinks } from '../lib/social'
@@ -23,7 +24,7 @@ const personSchema = generatePersonSchema()
 					class="container mx-auto px-6 lg:px-40 flex flex-col items-center justify-between relative"
 				>
 					{/* Left column - Introduction */}
-					<div class="mb-10">
+					<div class="mb-4">
 						<div class="flex items-center mb-10 gap-6">
 							<Image
 								src={avatar}
@@ -68,6 +69,8 @@ const personSchema = generatePersonSchema()
 						</div>
 					</div>
 
+					<SquigglyDivider class="invisible dark:visible" />
+
 					{/* Recent Thoughts Section */}
 					{
 						recentThoughts.length > 0 && (
@@ -95,6 +98,8 @@ const personSchema = generatePersonSchema()
 							</div>
 						)
 					}
+
+					<SquigglyDivider />
 
 					{/* Skills & Projects Block */}
 					<div class="space-y-6">

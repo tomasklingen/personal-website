@@ -1,0 +1,25 @@
+---
+interface Props {
+	class?: string
+}
+
+const { class: className = '' } = Astro.props
+---
+
+<div class={`w-full flex justify-center py-6 ${className}`}>
+	<svg
+		width="300"
+		height="20"
+		viewBox="0 0 300 20"
+		fill="none"
+		xmlns="http://www.w3.org/2000/svg"
+		class="text-amber-400 dark:text-amber-500"
+	>
+		<path
+			d="M10 10C20 5 30 15 40 10C50 5 60 15 70 10C80 5 90 15 100 10C110 5 120 15 130 10C140 5 150 15 160 10C170 5 180 15 190 10C200 5 210 15 220 10C230 5 240 15 250 10C260 5 270 15 280 10C290 5 290 10"
+			stroke="currentColor"
+			stroke-width="2"
+			stroke-linecap="round"
+			fill="none"></path>
+	</svg>
+</div>

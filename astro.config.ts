@@ -9,13 +9,14 @@ export default defineConfig({
 	integrations: [
 		react(),
 		sitemap({
-			filter: (page) => page !== 'https://tomasklingen.nl/run/',
+			filter: (page) => page !== 'https://tomasklingen.nl/run',
 		}),
 	],
 	output: 'static',
+	trailingSlash: 'never',
 	build: {
 		assets: 'assets',
-		format: 'directory',
+		format: 'file',
 	},
 	markdown: {
 		shikiConfig: {

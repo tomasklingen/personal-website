@@ -64,7 +64,7 @@ const { title, entries, slug } = Astro.props
 					distanceConfig.map(({ slug: configSlug, shortLabel }) => (
 						<li>
 							<Link
-								href={`/run/${configSlug}/`}
+								href={`/run/${configSlug}`}
 								class={`px-3 py-1 rounded transition-colors font-medium ${
 									configSlug === slug
 										? 'bg-emerald-700 text-white dark:bg-emerald-400 dark:text-neutral-900'

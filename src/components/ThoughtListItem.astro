@@ -37,7 +37,7 @@ const timeClass = isCompact
 			isCompact ? (
 				<h3 class={headingClass}>
 					<Link
-						href={`/thoughts/${thought.year}/${thought.slug}/`}
+						href={`/thoughts/${thought.year}/${thought.slug}`}
 						variant="default"
 						style={{
 							viewTransitionName: `thought-title-${thought.slug}`,
@@ -49,7 +49,7 @@ const timeClass = isCompact
 			) : (
 				<h2 class={headingClass}>
 					<Link
-						href={`/thoughts/${thought.year}/${thought.slug}/`}
+						href={`/thoughts/${thought.year}/${thought.slug}`}
 						variant="default"
 						style={{
 							viewTransitionName: `thought-title-${thought.slug}`,

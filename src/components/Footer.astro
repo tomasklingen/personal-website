@@ -1,6 +1,12 @@
 ---
 import { socialLinks } from '~/lib/social'
 import SocialLink from './SocialLink.astro'
+
+const buildTime = new Date().toLocaleDateString('en-GB', {
+	year: 'numeric',
+	month: 'short',
+	day: 'numeric',
+})
 ---
 
 <footer class="text-center text-neutral-500 dark:text-neutral-400 text-sm">
@@ -18,6 +24,9 @@ import SocialLink from './SocialLink.astro'
 				}
 			</div>
 			<p>© {new Date().getFullYear()} Tomas Klingen</p>
+			<p class="text-xs text-neutral-400 dark:text-neutral-600">
+				Last updated {buildTime}
+			</p>
 		</div>
 	</div>
 </footer>

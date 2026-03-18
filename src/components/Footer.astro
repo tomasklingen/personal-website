@@ -1,32 +1,7 @@
 ---
-import { socialLinks } from '~/lib/social'
-import SocialLink from './SocialLink.astro'
 
-const buildTime = new Date().toLocaleDateString('en-GB', {
-	year: 'numeric',
-	month: 'short',
-	day: 'numeric',
-})
 ---
 
-<footer class="text-center text-neutral-500 dark:text-neutral-400 text-sm">
-	<div class="container mx-auto px-6 lg:px-40 p-4">
-		<div class="flex flex-col items-center gap-3">
-			<div class="flex space-x-2">
-				{
-					Object.values(socialLinks).map((social) => (
-						<SocialLink
-							social={social}
-							class="p-2 text-neutral-400 hover:text-neutral-600 dark:text-neutral-500 dark:hover:text-neutral-300 transition-colors duration-200"
-							iconClass="w-5 h-5"
-						/>
-					))
-				}
-			</div>
-			<p>© {new Date().getFullYear()} Tomas Klingen</p>
-			<p class="text-xs text-neutral-400 dark:text-neutral-600">
-				Last updated {buildTime}
-			</p>
-		</div>
-	</div>
+<footer class="text-center text-neutral-400 dark:text-neutral-600 text-sm py-6">
+	<p>© {new Date().getFullYear()} Tomas Klingen</p>
 </footer>

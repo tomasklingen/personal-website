@@ -1,62 +1,58 @@
 {
-	"name": "tomasklingen.github.io",
-	"author": "Tomas Klingen",
-	"version": "1.0.0",
-	"description": "Portfolio website Tomas Klingen",
-	"type": "module",
-	"private": true,
-	"scripts": {
-		"dev": "astro dev",
-		"build": "astro build",
-		"preview": "astro preview",
-		"check-fix": "pnpm biome check --fix",
-		"format": "prettier --write ./src",
-		"format:check": "prettier --check ./src",
-		"prepare": "husky",
-		"typecheck": "astro check && tsc",
-		"test": "vitest",
-		"test:ui": "vitest --ui"
-	},
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/tomasklingen/tomasklingen.github.io"
-	},
-	"license": "SEE LICENSE IN LICENSE",
-	"bugs": {
-		"url": "https://github.com/tomasklingen/tomasklingen.github.io/issues"
-	},
-	"homepage": "https://github.com/tomasklingen/tomasklingen.github.io",
-	"devDependencies": {
-		"@astrojs/check": "^0.9.6",
-		"@biomejs/biome": "2.4.4",
-		"@tailwindcss/typography": "^0.5.19",
-		"husky": "^9.1.7",
-		"sitemap": "^8.0.2",
-		"vitest": "^4.0.18"
-	},
-	"dependencies": {
-		"@astrojs/mdx": "^4.3.12",
-		"@astrojs/react": "^4.4.2",
-		"@astrojs/sitemap": "^3.6.0",
-		"@tailwindcss/postcss": "^4.1.17",
-		"@tailwindcss/vite": "^4.1.17",
-		"@types/mdx": "^2.0.13",
-		"@types/node": "^22.19.2",
-		"@types/react": "^19.2.14",
-		"@types/react-dom": "^19.2.3",
-		"astro": "^5.18.0",
-		"clsx": "^2.1.1",
-		"prettier": "^3.7.4",
-		"prettier-plugin-astro": "^0.14.1",
-		"react": "^19.2.4",
-		"react-dom": "^19.2.4",
-		"sharp": "^0.34.5",
-		"tailwindcss": "^4.1.17",
-		"typescript": "^5.9.3"
-	},
-	"pnpm": {
-		"overrides": {
-			"vite": "8.0.0-beta.16"
-		}
-	}
+  "name": "tomasklingen.github.io",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Portfolio website Tomas Klingen",
+  "homepage": "https://github.com/tomasklingen/tomasklingen.github.io",
+  "bugs": {
+    "url": "https://github.com/tomasklingen/tomasklingen.github.io/issues"
+  },
+  "license": "SEE LICENSE IN LICENSE",
+  "author": "Tomas Klingen",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tomasklingen/tomasklingen.github.io"
+  },
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check-fix": "pnpm biome check --fix",
+    "format": "prettier --write ./src",
+    "format:check": "prettier --check ./src",
+    "prepare": "husky",
+    "typecheck": "astro check && tsc",
+    "test": "vitest",
+    "test:ui": "vitest --ui"
+  },
+  "dependencies": {
+    "@astrojs/mdx": "^5.0.4",
+    "@astrojs/react": "^5.0.4",
+    "@astrojs/sitemap": "^3.7.2",
+    "@tailwindcss/postcss": "^4.1.17",
+    "@tailwindcss/vite": "^4.1.17",
+    "@types/mdx": "^2.0.13",
+    "@types/node": "^22.19.2",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "astro": "^6.1.10",
+    "clsx": "^2.1.1",
+    "prettier": "^3.7.4",
+    "prettier-plugin-astro": "^0.14.1",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "sharp": "^0.34.5",
+    "tailwindcss": "^4.1.17",
+    "typescript": "6.0.0-beta"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.9",
+    "@biomejs/biome": "2.4.4",
+    "@tailwindcss/typography": "^0.5.19",
+    "@typescript/native-preview": "7.0.0-dev.20260421.2",
+    "husky": "^9.1.7",
+    "sitemap": "^8.0.2",
+    "vitest": "^4.0.18"
+  }
 }

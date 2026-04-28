@@ -1,4 +1,6 @@
-export const BlueskyIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
+import type { FC, SVGProps } from 'react'
+
+export const BlueskyIcon: FC<SVGProps<SVGSVGElement>> = (props) => (
 	<svg
 		viewBox="0 0 600 530"
 		version="1.1"
@@ -13,9 +15,7 @@ export const BlueskyIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
 	</svg>
 )
 
-export const LinkedinIcon: React.FC<React.SVGProps<SVGSVGElement>> = (
-	props,
-) => (
+export const LinkedinIcon: FC<SVGProps<SVGSVGElement>> = (props) => (
 	<svg viewBox="0 0 24 24" aria-hidden="true" {...props}>
 		<title>Linkedin logo</title>
 		<path
@@ -25,7 +25,7 @@ export const LinkedinIcon: React.FC<React.SVGProps<SVGSVGElement>> = (
 	</svg>
 )
 
-export const GithubIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
+export const GithubIcon: FC<SVGProps<SVGSVGElement>> = (props) => (
 	<svg viewBox="0 0 24 24" aria-hidden="true" {...props}>
 		<title>Github logo</title>
 		<path

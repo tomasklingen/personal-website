@@ -22,7 +22,7 @@
     "format": "prettier --write ./src",
     "format:check": "prettier --check ./src",
     "prepare": "husky",
-    "typecheck": "astro check && tsc",
+    "typecheck": "astro check && tsgo",
     "test": "vitest",
     "test:ui": "vitest --ui"
   },
@@ -43,8 +43,7 @@
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "sharp": "^0.34.5",
-    "tailwindcss": "^4.1.17",
-    "typescript": "6.0.0-beta"
+    "tailwindcss": "^4.1.17"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.9",
@@ -53,6 +52,7 @@
     "@typescript/native-preview": "7.0.0-dev.20260421.2",
     "husky": "^9.1.7",
     "sitemap": "^8.0.2",
+    "typescript": "^6.0.3",
     "vitest": "^4.0.18"
   }
 }

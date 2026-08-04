@@ -25,12 +25,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           submodules: recursive # Ensures all submodules are checked out
           fetch-depth: 0 # Fetches the entire history for submodules
       - name: Install, build, and upload your site
-        uses: withastro/action@v4
+        uses: withastro/action@v6
         with:
           package-manager: pnpm@latest
 
@@ -43,4 +43,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5

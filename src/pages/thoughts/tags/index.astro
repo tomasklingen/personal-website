@@ -1,0 +1,68 @@
+---
+import Footer from '~/components/Footer.astro'
+import Link from '~/components/Link.astro'
+import Layout from '~/layouts/Layout.astro'
+import ThoughtsLayout from '~/layouts/ThoughtsLayout.astro'
+import { getTagDescription } from '~/lib/tag-meta'
+import { getAllThoughtsSummary } from '~/lib/thoughts'
+
+const thoughts = await getAllThoughtsSummary()
+
+const counts = new Map<string, number>()
+for (const thought of thoughts) {
+	for (const tag of thought.tags ?? []) {
+		const key = tag.toLowerCase()
+		counts.set(key, (counts.get(key) ?? 0) + 1)
+	}
+}
+
+const tags = Array.from(counts, ([tag, count]) => ({
+	tag,
+	count,
+	description: getTagDescription(tag),
+})).sort((a, b) => b.count - a.count || a.tag.localeCompare(b.tag))
+---
+
+<Layout
+	title="Thoughts by tag - Tomas Klingen"
+	description="Browse all thoughts by Tomas Klingen, grouped by tag."
+>
+	<div class="flex-1 relative z-10">
+		<div class="flex flex-col relative">
+			<ThoughtsLayout>
+				<header class="mb-8">
+					<h1 class="text-3xl font-bold text-neutral-900 dark:text-neutral-100">
+						Thoughts by tag
+					</h1>
+					<p class="text-neutral-600 dark:text-neutral-400 mt-2">
+						{tags.length} tags across {thoughts.length} thoughts
+					</p>
+				</header>
+
+				<ul class="space-y-4">
+					{tags.map(({ tag, count, description }) => (
+						<li class="flex flex-col gap-1">
+							<div class="flex items-baseline gap-3">
+								<Link
+									href={`/thoughts/tags/${encodeURIComponent(tag)}`}
+									variant="tag"
+								>
+									{tag}
+								</Link>
+								<span class="text-sm text-neutral-600 dark:text-neutral-400">
+									{count} {count === 1 ? 'thought' : 'thoughts'}
+								</span>
+							</div>
+							{description && (
+								<p class="text-neutral-700 dark:text-neutral-300 max-w-prose">
+									{description}
+								</p>
+							)}
+						</li>
+					))}
+				</ul>
+			</ThoughtsLayout>
+		</div>
+		<Footer />
+	</div>
+</Layout>

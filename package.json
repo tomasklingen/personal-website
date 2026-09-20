@@ -22,9 +22,7 @@
     "format": "prettier --write ./src",
     "format:check": "prettier --check ./src",
     "prepare": "husky",
-    "typecheck": "astro check && tsc",
-    "test": "vitest",
-    "test:ui": "vitest --ui"
+    "typecheck": "astro check && tsc"
   },
   "dependencies": {
     "@astrojs/react": "^6.0.2",
@@ -49,7 +47,6 @@
     "@tailwindcss/typography": "^0.5.20",
     "@typescript/native": "npm:typescript@^7.0.2",
     "husky": "^9.1.7",
-    "typescript": "npm:@typescript/typescript6@^6.0.2",
-    "vitest": "^4.1.10"
+    "typescript": "npm:@typescript/typescript6@^6.0.2"
   }
 }

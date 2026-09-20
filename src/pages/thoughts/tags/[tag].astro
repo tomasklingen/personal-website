@@ -4,6 +4,7 @@ import Footer from '~/components/Footer.astro'
 import ThoughtListItem from '~/components/ThoughtListItem.astro'
 import Layout from '~/layouts/Layout.astro'
 import ThoughtsLayout from '~/layouts/ThoughtsLayout.astro'
+import { getTagDescription } from '~/lib/tag-meta'
 import { getAllThoughtsSummary } from '~/lib/thoughts'
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -39,11 +40,16 @@ const { tag, thoughts } = Astro.props
 if (!tag) {
 	return new Response('Tag not found', { status: 404 })
 }
+
+const tagDescription = getTagDescription(tag)
 ---
 
 <Layout
 	title={`Thoughts tagged: ${tag} - Tomas Klingen`}
-	description={`${thoughts.length} thoughts tagged with ${tag} by Tomas Klingen`}
+	description={
+		tagDescription ??
+		`${thoughts.length} thoughts tagged with ${tag} by Tomas Klingen`
+	}
 >
 	<div class="flex-1 relative z-10">
 		<div class="flex flex-col relative">
@@ -53,6 +59,11 @@ if (!tag) {
 						Thoughts tagged:{' '}
 						<span class="text-emerald-600 dark:text-emerald-300">{tag}</span>
 					</h1>
+					{tagDescription && (
+						<p class="text-neutral-700 dark:text-neutral-300 mt-3 max-w-prose">
+							{tagDescription}
+						</p>
+					)}
 					<p class="text-neutral-600 dark:text-neutral-400 mt-2">
 						{thoughts.length} {thoughts.length === 1 ? 'thought' : 'thoughts'}{' '}
 						found

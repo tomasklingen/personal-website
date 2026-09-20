@@ -51,35 +51,31 @@ if (!tag) {
 				<header class="mb-8">
 					<h1 class="text-3xl font-bold text-neutral-900 dark:text-neutral-100">
 						Thoughts tagged:{' '}
-						<span class="text-emerald-600 dark:text-emerald-300">
-							{tag}
-						</span>
+						<span class="text-emerald-600 dark:text-emerald-300">{tag}</span>
 					</h1>
 					<p class="text-neutral-600 dark:text-neutral-400 mt-2">
-						{thoughts.length}{' '}
-						{thoughts.length === 1 ? 'thought' : 'thoughts'} found
+						{thoughts.length} {thoughts.length === 1 ? 'thought' : 'thoughts'}{' '}
+						found
 					</p>
 				</header>
 
-				{
-					thoughts.length === 0 ? (
-						<div class="text-center py-12">
-							<p class="text-neutral-500 dark:text-neutral-400">
-								No thoughts found with tag "{tag}"
-							</p>
-						</div>
-					) : (
-						<section class="space-y-6">
-							{thoughts.map((thought) => (
-								<ThoughtListItem
-									thought={thought}
-									class="py-2"
-									highlightedTag={tag}
-								/>
-							))}
-						</section>
-					)
-				}
+				{thoughts.length === 0 ? (
+					<div class="text-center py-12">
+						<p class="text-neutral-500 dark:text-neutral-400">
+							No thoughts found with tag "{tag}"
+						</p>
+					</div>
+				) : (
+					<section class="space-y-6">
+						{thoughts.map((thought) => (
+							<ThoughtListItem
+								thought={thought}
+								class="py-2"
+								highlightedTag={tag}
+							/>
+						))}
+					</section>
+				)}
 			</ThoughtsLayout>
 		</div>
 		<Footer />

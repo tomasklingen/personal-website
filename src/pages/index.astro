@@ -20,9 +20,7 @@ const personSchema = generatePersonSchema()
 		<div class="flex flex-col relative">
 			<div class="relative w-full pt-12 overflow-hidden dark:text-white">
 				{/* Main content */}
-				<div
-					class="container mx-auto px-6 lg:px-40 flex flex-col items-center justify-between relative"
-				>
+				<div class="container mx-auto px-6 lg:px-40 flex flex-col items-center justify-between relative">
 					{/* Left column - Introduction */}
 					<div class="mb-4">
 						<div class="flex items-center mb-10 gap-6">
@@ -47,7 +45,10 @@ const personSchema = generatePersonSchema()
 							technologies. A strong focus on creating highly maintainable and
 							quality code guides every project I undertake. When I'm not at the
 							keyboard, you can find me cycling,{' '}
-							<Link href="/run/5k" variant="accent"> running </Link>
+							<Link href="/run/5k" variant="accent">
+								{' '}
+								running{' '}
+							</Link>
 							, or doing Crossfit.
 						</p>
 						<div class="flex space-x-4 justify-center">
@@ -72,49 +73,41 @@ const personSchema = generatePersonSchema()
 					<SquigglyDivider class="invisible dark:visible" />
 
 					{/* Recent Thoughts Section */}
-					{
-						recentThoughts.length > 0 && (
-							<div class="mb-8 w-full">
-								<div class="md:bg-amber-400/70 md:dark:bg-neutral-900/50 md:backdrop-blur-xs md:p-8 md:-mx-8 rounded-lg border-neutral-700 md:shadow-xl">
-									<div class="flex items-center justify-between my-1 mb-4">
-										<h2 class="text-xl font-semibold dark:text-gray-200">
-											Recent Thoughts 💡
-										</h2>
-										<Link href="/thoughts" variant="default" class="text-sm">
-											View all →
-										</Link>
-									</div>
-									<div class="space-y-4">
-										{recentThoughts.map((thought) => (
-											<ThoughtListItem
-												thought={thought}
-												class="bg-neutral-100 dark:bg-neutral-800/80 p-4 rounded-md transition-colors"
-												variant="compact"
-												dateFormat="short"
-											/>
-										))}
-									</div>
+					{recentThoughts.length > 0 && (
+						<div class="mb-8 w-full">
+							<div class="md:bg-amber-400/70 md:dark:bg-neutral-900/50 md:backdrop-blur-xs md:p-8 md:-mx-8 rounded-lg border-neutral-700 md:shadow-xl">
+								<div class="flex items-center justify-between my-1 mb-4">
+									<h2 class="text-xl font-semibold dark:text-gray-200">
+										Recent Thoughts 💡
+									</h2>
+									<Link href="/thoughts" variant="default" class="text-sm">
+										View all →
+									</Link>
+								</div>
+								<div class="space-y-4">
+									{recentThoughts.map((thought) => (
+										<ThoughtListItem
+											thought={thought}
+											class="bg-neutral-100 dark:bg-neutral-800/80 p-4 rounded-md transition-colors"
+											variant="compact"
+											dateFormat="short"
+										/>
+									))}
 								</div>
 							</div>
-						)
-					}
+						</div>
+					)}
 
 					<SquigglyDivider />
 
 					{/* Skills & Projects Block */}
 					<div class="space-y-6">
 						{/* Skills Card */}
-						<div
-							class="md:bg-neutral-300 md:dark:bg-neutral-900/50 md:backdrop-blur-xs md:p-8 md:-mx-8 rounded-lg border-neutral-700 md:shadow-xl"
-						>
+						<div class="md:bg-neutral-300 md:dark:bg-neutral-900/50 md:backdrop-blur-xs md:p-8 md:-mx-8 rounded-lg border-neutral-700 md:shadow-xl">
 							<h2 class="text-xl font-semibold my-1 mb-4">How I Work</h2>
 							<div class="grid sm:grid-cols-2 gap-3 md:gap-4">
-								<div
-									class="bg-neutral-100/90 dark:bg-neutral-800/80 p-4 rounded-md dark:border-l-4 border-blue-500/60 hover:border-blue-500 transition-colors duration-200 group"
-								>
-									<h3
-										class="font-medium dark:text-gray-200 mb-2 flex items-center"
-									>
+								<div class="bg-neutral-100/90 dark:bg-neutral-800/80 p-4 rounded-md dark:border-l-4 border-blue-500/60 hover:border-blue-500 transition-colors duration-200 group">
+									<h3 class="font-medium dark:text-gray-200 mb-2 flex items-center">
 										<strong class="mr-2">💻</strong>
 										My Favorite Tech
 									</h3>
@@ -123,12 +116,8 @@ const personSchema = generatePersonSchema()
 										Svelte, RxJS.
 									</p>
 								</div>
-								<div
-									class="bg-neutral-100/90 dark:bg-neutral-800/80 p-4 rounded-md dark:border-l-4 border-purple-500/60 hover:border-purple-500 transition-colors duration-200 group"
-								>
-									<h3
-										class="font-medium dark:text-gray-200 mb-2 flex items-center"
-									>
+								<div class="bg-neutral-100/90 dark:bg-neutral-800/80 p-4 rounded-md dark:border-l-4 border-purple-500/60 hover:border-purple-500 transition-colors duration-200 group">
+									<h3 class="font-medium dark:text-gray-200 mb-2 flex items-center">
 										<strong class="mr-2">🎯</strong>
 										How I Like to Code
 									</h3>
@@ -137,12 +126,8 @@ const personSchema = generatePersonSchema()
 										performs well, and is easy to understand.
 									</p>
 								</div>
-								<div
-									class="bg-neutral-100/90 dark:bg-neutral-800/80 p-4 rounded-md dark:border-l-4 border-green-500/60 hover:border-green-500 transition-colors duration-200 group"
-								>
-									<h3
-										class="font-medium dark:text-gray-200 mb-2 flex items-center"
-									>
+								<div class="bg-neutral-100/90 dark:bg-neutral-800/80 p-4 rounded-md dark:border-l-4 border-green-500/60 hover:border-green-500 transition-colors duration-200 group">
+									<h3 class="font-medium dark:text-gray-200 mb-2 flex items-center">
 										<strong class="mr-2">🛠️</strong>
 										Tools of the Trade
 									</h3>
@@ -151,12 +136,8 @@ const personSchema = generatePersonSchema()
 										CI/CD tools like Gitlab & Github Actions.
 									</p>
 								</div>
-								<div
-									class="bg-neutral-100/90 dark:bg-neutral-800/80 p-4 rounded-md dark:border-l-4 border-rose-500/60 hover:border-rose-500 transition-colors duration-200 group"
-								>
-									<h3
-										class="font-medium dark:text-gray-200 mb-2 flex items-center"
-									>
+								<div class="bg-neutral-100/90 dark:bg-neutral-800/80 p-4 rounded-md dark:border-l-4 border-rose-500/60 hover:border-rose-500 transition-colors duration-200 group">
+									<h3 class="font-medium dark:text-gray-200 mb-2 flex items-center">
 										<strong class="mr-2">👨‍💻</strong>
 										My Approach
 									</h3>

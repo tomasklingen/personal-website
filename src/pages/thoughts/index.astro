@@ -22,16 +22,14 @@ const thoughts = await getAllThoughtsSummary()
 				</header>
 
 				<section class="space-y-6">
-					{
-						thoughts.map((thought) => (
-							<ThoughtListItem
-								thought={thought}
-								class="py-2"
-								variant="default"
-								dateFormat="default"
-							/>
-						))
-					}
+					{thoughts.map((thought) => (
+						<ThoughtListItem
+							thought={thought}
+							class="py-2"
+							variant="default"
+							dateFormat="default"
+						/>
+					))}
 				</section>
 			</ThoughtsLayout>
 		</div>

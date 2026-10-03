@@ -1,6 +1,7 @@
 ---
 import { socialLinks } from '~/lib/social'
 import SocialLink from './SocialLink.astro'
+import ThemeSwitch from './ThemeSwitch.astro'
 
 const buildTime = new Date().toLocaleDateString('en-GB', {
 	year: 'numeric',
@@ -25,6 +26,7 @@ const buildTime = new Date().toLocaleDateString('en-GB', {
 			<p class="text-xs text-neutral-400 dark:text-neutral-600">
 				Last updated {buildTime}
 			</p>
+			<ThemeSwitch />
 		</div>
 	</div>
 </footer>

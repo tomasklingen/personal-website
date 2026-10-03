@@ -47,16 +47,20 @@ const canonicalUrl = new URL(canonicalPath, Astro.site)
 			></script>
 		)}
 		<script is:inline>
-			// Dark mode detection script - runs immediately to prevent flash
-			if (
-				localStorage.theme === 'dark' ||
-				(!('theme' in localStorage) &&
+			// Runs before first paint to prevent a flash. ThemeSwitch.astro applies
+			// the same rule when the visitor changes the preference.
+			// data-theme holds the preference, the dark class holds the result.
+			const preference =
+				localStorage.theme === 'light' || localStorage.theme === 'dark'
+					? localStorage.theme
+					: 'system'
+			const isDark =
+				preference === 'dark' ||
+				(preference === 'system' &&
 					window.matchMedia('(prefers-color-scheme: dark)').matches)
-			) {
-				document.documentElement.classList.add('dark')
-			} else {
-				document.documentElement.classList.remove('dark')
-			}
+
+			document.documentElement.dataset.theme = preference
+			document.documentElement.classList.toggle('dark', isDark)
 		</script>
 	</head>
 	<body class="min-h-screen bg-neutral-100 dark:bg-neutral-900">

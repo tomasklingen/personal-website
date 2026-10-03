@@ -1,0 +1,129 @@
+---
+// Full class names stay literal so Tailwind can find them. The active state
+// reads the data-theme attribute that the inline script in Layout sets on <html>.
+// Icons inherit the inactive color from the label. A color class on the icon
+// itself would beat the active-state classes in the dark variant.
+const options = [
+	{
+		value: 'light',
+		label: 'Light',
+		iconClass:
+			'in-data-[theme=light]:rotate-90 in-data-[theme=light]:scale-110 in-data-[theme=light]:text-amber-600',
+	},
+	{
+		value: 'system',
+		label: 'System',
+		iconClass:
+			'in-data-[theme=system]:scale-110 in-data-[theme=system]:text-emerald-600 dark:in-data-[theme=system]:text-emerald-400',
+	},
+	{
+		value: 'dark',
+		label: 'Dark',
+		iconClass:
+			'in-data-[theme=dark]:-rotate-20 in-data-[theme=dark]:scale-110 in-data-[theme=dark]:text-indigo-300',
+	},
+] as const
+---
+
+<fieldset class="relative inline-flex rounded-full bg-neutral-200 p-1 ring-1 ring-neutral-300 dark:bg-neutral-800 dark:ring-neutral-700">
+	<legend class="sr-only">Color theme</legend>
+	<span
+		aria-hidden="true"
+		class="absolute top-1 left-1 size-8 rounded-full bg-white shadow-sm transition-transform duration-500 ease-spring motion-reduce:transition-none dark:bg-neutral-600 in-data-[theme=system]:translate-x-8 in-data-[theme=dark]:translate-x-16"
+	></span>
+	{options.map(({ value, label, iconClass }) => (
+		<label
+			title={label}
+			class="relative grid size-8 cursor-pointer place-items-center rounded-full text-neutral-500 transition-transform duration-200 ease-spring active:scale-90 motion-reduce:transition-none dark:text-neutral-400 has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-emerald-500"
+		>
+			<input type="radio" name="theme" value={value} class="sr-only" />
+			<span class="sr-only">{label}</span>
+			<svg
+				aria-hidden="true"
+				viewBox="0 0 24 24"
+				fill="none"
+				stroke="currentColor"
+				stroke-width="2"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				class:list={[
+					'size-4.5 transition-[rotate,scale,color] duration-500 ease-spring motion-reduce:transition-none',
+					iconClass,
+				]}
+			>
+				{value === 'light' && (
+					<>
+						<circle cx="12" cy="12" r="4" />
+						<path d="M12 2v2" />
+						<path d="M12 20v2" />
+						<path d="m4.93 4.93 1.41 1.41" />
+						<path d="m17.66 17.66 1.41 1.41" />
+						<path d="M2 12h2" />
+						<path d="M20 12h2" />
+						<path d="m6.34 17.66-1.41 1.41" />
+						<path d="m19.07 4.93-1.41 1.41" />
+					</>
+				)}
+				{value === 'system' && (
+					<>
+						<rect width="20" height="14" x="2" y="3" rx="2" />
+						<path d="M8 21h8" />
+						<path d="M12 17v4" />
+					</>
+				)}
+				{value === 'dark' && <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />}
+			</svg>
+		</label>
+	))}
+</fieldset>
+
+<script>
+	type ThemePreference = 'light' | 'system' | 'dark'
+
+	const storageKey = 'theme'
+	const root = document.documentElement
+	const prefersDark = window.matchMedia('(prefers-color-scheme: dark)')
+	const inputs = document.querySelectorAll<HTMLInputElement>(
+		'input[name="theme"]',
+	)
+
+	const isThemePreference = (value: unknown): value is ThemePreference =>
+		value === 'light' || value === 'system' || value === 'dark'
+
+	const readPreference = (): ThemePreference => {
+		const stored = localStorage.getItem(storageKey)
+		return isThemePreference(stored) ? stored : 'system'
+	}
+
+	const storePreference = (preference: ThemePreference) => {
+		if (preference === 'system') {
+			localStorage.removeItem(storageKey)
+		} else {
+			localStorage.setItem(storageKey, preference)
+		}
+	}
+
+	const applyPreference = (preference: ThemePreference) => {
+		const isDark =
+			preference === 'dark' || (preference === 'system' && prefersDark.matches)
+
+		root.dataset.theme = preference
+		root.classList.toggle('dark', isDark)
+	}
+
+	const initialPreference = readPreference()
+	for (const input of inputs) {
+		input.checked = input.value === initialPreference
+
+		input.addEventListener('change', () => {
+			if (!input.checked || !isThemePreference(input.value)) return
+
+			storePreference(input.value)
+			applyPreference(input.value)
+		})
+	}
+
+	prefersDark.addEventListener('change', () => {
+		if (readPreference() === 'system') applyPreference('system')
+	})
+</script>

@@ -7,7 +7,7 @@ import { defineConfig } from 'astro/config'
 export default defineConfig({
 	site: 'https://tomasklingen.nl',
 	integrations: [
-		react(),
+		react({ compiler: true }),
 		sitemap({
 			filter: (page) => page !== 'https://tomasklingen.nl/run',
 		}),

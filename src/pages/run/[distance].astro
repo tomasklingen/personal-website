@@ -37,7 +37,7 @@ const example = getPaceEntry(exampleSeconds, distance)
 const distanceName = label.toLowerCase()
 const usage = `Find your goal finish time in the first column. The next columns show the pace to hold. For example, a ${distanceName} finish time of ${example.time} is a pace of ${example.pacePerKm} per km, or ${example.pacePerMile} per mile.`
 const pageTitle = `${label} Pace Chart`
-const description = `Pace chart for the ${distanceName}. Find your finish time between ${formatTime(finishRange.fastest)} and ${formatTime(finishRange.slowest)} and read the pace per kilometer and per mile.`
+const description = `Pace chart for the ${distanceName} distance. Find your finish time between ${formatTime(finishRange.fastest)} and ${formatTime(finishRange.slowest)} and read the pace per kilometer and per mile.`
 const structuredData = generateWebPageSchema({
 	name: pageTitle,
 	description,
@@ -70,7 +70,7 @@ const structuredData = generateWebPageSchema({
 					<li>
 						<Link
 							href={`/run/${configSlug}`}
-							class={`px-3 py-1 rounded transition-colors font-medium ${
+							class={`px-3 py-1 rounded transition-colors font-medium whitespace-nowrap ${
 								configSlug === slug
 									? 'bg-emerald-700 text-white dark:bg-emerald-400 dark:text-neutral-900'
 									: 'text-emerald-700 dark:text-emerald-400 hover:bg-emerald-100 dark:hover:bg-emerald-900/40'

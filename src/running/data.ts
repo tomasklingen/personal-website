@@ -3,9 +3,9 @@ import { type FinishRange, hms, KM_PER_MILE } from '~/running/utils'
 export const distanceConfig = [
 	{
 		slug: '1k',
-		label: '1k',
+		label: '1 km',
 		about:
-			'A 1k race is 1000 meters, or 2.5 laps of a 400 meter track. The finish time is also the pace per kilometer. Divide the pace by 2.5 to get your 400 meter lap time.',
+			'A 1 kilometer race is 1000 meters, or 2.5 laps of a 400 meter track. The finish time is also the pace per kilometer. Divide the pace by 2.5 to get your 400 meter lap time.',
 		distance: 1,
 		exampleSeconds: hms(0, 4),
 		finishRange: { fastest: hms(0, 3), slowest: hms(0, 8), step: 10 },
@@ -21,18 +21,18 @@ export const distanceConfig = [
 	},
 	{
 		slug: '5k',
-		label: '5k',
+		label: '5 km',
 		about:
-			'A 5k race is 5000 meters, or 3.1 miles. It is 12.5 laps of a 400 meter track. Many recreational runners finish a 5k in 25 to 35 minutes.',
+			'A 5 kilometer race is 5000 meters, or 3.1 miles. It is 12.5 laps of a 400 meter track. Many recreational runners finish a 5 kilometer race in 25 to 35 minutes.',
 		distance: 5,
 		exampleSeconds: hms(0, 25),
 		finishRange: { fastest: hms(0, 15), slowest: hms(0, 45), step: 10 },
 	},
 	{
 		slug: '10k',
-		label: '10k',
+		label: '10 km',
 		about:
-			'A 10k race is 10,000 meters, or 6.2 miles. It is 25 laps of a 400 meter track. Many recreational runners finish a 10k in 50 to 70 minutes.',
+			'A 10 kilometer race is 10,000 meters, or 6.2 miles. It is 25 laps of a 400 meter track. Many recreational runners finish a 10 kilometer race in 50 to 70 minutes.',
 		distance: 10,
 		exampleSeconds: hms(0, 50),
 		finishRange: { fastest: hms(0, 30), slowest: hms(1, 30), step: 30 },

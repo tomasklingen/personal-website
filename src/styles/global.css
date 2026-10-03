@@ -17,6 +17,16 @@
 	--breakpoint-xl: 40rem;
 }
 
+/* Inline code as a pill. Code inside pre keeps the plugin reset. */
+.prose :where(:not(pre) > code) {
+	@apply rounded bg-emerald-100 px-1.5 py-0.5 font-normal text-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-200;
+
+	&::before,
+	&::after {
+		content: none;
+	}
+}
+
 @media (prefers-color-scheme: dark) {
 	.astro-code,
 	.astro-code span {

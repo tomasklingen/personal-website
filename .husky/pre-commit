@@ -1,3 +1,11 @@
+staged=$(mktemp)
+trap 'rm -f "$staged"' EXIT
+
+git diff --cached --name-only --diff-filter=d -z > "$staged"
 pnpm check-fix
-pnpm exec tsc
+if [ -s "$staged" ]; then
+	git --literal-pathspecs add --pathspec-from-file="$staged" --pathspec-file-nul
+fi
+
+pnpm typecheck
 pnpm format:check

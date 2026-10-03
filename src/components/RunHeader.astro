@@ -1,6 +1,6 @@
 ---
 import Link from '~/components/Link.astro'
-import { distanceConfig, subFourMarathon } from '~/running/data'
+import { distanceConfig, getSubGoalPath, subGoals } from '~/running/data'
 
 interface Props {
 	title: string
@@ -14,13 +14,16 @@ const pages = [
 		path: `/run/${slug}`,
 		label,
 	})),
-	{ path: subFourMarathon.path, label: subFourMarathon.label },
+	...subGoals.map((goal) => ({
+		path: getSubGoalPath(goal),
+		label: goal.label,
+	})),
 ]
 ---
 
 <header class="shadow p-4 flex flex-col gap-2 md:flex-row md:items-center md:justify-between border-b border-neutral-200 dark:border-neutral-700">
 	<div class="flex items-center gap-4">
-		<Link href="/" variant="nav">
+		<Link href="/" variant="nav" class="shrink-0 whitespace-nowrap">
 			{' '}
 			&larr; Home{' '}
 		</Link>

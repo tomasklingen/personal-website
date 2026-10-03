@@ -6,7 +6,7 @@ import PaceTable from '~/components/PaceTable.astro'
 import RunHeader from '~/components/RunHeader.astro'
 import Layout from '~/layouts/Layout.astro'
 import { generateWebPageSchema } from '~/lib/structured-data'
-import { distanceConfig, type RelatedPage } from '~/running/data'
+import { distanceConfig, getSubGoalPath, subGoals } from '~/running/data'
 import {
 	type FinishRange,
 	formatTime,
@@ -28,19 +28,14 @@ interface Props {
 	distance: number
 	exampleSeconds: number
 	finishRange: FinishRange
-	relatedPage?: RelatedPage
 }
 
-const {
-	slug,
-	label,
-	about,
-	distance,
-	exampleSeconds,
-	finishRange,
-	relatedPage,
-} = Astro.props
+const { slug, label, about, distance, exampleSeconds, finishRange } =
+	Astro.props
 
+const relatedGoals = subGoals.filter(
+	({ distanceSlug }) => distanceSlug === slug,
+)
 const entries = generatePaceEntries(finishRange, distance)
 const example = getPaceEntry(exampleSeconds, distance)
 const distanceName = label.toLowerCase()
@@ -65,14 +60,14 @@ const structuredData = generateWebPageSchema({
 		<section class="flex flex-col gap-3 px-4 pt-6 text-neutral-700 dark:text-neutral-300">
 			<p>{about}</p>
 			<p>{usage}</p>
-			{relatedPage && (
+			{relatedGoals.map((goal) => (
 				<p>
-					{relatedPage.prompt}{' '}
-					<Link href={relatedPage.path} variant="accent">
-						{relatedPage.linkText} &rarr;
+					Aiming to finish under {goal.threshold}?{' '}
+					<Link href={getSubGoalPath(goal)} variant="accent">
+						See the {goal.label.toLowerCase()} pace and splits &rarr;
 					</Link>
 				</p>
-			)}
+			))}
 		</section>
 
 		<section class="flex-1">

@@ -56,11 +56,32 @@ export const getPaceEntry = (
 	}
 }
 
+/**
+ * Like getPaceEntry, but rounds paces down to the second. Holding the pace
+ * for the full distance then finishes at or under the given time.
+ */
+export const getGoalPaceEntry = (
+	totalSeconds: number,
+	distance: number,
+): PaceEntry => {
+	const pacePerKmSeconds = totalSeconds / distance
+
+	return {
+		time: formatTime(totalSeconds),
+		pacePerKm: formatTime(Math.floor(pacePerKmSeconds)),
+		pacePerMile: formatTime(Math.floor(pacePerKmSeconds * KM_PER_MILE)),
+	}
+}
+
 const formatDistance = new Intl.NumberFormat('en', {
 	maximumFractionDigits: 1,
 }).format
 
-/** Elapsed time at each checkpoint when holding a constant pace in seconds per km. */
+/**
+ * Elapsed time at each checkpoint when holding a constant pace in seconds per
+ * km. Times round down to the second, so a runner who is on time at every
+ * checkpoint is not late for the finish.
+ */
 export const generateSplits = (
 	checkpoints: readonly Checkpoint[],
 	paceSeconds: number,
@@ -69,7 +90,7 @@ export const generateSplits = (
 		label,
 		kilometers: formatDistance(distance),
 		miles: formatDistance(distance / KM_PER_MILE),
-		elapsed: formatTime(distance * paceSeconds),
+		elapsed: formatTime(Math.floor(distance * paceSeconds)),
 		isMilestone,
 	}))
 

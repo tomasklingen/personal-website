@@ -1,4 +1,5 @@
 ---
+import type { GetStaticPaths } from 'astro'
 import Footer from '~/components/Footer.astro'
 import Link from '~/components/Link.astro'
 import PaceTable from '~/components/PaceTable.astro'
@@ -6,91 +7,120 @@ import RunHeader from '~/components/RunHeader.astro'
 import SquigglyDivider from '~/components/SquigglyDivider.astro'
 import Layout from '~/layouts/Layout.astro'
 import { generateWebPageSchema } from '~/lib/structured-data'
-import { subFourMarathon } from '~/running/data'
 import {
-	type Checkpoint,
+	distanceConfig,
+	getSubGoalPath,
+	type SubGoal,
+	subGoals,
+} from '~/running/data'
+import {
 	formatTime,
 	generatePaceEntries,
 	generateSplits,
-	getPaceEntry,
-	hms,
-	MARATHON_KM,
+	getGoalPaceEntry,
 } from '~/running/utils'
 
-const { path, label, finishSeconds } = subFourMarathon
+export const getStaticPaths: GetStaticPaths = () => {
+	return subGoals.map((subGoal) => {
+		const chart = distanceConfig.find(
+			({ slug }) => slug === subGoal.distanceSlug,
+		)
+		if (!chart) {
+			throw new Error(`Unknown distance "${subGoal.distanceSlug}"`)
+		}
 
-const halfKm = MARATHON_KM / 2
-const paceSeconds = finishSeconds / MARATHON_KM
-const goal = getPaceEntry(finishSeconds, MARATHON_KM)
-const speed = (MARATHON_KM / (finishSeconds / 3600)).toFixed(1)
-const lapTime = formatTime(paceSeconds * 0.4)
-const wholeSecondPace = Math.round(paceSeconds)
-const wholeSecondPaceFinish = formatTime(wholeSecondPace * MARATHON_KM)
+		return {
+			params: { distance: subGoal.distanceSlug, goal: subGoal.slug },
+			props: { subGoal, distance: chart.distance, distanceLabel: chart.label },
+		}
+	})
+}
+
+interface Props {
+	subGoal: SubGoal
+	distance: number
+	distanceLabel: string
+}
+
+const { subGoal, distance, distanceLabel } = Astro.props
+const {
+	distanceSlug,
+	label,
+	threshold,
+	goalText,
+	finishSeconds,
+	checkpoints,
+	negativeSplit,
+	nearbyRanges,
+} = subGoal
+
+const path = getSubGoalPath(subGoal)
+const halfDistance = distance / 2
+const paceSeconds = finishSeconds / distance
+const target = getGoalPaceEntry(finishSeconds, distance)
+
+// Round up, so holding the speed finishes under the goal time.
+const speed = (
+	Math.ceil((distance / (finishSeconds / 3600)) * 10) / 10
+).toFixed(1)
+const lapTime = formatTime(Math.floor(paceSeconds * 0.4))
+const wholeSecondPace = Math.floor(paceSeconds)
+const wholeSecondPaceFinish = formatTime(wholeSecondPace * distance)
 const slowerPace = formatTime(wholeSecondPace + 1)
-const slowerPaceFinish = formatTime((wholeSecondPace + 1) * MARATHON_KM)
+const slowerPaceFinish = formatTime((wholeSecondPace + 1) * distance)
 
-// A string, because Astro drops a line break between an expression and text.
+// The no-break space keeps the number and the unit on one line.
+const distanceText = `${distance} km`
+
+// These are strings, because Astro drops a line break between an expression and text.
+const intro = `${goalText} That is a pace of ${target.pacePerKm} per km or faster for ${distanceText}.`
+const splitsIntro = `Pass each checkpoint at the time shown to finish in ${target.time}. Use the list as a pace band on race day.`
 const marginNote = [
-	`Holding ${goal.pacePerKm} per km for ${MARATHON_KM} km gives a finish of ${wholeSecondPaceFinish}.`,
+	`Holding ${target.pacePerKm} per km for ${distanceText} gives a finish of ${wholeSecondPaceFinish}.`,
 	`A pace of ${slowerPace} per km is already too slow. It gives ${slowerPaceFinish}.`,
-	`Most runners cover more than ${MARATHON_KM} km, because they cannot run the shortest line.`,
+	`Most runners cover more than ${distanceText}, because they cannot run the shortest line.`,
 	'Plan a few seconds per km of margin.',
 ].join(' ')
+const chartLinkText = `See the full ${distanceLabel.toLowerCase()} pace chart →`
 
 const stats = [
-	{ value: goal.pacePerKm, unit: 'per km' },
-	{ value: goal.pacePerMile, unit: 'per mile' },
+	{ value: target.pacePerKm, unit: 'per km' },
+	{ value: target.pacePerMile, unit: 'per mile' },
 	{ value: speed, unit: 'km/h' },
 	{ value: lapTime, unit: '400 m lap' },
 ]
 
-const kilometerCheckpoint = (distance: number): Checkpoint => ({
-	label: `${distance} km`,
-	distance,
-})
-
-const checkpoints: Checkpoint[] = [
-	...[5, 10, 15, 20].map(kilometerCheckpoint),
-	{ label: 'Half marathon', distance: halfKm, isMilestone: true },
-	...[25, 30, 35, 40].map(kilometerCheckpoint),
-	{ label: 'Finish', distance: MARATHON_KM, isMilestone: true },
-]
 const splits = generateSplits(checkpoints, paceSeconds)
 
-const negativeSplitFirstHalf = hms(2, 1)
-const negativeSplitSecondHalf = finishSeconds - negativeSplitFirstHalf
+const secondHalfSeconds = finishSeconds - negativeSplit.firstHalfSeconds
 const strategies = [
 	{
 		name: 'Even pace',
 		description: 'Run every kilometer at the same pace.',
-		firstHalfPace: goal.pacePerKm,
-		secondHalfPace: goal.pacePerKm,
-		halfwayTime: formatTime(halfKm * paceSeconds),
+		firstHalfPace: target.pacePerKm,
+		secondHalfPace: target.pacePerKm,
+		halfwayTime: formatTime(Math.floor(halfDistance * paceSeconds)),
 	},
 	{
 		name: 'Negative split',
-		description:
-			'Run the second half about 2 minutes faster than the first half.',
-		firstHalfPace: getPaceEntry(negativeSplitFirstHalf, halfKm).pacePerKm,
-		secondHalfPace: getPaceEntry(negativeSplitSecondHalf, halfKm).pacePerKm,
-		halfwayTime: formatTime(negativeSplitFirstHalf),
+		description: negativeSplit.description,
+		firstHalfPace: getGoalPaceEntry(
+			negativeSplit.firstHalfSeconds,
+			halfDistance,
+		).pacePerKm,
+		secondHalfPace: getGoalPaceEntry(secondHalfSeconds, halfDistance).pacePerKm,
+		halfwayTime: formatTime(negativeSplit.firstHalfSeconds),
 	},
 ]
 
 const nearbyEntries = [
-	...generatePaceEntries(
-		{ fastest: hms(3, 30), slowest: hms(3, 55), step: 300 },
-		MARATHON_KM,
-	),
-	goal,
-	...generatePaceEntries(
-		{ fastest: hms(4, 5), slowest: hms(4, 30), step: 300 },
-		MARATHON_KM,
-	),
+	...generatePaceEntries(nearbyRanges.faster, distance),
+	target,
+	...generatePaceEntries(nearbyRanges.slower, distance),
 ]
 
 const pageTitle = `${label} Pace`
-const description = `A sub 4 hour marathon needs a pace of ${goal.pacePerKm} per kilometer or ${goal.pacePerMile} per mile. See the splits for every 5 kilometers, two pacing options and finish times near 4 hours.`
+const description = `A ${label.toLowerCase()} needs a pace of ${target.pacePerKm} per kilometer or ${target.pacePerMile} per mile. See the splits, two pacing options and finish times near ${threshold}.`
 const structuredData = generateWebPageSchema({
 	name: pageTitle,
 	description,
@@ -99,7 +129,7 @@ const structuredData = generateWebPageSchema({
 ---
 
 <Layout
-	title={`${pageTitle}: ${goal.pacePerKm} per km, ${goal.pacePerMile} per mile - Tomas Klingen`}
+	title={`${pageTitle}: ${target.pacePerKm} per km, ${target.pacePerMile} per mile - Tomas Klingen`}
 	description={description}
 	structuredData={structuredData}
 >
@@ -112,13 +142,9 @@ const structuredData = generateWebPageSchema({
 					My goal
 				</p>
 				<p class="mt-2 font-header text-6xl font-bold tabular-nums sm:text-7xl">
-					{goal.time}
+					{target.time}
 				</p>
-				<p class="mt-3 text-emerald-50 dark:text-neutral-200">
-					I have not run a marathon yet. My goal for the first one is a finish
-					under 4 hours. That is a pace of {goal.pacePerKm} per km or faster for{' '}
-					{MARATHON_KM} km.
-				</p>
+				<p class="mt-3 text-emerald-50 dark:text-neutral-200">{intro}</p>
 				<dl class="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
 					{stats.map(({ value, unit }) => (
 						<div class="rounded-xl bg-white/10 p-4 ring-1 ring-white/20">
@@ -140,10 +166,7 @@ const structuredData = generateWebPageSchema({
 			<h2 class="text-2xl font-bold text-neutral-900 dark:text-white">
 				🏁 Splits at even pace
 			</h2>
-			<p class="mt-2">
-				Hold {goal.pacePerKm} per km to pass each checkpoint at the time shown.
-				Use the list as a pace band on race day.
-			</p>
+			<p class="mt-2">{splitsIntro}</p>
 			<ol class="mt-6 rounded-2xl bg-white p-4 shadow dark:bg-neutral-800">
 				{splits.map(({ label: splitLabel, miles, elapsed, isMilestone }) => (
 					<li class="relative flex items-center justify-between gap-4 py-3 pl-8 before:absolute before:inset-y-0 before:left-[7px] before:w-0.5 before:bg-emerald-200 first:before:top-1/2 last:before:bottom-1/2 dark:before:bg-emerald-900">
@@ -187,7 +210,7 @@ const structuredData = generateWebPageSchema({
 			<h2 class="text-2xl font-bold text-neutral-900 dark:text-white">
 				⚖️ Pacing options
 			</h2>
-			<p class="mt-2">Both options finish in {goal.time}.</p>
+			<p class="mt-2">Both options finish in {target.time}.</p>
 			<div class="mt-4 grid gap-4 sm:grid-cols-2">
 				{strategies.map(
 					({
@@ -233,13 +256,13 @@ const structuredData = generateWebPageSchema({
 
 		<section class="flex-1 px-4">
 			<PaceTable
-				title="Finish times near 4 hours"
+				title={`Finish times near ${threshold}`}
 				entries={nearbyEntries}
-				highlightTime={goal.time}
+				highlightTime={target.time}
 			/>
 			<p class="text-center text-neutral-700 dark:text-neutral-300">
-				<Link href="/run/marathon" variant="accent">
-					See the full marathon pace chart &rarr;
+				<Link href={`/run/${distanceSlug}`} variant="accent">
+					{chartLinkText}
 				</Link>
 			</p>
 		</section>

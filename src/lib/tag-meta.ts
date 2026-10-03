@@ -3,8 +3,11 @@
  * A tag without an entry shows no description.
  */
 const tagDescriptions: Record<string, string> = {
+	agents: 'AI agents: how they load context, skills and memory.',
+	ai: 'Working with AI tools and LLMs.',
 	blogging: 'Writing, publishing and the tooling around this site.',
 	cheatsheet: 'Short reference notes to look up commands fast.',
+	claude: 'Claude and Claude Code: skills, memory and configuration.',
 	cli: 'Command line tools and terminal workflows.',
 	frontmatter: 'YAML metadata at the top of markdown files.',
 	git: 'Version control with git: commands, config and workflows.',

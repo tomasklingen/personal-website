@@ -1,56 +1,65 @@
+import { type FinishRange, hms, KM_PER_MILE } from '~/running/utils'
+
 export const distanceConfig = [
 	{
 		slug: '1k',
-		title: '1000m - 1k',
-		shortLabel: '1k',
+		label: '1k',
+		about:
+			'A 1k race is 1000 meters, or 2.5 laps of a 400 meter track. The finish time is also the pace per kilometer. Divide the pace by 2.5 to get your 400 meter lap time.',
 		distance: 1,
-		paceConfig: { startSeconds: 210, increment: 10, count: 16 }, // 3:30 to 6:00
+		exampleSeconds: hms(0, 4),
+		finishRange: { fastest: hms(0, 3), slowest: hms(0, 8), step: 10 },
 	},
 	{
 		slug: '1mile',
-		title: '1 Mile',
-		shortLabel: '1 mile',
-		distance: 1.60934,
-		paceConfig: { startSeconds: 270, increment: 5, count: 50 },
+		label: '1 Mile',
+		about:
+			'A mile is 1609 meters, or four laps of a 400 meter track plus 9 meters. Many casual runners finish a mile in 8 to 12 minutes.',
+		distance: KM_PER_MILE,
+		exampleSeconds: hms(0, 8),
+		finishRange: { fastest: hms(0, 4), slowest: hms(0, 12), step: 5 },
 	},
 	{
 		slug: '5k',
-		title: '5000m - 5k',
-		shortLabel: '5k',
+		label: '5k',
+		about:
+			'A 5k race is 5000 meters, or 3.1 miles. It is 12.5 laps of a 400 meter track. Many recreational runners finish a 5k in 25 to 35 minutes.',
 		distance: 5,
-		paceConfig: { startSeconds: 1050, increment: 10, count: 50 }, // 17:30 to 30:00
+		exampleSeconds: hms(0, 25),
+		finishRange: { fastest: hms(0, 15), slowest: hms(0, 45), step: 10 },
 	},
 	{
 		slug: '10k',
-		title: '10.000m - 10k',
-		shortLabel: '10k',
+		label: '10k',
+		about:
+			'A 10k race is 10,000 meters, or 6.2 miles. It is 25 laps of a 400 meter track. Many recreational runners finish a 10k in 50 to 70 minutes.',
 		distance: 10,
-		paceConfig: { startSeconds: 1740, increment: 15, count: 100 },
+		exampleSeconds: hms(0, 50),
+		finishRange: { fastest: hms(0, 30), slowest: hms(1, 30), step: 30 },
 	},
 	{
 		slug: 'half-marathon',
-		title: 'Half Marathon',
-		shortLabel: 'Half Marathon',
+		label: 'Half Marathon',
+		about:
+			'A half marathon is 21.0975 kilometers, or 13.1 miles. Many recreational runners finish a half marathon in 1:50 to 2:30.',
 		distance: 21.0975,
-		paceConfig: { startSeconds: 4440, increment: 60, count: 60 },
+		exampleSeconds: hms(2, 0),
+		finishRange: { fastest: hms(1, 10), slowest: hms(3, 0), step: 60 },
 	},
 	{
 		slug: 'marathon',
-		title: 'Marathon - 42.195K',
-		shortLabel: 'Marathon',
+		label: 'Marathon',
+		about:
+			'A marathon is 42.195 kilometers, or 26.2 miles. Many recreational runners finish a marathon in 3:30 to 5:00.',
 		distance: 42.195,
-		paceConfig: { startSeconds: 7200, increment: 120, count: 100 },
+		exampleSeconds: hms(4, 0),
+		finishRange: { fastest: hms(2, 0), slowest: hms(6, 0), step: 120 },
 	},
 ] as const satisfies {
-	title: string
 	slug: string
-	shortLabel: string
+	label: string
+	about: string
 	distance: number
-	paceConfig: {
-		startSeconds: number
-		increment: number
-		count: number
-	}
+	exampleSeconds: number
+	finishRange: FinishRange
 }[]
-
-export type Slug = (typeof distanceConfig)[number]['slug']

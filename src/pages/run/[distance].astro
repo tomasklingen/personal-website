@@ -4,44 +4,51 @@ import Footer from '~/components/Footer.astro'
 import Link from '~/components/Link.astro'
 import PaceTable from '~/components/PaceTable.astro'
 import Layout from '~/layouts/Layout.astro'
+import { generateWebPageSchema } from '~/lib/structured-data'
 import { distanceConfig } from '~/running/data'
-import { generatePaceEntries } from '~/running/utils'
+import {
+	type FinishRange,
+	formatTime,
+	generatePaceEntries,
+	getPaceEntry,
+} from '~/running/utils'
 
 export const getStaticPaths: GetStaticPaths = () => {
-	return distanceConfig.map((config) => {
-		const { startSeconds, increment, count } = config.paceConfig
-		const entries = generatePaceEntries(
-			startSeconds,
-			increment,
-			count,
-			config.distance,
-		)
-
-		return {
-			params: { distance: config.slug },
-			props: { ...config, entries },
-		}
-	})
+	return distanceConfig.map((config) => ({
+		params: { distance: config.slug },
+		props: config,
+	}))
 }
 
 interface Props {
 	slug: string
-	title: string
-	shortLabel: string
+	label: string
+	about: string
 	distance: number
-	entries: Array<{
-		time: string
-		pacePerKm: string
-		pacePerMile: string
-	}>
+	exampleSeconds: number
+	finishRange: FinishRange
 }
 
-const { title, entries, slug } = Astro.props
+const { slug, label, about, distance, exampleSeconds, finishRange } =
+	Astro.props
+
+const entries = generatePaceEntries(finishRange, distance)
+const example = getPaceEntry(exampleSeconds, distance)
+const distanceName = label.toLowerCase()
+const usage = `Find your goal finish time in the first column. The next columns show the pace to hold. For example, a ${distanceName} finish time of ${example.time} is a pace of ${example.pacePerKm} per km, or ${example.pacePerMile} per mile.`
+const pageTitle = `${label} Pace Chart`
+const description = `Pace chart for the ${distanceName}. Find your finish time between ${formatTime(finishRange.fastest)} and ${formatTime(finishRange.slowest)} and read the pace per kilometer and per mile.`
+const structuredData = generateWebPageSchema({
+	name: pageTitle,
+	description,
+	url: new URL(`/run/${slug}`, Astro.site).href,
+})
 ---
 
 <Layout
-	title={`${title} Running Pace Calculation Table - Tomas Klingen`}
-	description={`Find your ideal running pace for the ${title} distance using the pacing charts. Find your perfect pace per kilometer and mile for ${title} races and training.`}
+	title={`${pageTitle} (min/km and min/mile) - Tomas Klingen`}
+	description={description}
+	structuredData={structuredData}
 >
 	<main class="container mx-auto flex flex-col transition-colors">
 		<header class="shadow p-4 flex flex-col gap-2 md:flex-row md:items-center md:justify-between border-b border-neutral-200 dark:border-neutral-700">
@@ -51,7 +58,7 @@ const { title, entries, slug } = Astro.props
 					&larr; Home{' '}
 				</Link>
 				<h1 class="text-2xl font-bold text-neutral-900 dark:text-white">
-					Running Paces
+					{pageTitle}
 				</h1>
 			</div>
 			<hr class="my-2 md:hidden border-neutral-200 dark:border-neutral-800" />
@@ -59,7 +66,7 @@ const { title, entries, slug } = Astro.props
 
 		<nav class="bg-white dark:bg-neutral-900 border-b border-neutral-200 dark:border-neutral-800 p-2">
 			<ul class="flex flex-wrap gap-2">
-				{distanceConfig.map(({ slug: configSlug, shortLabel }) => (
+				{distanceConfig.map(({ slug: configSlug, label: configLabel }) => (
 					<li>
 						<Link
 							href={`/run/${configSlug}`}
@@ -69,15 +76,20 @@ const { title, entries, slug } = Astro.props
 									: 'text-emerald-700 dark:text-emerald-400 hover:bg-emerald-100 dark:hover:bg-emerald-900/40'
 							}`}
 						>
-							{shortLabel}
+							{configLabel}
 						</Link>
 					</li>
 				))}
 			</ul>
 		</nav>
 
+		<section class="flex flex-col gap-3 px-4 pt-6 text-neutral-700 dark:text-neutral-300">
+			<p>{about}</p>
+			<p>{usage}</p>
+		</section>
+
 		<section class="flex-1">
-			<PaceTable title={`${title} Running Paces`} entries={entries} />
+			<PaceTable title={`${label} Finish Times and Paces`} entries={entries} />
 		</section>
 	</main>
 	<Footer />

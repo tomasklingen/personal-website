@@ -18,6 +18,35 @@ export function generatePersonSchema() {
 	}
 }
 
+export function generateWebPageSchema({
+	name,
+	description,
+	url,
+}: {
+	name: string
+	description: string
+	url: string
+}) {
+	return {
+		'@context': 'https://schema.org',
+		'@type': 'WebPage',
+		name,
+		description,
+		url,
+		inLanguage: 'en',
+		isPartOf: {
+			'@type': 'WebSite',
+			name: 'Tomas Klingen',
+			url: 'https://tomasklingen.nl',
+		},
+		author: {
+			'@type': 'Person',
+			name: 'Tomas Klingen',
+			url: 'https://tomasklingen.nl',
+		},
+	}
+}
+
 export function generateBlogPostingSchema({
 	title,
 	url,

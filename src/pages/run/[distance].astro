@@ -3,9 +3,10 @@ import type { GetStaticPaths } from 'astro'
 import Footer from '~/components/Footer.astro'
 import Link from '~/components/Link.astro'
 import PaceTable from '~/components/PaceTable.astro'
+import RunHeader from '~/components/RunHeader.astro'
 import Layout from '~/layouts/Layout.astro'
 import { generateWebPageSchema } from '~/lib/structured-data'
-import { distanceConfig } from '~/running/data'
+import { distanceConfig, type RelatedPage } from '~/running/data'
 import {
 	type FinishRange,
 	formatTime,
@@ -27,10 +28,18 @@ interface Props {
 	distance: number
 	exampleSeconds: number
 	finishRange: FinishRange
+	relatedPage?: RelatedPage
 }
 
-const { slug, label, about, distance, exampleSeconds, finishRange } =
-	Astro.props
+const {
+	slug,
+	label,
+	about,
+	distance,
+	exampleSeconds,
+	finishRange,
+	relatedPage,
+} = Astro.props
 
 const entries = generatePaceEntries(finishRange, distance)
 const example = getPaceEntry(exampleSeconds, distance)
@@ -51,41 +60,19 @@ const structuredData = generateWebPageSchema({
 	structuredData={structuredData}
 >
 	<main class="container mx-auto flex flex-col transition-colors">
-		<header class="shadow p-4 flex flex-col gap-2 md:flex-row md:items-center md:justify-between border-b border-neutral-200 dark:border-neutral-700">
-			<div class="flex items-center gap-4">
-				<Link href="/" variant="nav">
-					{' '}
-					&larr; Home{' '}
-				</Link>
-				<h1 class="text-2xl font-bold text-neutral-900 dark:text-white">
-					{pageTitle}
-				</h1>
-			</div>
-			<hr class="my-2 md:hidden border-neutral-200 dark:border-neutral-800" />
-		</header>
-
-		<nav class="bg-white dark:bg-neutral-900 border-b border-neutral-200 dark:border-neutral-800 p-2">
-			<ul class="flex flex-wrap gap-2">
-				{distanceConfig.map(({ slug: configSlug, label: configLabel }) => (
-					<li>
-						<Link
-							href={`/run/${configSlug}`}
-							class={`px-3 py-1 rounded transition-colors font-medium whitespace-nowrap ${
-								configSlug === slug
-									? 'bg-emerald-700 text-white dark:bg-emerald-400 dark:text-neutral-900'
-									: 'text-emerald-700 dark:text-emerald-400 hover:bg-emerald-100 dark:hover:bg-emerald-900/40'
-							}`}
-						>
-							{configLabel}
-						</Link>
-					</li>
-				))}
-			</ul>
-		</nav>
+		<RunHeader title={pageTitle} currentPath={`/run/${slug}`} />
 
 		<section class="flex flex-col gap-3 px-4 pt-6 text-neutral-700 dark:text-neutral-300">
 			<p>{about}</p>
 			<p>{usage}</p>
+			{relatedPage && (
+				<p>
+					{relatedPage.prompt}{' '}
+					<Link href={relatedPage.path} variant="accent">
+						{relatedPage.linkText} &rarr;
+					</Link>
+				</p>
+			)}
 		</section>
 
 		<section class="flex-1">

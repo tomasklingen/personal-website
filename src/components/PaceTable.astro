@@ -4,10 +4,11 @@ import type { PaceEntry } from '~/running/utils'
 interface Props {
 	title: string
 	entries: PaceEntry[]
+	highlightTime?: string
 	class?: string
 }
 
-const { title, entries, class: className } = Astro.props
+const { title, entries, highlightTime, class: className } = Astro.props
 ---
 
 <section class={`my-8 ${className || ''}`}>
@@ -31,9 +32,11 @@ const { title, entries, class: className } = Astro.props
 				{entries.map((entry, idx) => (
 					<tr
 						class={
-							idx % 2 === 0
-								? 'bg-white dark:bg-neutral-900'
-								: 'bg-neutral-50 dark:bg-neutral-800/60'
+							entry.time === highlightTime
+								? 'bg-amber-100 font-bold dark:bg-amber-500/20'
+								: idx % 2 === 0
+									? 'bg-white dark:bg-neutral-900'
+									: 'bg-neutral-50 dark:bg-neutral-800/60'
 						}
 					>
 						<td class="px-4 py-2 border-b border-neutral-200 dark:border-neutral-700">

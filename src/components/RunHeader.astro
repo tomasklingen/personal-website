@@ -1,0 +1,50 @@
+---
+import Link from '~/components/Link.astro'
+import { distanceConfig, subFourMarathon } from '~/running/data'
+
+interface Props {
+	title: string
+	currentPath: string
+}
+
+const { title, currentPath } = Astro.props
+
+const pages = [
+	...distanceConfig.map(({ slug, label }) => ({
+		path: `/run/${slug}`,
+		label,
+	})),
+	{ path: subFourMarathon.path, label: subFourMarathon.label },
+]
+---
+
+<header class="shadow p-4 flex flex-col gap-2 md:flex-row md:items-center md:justify-between border-b border-neutral-200 dark:border-neutral-700">
+	<div class="flex items-center gap-4">
+		<Link href="/" variant="nav">
+			{' '}
+			&larr; Home{' '}
+		</Link>
+		<h1 class="text-2xl font-bold text-neutral-900 dark:text-white">{title}</h1>
+	</div>
+	<hr class="my-2 md:hidden border-neutral-200 dark:border-neutral-800" />
+</header>
+
+<nav class="bg-white dark:bg-neutral-900 border-b border-neutral-200 dark:border-neutral-800 p-2">
+	<ul class="flex flex-wrap gap-2">
+		{pages.map(({ path, label }) => (
+			<li>
+				<Link
+					href={path}
+					class={`px-3 py-1 rounded transition-colors font-medium whitespace-nowrap ${
+						path === currentPath
+							? 'bg-emerald-700 text-white dark:bg-emerald-400 dark:text-neutral-900'
+							: 'text-emerald-700 dark:text-emerald-400 hover:bg-emerald-100 dark:hover:bg-emerald-900/40'
+					}`}
+					aria-current={path === currentPath ? 'page' : undefined}
+				>
+					{label}
+				</Link>
+			</li>
+		))}
+	</ul>
+</nav>

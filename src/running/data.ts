@@ -1,4 +1,22 @@
-import { type FinishRange, hms, KM_PER_MILE } from '~/running/utils'
+import {
+	type FinishRange,
+	hms,
+	KM_PER_MILE,
+	MARATHON_KM,
+} from '~/running/utils'
+
+export interface RelatedPage {
+	path: string
+	prompt: string
+	linkText: string
+}
+
+// The slowest finish time that is still under 4 hours.
+export const subFourMarathon = {
+	path: '/run/marathon/sub-4-hour',
+	label: 'Sub 4 Hour Marathon',
+	finishSeconds: hms(3, 59, 59),
+} as const
 
 export const distanceConfig = [
 	{
@@ -51,9 +69,14 @@ export const distanceConfig = [
 		label: 'Marathon',
 		about:
 			'A marathon is 42.195 kilometers, or 26.2 miles. Many recreational runners finish a marathon in 3:30 to 5:00.',
-		distance: 42.195,
+		distance: MARATHON_KM,
 		exampleSeconds: hms(4, 0),
 		finishRange: { fastest: hms(2, 0), slowest: hms(6, 0), step: 120 },
+		relatedPage: {
+			path: subFourMarathon.path,
+			prompt: 'Aiming to finish under 4 hours?',
+			linkText: 'See the sub 4 hour marathon pace and splits',
+		},
 	},
 ] as const satisfies {
 	slug: string
@@ -62,4 +85,5 @@ export const distanceConfig = [
 	distance: number
 	exampleSeconds: number
 	finishRange: FinishRange
+	relatedPage?: RelatedPage
 }[]

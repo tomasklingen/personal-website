@@ -3,6 +3,7 @@ title: Frontmatter in agent skills and memory
 date: 2026-10-03
 tags: [frontmatter, ai, agents, claude, yaml]
 description: How AI agents use YAML frontmatter to decide which skills, rules, and memories to load into context.
+draft: true
 ---
 
 In [Frontmatter Basics](/thoughts/2025/frontmatter-basics), I described frontmatter as YAML metadata placed at the top of a Markdown file. While it is a staple format for static blogs, AI coding agents rely on it heavily as well.

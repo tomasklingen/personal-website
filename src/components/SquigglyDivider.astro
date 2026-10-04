@@ -16,7 +16,7 @@ const wavePath = `M${start} 10${Array.from({ length: segments }, (_, index) => {
 }).join('')}`
 ---
 
-<div class={`w-full flex justify-center py-6 ${className}`}>
+<div class={`squiggle w-full flex justify-center py-6 ${className}`}>
 	<svg
 		width="300"
 		height="20"
@@ -25,24 +25,32 @@ const wavePath = `M${start} 10${Array.from({ length: segments }, (_, index) => {
 		xmlns="http://www.w3.org/2000/svg"
 		class="text-amber-400 dark:text-amber-500 [clip-path:inset(0_10px)]"
 	>
-		<path
-			class="wave"
-			d={wavePath}
-			stroke="currentColor"
-			stroke-width="2"
-			stroke-linecap="round"
-			fill="none"
-		></path>
+		<g class="amplitude">
+			<path
+				class="wave"
+				d={wavePath}
+				stroke="currentColor"
+				stroke-width="2"
+				stroke-linecap="round"
+				fill="none"
+			></path>
+		</g>
 	</svg>
 </div>
 
 <style define:vars={{ period: `${period}px` }}>
 	.wave {
-		animation: squiggle 1s linear infinite paused;
+		animation: squiggle 4s linear infinite;
 	}
 
-	svg:hover .wave {
-		animation-play-state: running;
+	.amplitude {
+		transform-box: fill-box;
+		transform-origin: center;
+		transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+	}
+
+	.squiggle:hover .amplitude {
+		transform: scaleY(1.6);
 	}
 
 	@keyframes squiggle {
@@ -55,5 +63,45 @@ const wavePath = `M${start} 10${Array.from({ length: segments }, (_, index) => {
 		.wave {
 			animation: none;
 		}
+
+		.amplitude {
+			transition: none;
+		}
+
+		.squiggle:hover .amplitude {
+			transform: none;
+		}
 	}
 </style>
+
+<script>
+	const HOVER_RATE = 5
+	// Fraction of the remaining speed difference closed per frame.
+	const EASING = 0.06
+
+	for (const squiggle of document.querySelectorAll('.squiggle')) {
+		// Reduced motion removes the animation, so there is nothing to ramp.
+		const animation = squiggle.querySelector('.wave')?.getAnimations()[0]
+		if (!animation) continue
+
+		let target = 1
+		let frame = 0
+
+		// Changing playbackRate keeps currentTime, so the wave speeds up without a jump.
+		const step = () => {
+			const rate =
+				animation.playbackRate + (target - animation.playbackRate) * EASING
+			const settled = Math.abs(target - rate) < 0.01
+			animation.playbackRate = settled ? target : rate
+			frame = settled ? 0 : requestAnimationFrame(step)
+		}
+
+		const rampTo = (rate: number) => {
+			target = rate
+			if (!frame) frame = requestAnimationFrame(step)
+		}
+
+		squiggle.addEventListener('pointerenter', () => rampTo(HOVER_RATE))
+		squiggle.addEventListener('pointerleave', () => rampTo(1))
+	}
+</script>

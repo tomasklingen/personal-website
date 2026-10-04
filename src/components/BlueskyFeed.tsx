@@ -34,6 +34,8 @@ const useIsHydrated = () =>
 /**
  * The prerendered HTML cannot know the visitor's time zone. It shows the site
  * time zone, dimmed, and fades to the visitor's local time after hydration.
+ * Browser engines format dates differently from Node, for example WebKit
+ * writes "Oct 2, 2026 at 07:19 PM". So the text can differ during hydration.
  */
 const PostTime: FC<{ date: Date }> = ({ date }) => {
 	const isHydrated = useIsHydrated()
@@ -41,6 +43,7 @@ const PostTime: FC<{ date: Date }> = ({ date }) => {
 	return (
 		<time
 			dateTime={date.toISOString()}
+			suppressHydrationWarning
 			className={`transition-opacity duration-500 motion-reduce:transition-none ${isHydrated ? 'opacity-100' : 'opacity-60'}`}
 		>
 			{formatDateTime(date, isHydrated ? undefined : SITE_TIME_ZONE)}

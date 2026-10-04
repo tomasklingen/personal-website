@@ -3,7 +3,8 @@ import {
 	QueryClientProvider,
 	useQuery,
 } from '@tanstack/react-query'
-import { type FC, useSyncExternalStore } from 'react'
+import { clsx } from 'clsx'
+import { type FC, useState, useSyncExternalStore } from 'react'
 import {
 	BLUESKY_PROFILE_URL,
 	type BlueskyPost,
@@ -11,10 +12,14 @@ import {
 } from '~/lib/bluesky'
 import { formatDateTime, SITE_TIME_ZONE } from '~/lib/date'
 
-const SKELETON_COUNT = 3
+const SKELETON_COUNT = 5
+// Mobile shows this many posts until the visitor expands the list.
+const MOBILE_POST_COUNT = 3
 const STALE_TIME_MS = 5 * 60 * 1000
 
 const queryClient = new QueryClient()
+
+const LIST_ID = 'bluesky-posts'
 
 const subscribeNever = () => () => {}
 
@@ -43,14 +48,28 @@ const PostTime: FC<{ date: Date }> = ({ date }) => {
 	)
 }
 
+// From md upwards the list scrolls inside a fixed height of about three posts.
+// The mask fades the bottom edge to hint at more posts, and the padding keeps
+// the last post clear of it. On mobile the page scrolls instead, because a
+// nested scroll area traps touch swipes.
+const listClass =
+	'flex flex-col gap-4 md:max-h-[41rem] md:overflow-y-auto md:pr-1 md:pb-8 md:[scrollbar-width:thin] md:[scrollbar-color:var(--color-neutral-400)_transparent] md:dark:[scrollbar-color:var(--color-neutral-600)_transparent] md:[mask-image:linear-gradient(to_bottom,black_calc(100%-2rem),transparent)]'
+const hiddenOnMobileClass = 'hidden md:block'
 const cardClass =
 	'bg-neutral-100/90 dark:bg-neutral-800/80 p-4 rounded-md dark:border-l-4 border-sky-500/60'
 const mutedLinkClass =
 	'text-gray-500 dark:text-gray-400 hover:text-sky-600 dark:hover:text-sky-400 transition-colors'
 
-const PostCard: FC<{ post: BlueskyPost }> = ({ post }) => (
+const PostCard: FC<{ post: BlueskyPost; className?: string | undefined }> = ({
+	post,
+	className,
+}) => (
 	<li
-		className={`${cardClass} hover:border-sky-500 transition-colors duration-200`}
+		className={clsx(
+			cardClass,
+			'hover:border-sky-500 transition-colors duration-200',
+			className,
+		)}
 	>
 		{post.isRepost && (
 			<p className="flex items-center gap-1 mb-3 text-xs text-gray-500 dark:text-gray-400">
@@ -109,8 +128,10 @@ const PostCard: FC<{ post: BlueskyPost }> = ({ post }) => (
 	</li>
 )
 
-const PostSkeleton: FC = () => (
-	<li className={`${cardClass} animate-pulse`}>
+const PostSkeleton: FC<{ className?: string | undefined }> = ({
+	className,
+}) => (
+	<li className={clsx(cardClass, 'animate-pulse', className)}>
 		<div className="flex items-center mb-3">
 			<div className="w-10 h-10 rounded-full mr-3 bg-neutral-300 dark:bg-neutral-700" />
 			<div className="flex-1 space-y-2">
@@ -141,6 +162,7 @@ interface BlueskyFeedProps {
 }
 
 const Feed: FC<BlueskyFeedProps> = ({ initialPosts }) => {
+	const [isExpanded, setIsExpanded] = useState(false)
 	const { data, isPending } = useQuery({
 		queryKey: ['bluesky-posts'],
 		queryFn: ({ signal }) => fetchLatestBlueskyPosts(signal),
@@ -152,22 +174,50 @@ const Feed: FC<BlueskyFeedProps> = ({ initialPosts }) => {
 
 	// Keep showing earlier posts when a refresh fails.
 	if (data?.length) {
+		const hiddenCount = data.length - MOBILE_POST_COUNT
+
 		return (
-			<ul className="space-y-4">
-				{data.map((post) => (
-					<PostCard key={post.url} post={post} />
-				))}
-			</ul>
+			<>
+				<ul id={LIST_ID} className={listClass}>
+					{data.map((post, index) => (
+						<PostCard
+							key={post.url}
+							post={post}
+							className={
+								index >= MOBILE_POST_COUNT && !isExpanded
+									? hiddenOnMobileClass
+									: undefined
+							}
+						/>
+					))}
+				</ul>
+				{hiddenCount > 0 && (
+					<button
+						type="button"
+						aria-expanded={isExpanded}
+						aria-controls={LIST_ID}
+						onClick={() => setIsExpanded((expanded) => !expanded)}
+						className="md:hidden mt-4 w-full rounded-md py-2 text-sm font-medium border border-neutral-300 dark:border-neutral-700 bg-neutral-100/90 dark:bg-neutral-800/80 dark:text-gray-200 hover:bg-white dark:hover:bg-neutral-700/80 transition-colors"
+					>
+						{isExpanded ? 'Show fewer posts' : `Show ${hiddenCount} more posts`}
+					</button>
+				)}
+			</>
 		)
 	}
 
 	if (isPending) {
 		return (
-			<ul className="space-y-4" aria-busy="true">
+			<ul className={listClass} aria-busy="true">
 				<li className="sr-only">Loading posts</li>
 				{Array.from({ length: SKELETON_COUNT }, (_, index) => (
-					// biome-ignore lint/suspicious/noArrayIndexKey: static placeholders
-					<PostSkeleton key={index} />
+					<PostSkeleton
+						// biome-ignore lint/suspicious/noArrayIndexKey: static placeholders
+						key={index}
+						className={
+							index >= MOBILE_POST_COUNT ? hiddenOnMobileClass : undefined
+						}
+					/>
 				))}
 			</ul>
 		)

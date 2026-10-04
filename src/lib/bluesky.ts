@@ -10,9 +10,9 @@ import { is } from '@atcute/lexicons'
 export const BLUESKY_HANDLE = 'tomasklingen.nl'
 export const BLUESKY_PROFILE_URL = `https://bsky.app/profile/${BLUESKY_HANDLE}`
 
-const POST_LIMIT = 3
+const POST_LIMIT = 5
 // Fetch more than needed, because quote posts and empty posts are skipped.
-const FETCH_LIMIT = 10
+const FETCH_LIMIT = 20
 const FETCH_TIMEOUT_MS = 10_000
 
 const REPOST_REASON_TYPE = 'app.bsky.feed.defs#reasonRepost'

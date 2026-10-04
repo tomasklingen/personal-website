@@ -7,12 +7,19 @@ import SocialLink from '../components/SocialLink.astro'
 import SquigglyDivider from '../components/SquigglyDivider.astro'
 import ThoughtListItem from '../components/ThoughtListItem.astro'
 import Layout from '../layouts/Layout.astro'
+import { BlueskyFeed } from '~/components/BlueskyFeed'
+import { fetchLatestBlueskyPosts } from '~/lib/bluesky'
 import { socialLinks } from '../lib/social'
 import { generatePersonSchema } from '../lib/structured-data'
 import { getAllThoughtsSummary } from '../lib/thoughts'
 
 const recentThoughts = (await getAllThoughtsSummary()).slice(0, 3)
 const personSchema = generatePersonSchema()
+// Prerender the posts to avoid layout shift. The browser refreshes them later.
+const initialPosts = await fetchLatestBlueskyPosts().catch((error: unknown) => {
+	console.warn('Could not prefetch Bluesky posts:', error)
+	return undefined
+})
 ---
 
 <Layout structuredData={personSchema}>
@@ -97,6 +104,28 @@ const personSchema = generatePersonSchema()
 							</div>
 						</div>
 					)}
+
+					<SquigglyDivider />
+
+					{/* Latest from Bluesky Section */}
+					<div class="mb-8 w-full">
+						<div class="md:bg-blue-400/70 md:dark:bg-neutral-900/50 md:backdrop-blur-xs md:p-8 md:-mx-8 rounded-lg border-neutral-700 md:shadow-xl">
+							<div class="flex items-center justify-between my-1 mb-4">
+								<h2 class="text-xl font-semibold dark:text-gray-200">
+									Latest from Bluesky 🦋
+								</h2>
+								<a
+									href={socialLinks.bluesky.href}
+									target="_blank"
+									rel="noopener noreferrer"
+									class="text-sm hover:underline"
+								>
+									Follow me →
+								</a>
+							</div>
+							<BlueskyFeed client:visible initialPosts={initialPosts} />
+						</div>
+					</div>
 
 					<SquigglyDivider />
 

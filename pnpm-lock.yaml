@@ -14,12 +14,27 @@ importers:
       '@astrojs/sitemap':
         specifier: ^3.7.4
         version: 3.7.4
+      '@atcute/bluesky':
+        specifier: ^4.0.23
+        version: 4.0.23(@atcute/lexicons@2.1.1)
+      '@atcute/bluesky-richtext-segmenter':
+        specifier: ^3.0.2
+        version: 3.0.2
+      '@atcute/client':
+        specifier: ^5.1.2
+        version: 5.1.2(@atcute/lexicons@2.1.1)(@typescript/typescript6@6.0.2)
+      '@atcute/lexicons':
+        specifier: ^2.1.1
+        version: 2.1.1
       '@tailwindcss/postcss':
         specifier: ^4.3.3
         version: 4.3.3
       '@tailwindcss/vite':
         specifier: ^4.3.3
         version: 4.3.3(vite@8.3.0(@types/node@26.6.4)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
+      '@tanstack/react-query':
+        specifier: ^5.104.1
+        version: 5.104.1(react@19.3.0)
       '@types/node':
         specifier: ^26.6.4
         version: 26.6.4
@@ -278,6 +293,38 @@ packages:
 
   '@astrojs/yaml2ts@0.2.4':
     resolution: {integrity: sha512-8oddpOae35pJsXPQXhTkM0ypfKPskVsh2bCxRtbf7e+/Epw2nReakFYpLKjZMEr75CsoF203PMnCocpfz0s69A==}
+
+  '@atcute/atproto@4.0.4':
+    resolution: {integrity: sha512-aEp5wQVPVbZcFJUwoi54tyT+ehRI/xtPe9T0zIvcryHAVXF/zxHtNboM+htbZLOAGsDFsqzgCyxph0Bafw7L8w==}
+    peerDependencies:
+      '@atcute/lexicons': ^2.0.0
+
+  '@atcute/bluesky-richtext-segmenter@3.0.2':
+    resolution: {integrity: sha512-LXsUuElLQ/gQe2g04SzgTeEbSwhcnmswioGdneve8e3vE+FU353EjuEVIsnA/H5rnGeLswLdrua7Io1twezynA==}
+
+  '@atcute/bluesky@4.0.23':
+    resolution: {integrity: sha512-ukn/6AvSwSMCV3Ec9mE8PdH/pdksvhowRmWPSQP//YeW8kW1wc8qkcHRInlaCktj5xRY3sMcfxGK2A3diJBAog==}
+    peerDependencies:
+      '@atcute/lexicons': ^2.0.0
+
+  '@atcute/client@5.1.2':
+    resolution: {integrity: sha512-V3MOJudmmbuiFfrmLR3/ZGA+PKcI4E4ZNEDGKMX/YrvFrHyElD1/gb8NxLesrlIcHefiulqfX9dAl6hOkIt7CA==}
+    peerDependencies:
+      '@atcute/lexicons': ^2.0.0
+
+  '@atcute/identity@2.0.2':
+    resolution: {integrity: sha512-amr/EQceqVtBVmjBK4uUF7nKKYuRttadigpvOcAn4dnO6SNSwSjQi8KDH9LnukEotPsSP4UDsQvNfHWEoUcslw==}
+    peerDependencies:
+      '@atcute/lexicons': ^2.0.0
+
+  '@atcute/lexicons@2.1.1':
+    resolution: {integrity: sha512-kHyqUW8g/Fq9LTctGh0TVBx0AmtecV6VSrRprrSbqKqHe9q8C6y+YPL3EMNq2l93XA1iDHkkvYwLdTcKL/lNbA==}
+
+  '@atcute/uint8array@1.2.0':
+    resolution: {integrity: sha512-KoBGTbV4lS8zXNu91osM3FecrH3NUnxNPsBAkaNtn6uf/p240245qoLn7keFpRM0npX522X8R+XBBb2rvtE7Rg==}
+
+  '@atcute/util-text@1.3.4':
+    resolution: {integrity: sha512-u2UAM7iSM09sQaSG9jtxWFSPgB8boVj50/BoyMvYnhVgGBu+nXIuAcdDUQCsZA44YZgTPPhN/b86JX+jH7SPzQ==}
 
   '@babel/helper-string-parser@7.29.7':
     resolution: {integrity: sha512-Pb5ijPrZ89GDH8223L4UP8i6QApWxs04RbPQJTeWDV0/keR2E36MeKnyr6LYmUUvqRRI+Iv87SuF1W6ErINzYw==}
@@ -794,6 +841,9 @@ packages:
       '@emnapi/core': ^1.7.1 || ^2.0.0-alpha.4
       '@emnapi/runtime': ^1.7.1 || ^2.0.0-alpha.4
 
+  '@oomfware/eval@0.1.0':
+    resolution: {integrity: sha512-EIkukTd3zDQEHUjcfFRDq79Jgm4OEyUrEUvp/SwgjfoH2POaE5cvaswIonFwdt8fSzJF5xtAdgcgIoKD8sPpjg==}
+
   '@oslojs/encoding@1.1.0':
     resolution: {integrity: sha512-70wQhgYmndg4GCPxPPxPGevRKqTIJ2Nh4OkiMWmDAVYsTQ+Ta7Sq+rPevXyXGdzr30/qZBnyOalCszoMxlyldQ==}
 
@@ -1055,6 +1105,9 @@ packages:
   '@shikijs/vscode-textmate@10.0.2':
     resolution: {integrity: sha512-83yeghZ2xxin3Nj8z1NMd/NCuca+gsYXswywDy5bHvwlWL8tpTQmzGeUuHd9FC3E/SBEMvzJRwWEOz5gGes9Qg==}
 
+  '@standard-schema/spec@1.1.0':
+    resolution: {integrity: sha512-l2aFy5jALhniG5HgqrD6jXLi/rUWrKvqN/qJx6yoJsgKhblVd+iqqU4RCXavm/jPityDo5TCvKMnpjKnOriy0w==}
+
   '@tailwindcss/node@4.3.3':
     resolution: {integrity: sha512-/T8IKEsf9VTU6tLjgC7+sv2mOPtQxzE2jMw7u4Tt40Tx+QSZxpzh95/H6cMKoja9XuW7iMdLJYBB0o9G1CaAgg==}
 
@@ -1156,6 +1209,14 @@ packages:
     resolution: {integrity: sha512-yYU8cogLeSh/ms2jh8Fj7jaba/EWa7Ja6GoUqYZaraEuCI5YS6ms6ObZgjjedm+jm6XZjdNRWBpPP6Z86oOxcw==}
     peerDependencies:
       vite: ^5.2.0 || ^6 || ^7 || ^8
+
+  '@tanstack/query-core@5.104.1':
+    resolution: {integrity: sha512-TiRghcrGkUTE+M4JBxvpPSpBhxvIzQairw+cksrHYGr+2uwC77yW1SY9nYxnYRYOppvucf8rEg6b5byoz4rTpw==}
+
+  '@tanstack/react-query@5.104.1':
+    resolution: {integrity: sha512-Zz70EgjahNI7aCz8BZxM3vUGU44ycxEAzMuCUjLeA7SVhhOkg3ZgPjPJPvHjs6Rmky/dtmnu1WzjGHNHmhCoZQ==}
+    peerDependencies:
+      react: ^18 || ^19
 
   '@tybys/wasm-util@0.10.4':
     resolution: {integrity: sha512-W3c4gRigFS0T/Ma4qIYF3GDAc5AQdHb1yL5znJT1Zv1YaD9Kitx656wBjvr19qbiosmZT8lWDM5BEMynUqX65A==}
@@ -1584,6 +1645,9 @@ packages:
   escalade@3.2.0:
     resolution: {integrity: sha512-WUj2qlxaQtO4g6Pq5c29GTcWGDyd8itL8zTlipgECz3JesAiiOKotd8JU6otB3PACgG6xkJUyVhboMS+bje/jA==}
     engines: {node: '>=6'}
+
+  esm-env@1.2.2:
+    resolution: {integrity: sha512-Epxrv+Nr/CaL4ZcFGPJIYLWFom+YeV1DqMLHJoEd9SYRxNbaFruBwfEX/kkHUJf55j2+TUbmDcmuilbP1TmXHA==}
 
   eventemitter3@5.0.4:
     resolution: {integrity: sha512-mlsTRyGaPBjPedk6Bvw+aqbsXDtoAyAzm5MO7JgU+yVRyMQ5O8bD4Kcci7BS85f93veegeCPkL8R4GLClnjLFw==}
@@ -2201,6 +2265,9 @@ packages:
     resolution: {integrity: sha512-/y4/bH9YNU5hi9NIrpOuvGXFcxrj3CMrV+/AYpowAYTpHn8gX/XPFjNy766FPoYY0miQhdW977JFWKGNhBdwyQ==}
     engines: {node: '>=22.19.0'}
 
+  unicode-segmenter@0.17.3:
+    resolution: {integrity: sha512-hKZwqBjJDmqNrq1+LjDxck1qLzJFcLLJM2Xq92ORRHOuau6GSHeELmn+uyk6zNH1CK9mogrUJGP9WJCJUQXMAw==}
+
   unified@11.0.5:
     resolution: {integrity: sha512-xKvGhPWw3k84Qjh8bI3ZeJjqnyadK+GEFtazSfZv/rKeTkTjOJho6mFqh2SM96iIcZokxiOpg78GazTSg8+KHA==}
 
@@ -2286,6 +2353,14 @@ packages:
 
   util-deprecate@1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
+
+  valibot@1.5.0:
+    resolution: {integrity: sha512-nil6AkP2TChWL43Z5uJ6GTxX01CUA+g8LWUM+N/rB9NBbkUMaUsi9PUNzlUPgoKASgmx9f7eGOYpJ04/fSa6FQ==}
+    peerDependencies:
+      typescript: '>=5'
+    peerDependenciesMeta:
+      typescript:
+        optional: true
 
   verkit@0.4.1:
     resolution: {integrity: sha512-mMVzj0TXExtVdlDEq+Mzp0eyOuyznNpFobNM3uAqe3HVm/Ps2c+u17BligMkZjZCA6EiXpoon8iRTer3iu40SQ==}
@@ -2724,6 +2799,45 @@ snapshots:
     dependencies:
       yaml: 2.9.1
 
+  '@atcute/atproto@4.0.4(@atcute/lexicons@2.1.1)':
+    dependencies:
+      '@atcute/lexicons': 2.1.1
+
+  '@atcute/bluesky-richtext-segmenter@3.0.2': {}
+
+  '@atcute/bluesky@4.0.23(@atcute/lexicons@2.1.1)':
+    dependencies:
+      '@atcute/atproto': 4.0.4(@atcute/lexicons@2.1.1)
+      '@atcute/lexicons': 2.1.1
+
+  '@atcute/client@5.1.2(@atcute/lexicons@2.1.1)(@typescript/typescript6@6.0.2)':
+    dependencies:
+      '@atcute/identity': 2.0.2(@atcute/lexicons@2.1.1)(@typescript/typescript6@6.0.2)
+      '@atcute/lexicons': 2.1.1
+    transitivePeerDependencies:
+      - typescript
+
+  '@atcute/identity@2.0.2(@atcute/lexicons@2.1.1)(@typescript/typescript6@6.0.2)':
+    dependencies:
+      '@atcute/lexicons': 2.1.1
+      valibot: 1.5.0(@typescript/typescript6@6.0.2)
+    transitivePeerDependencies:
+      - typescript
+
+  '@atcute/lexicons@2.1.1':
+    dependencies:
+      '@atcute/uint8array': 1.2.0
+      '@atcute/util-text': 1.3.4
+      '@oomfware/eval': 0.1.0
+      '@standard-schema/spec': 1.1.0
+      esm-env: 1.2.2
+
+  '@atcute/uint8array@1.2.0': {}
+
+  '@atcute/util-text@1.3.4':
+    dependencies:
+      unicode-segmenter: 0.17.3
+
   '@babel/helper-string-parser@7.29.7': {}
 
   '@babel/helper-validator-identifier@7.29.7': {}
@@ -3087,6 +3201,8 @@ snapshots:
       '@emnapi/runtime': 1.11.3
       '@tybys/wasm-util': 0.10.4
 
+  '@oomfware/eval@0.1.0': {}
+
   '@oslojs/encoding@1.1.0': {}
 
   '@oxc-project/types@0.150.0': {}
@@ -3237,6 +3353,8 @@ snapshots:
 
   '@shikijs/vscode-textmate@10.0.2': {}
 
+  '@standard-schema/spec@1.1.0': {}
+
   '@tailwindcss/node@4.3.3':
     dependencies:
       '@jridgewell/remapping': 2.3.5
@@ -3317,6 +3435,13 @@ snapshots:
       '@tailwindcss/oxide': 4.3.3
       tailwindcss: 4.3.3
       vite: 8.3.0(@types/node@26.6.4)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1)
+
+  '@tanstack/query-core@5.104.1': {}
+
+  '@tanstack/react-query@5.104.1(react@19.3.0)':
+    dependencies:
+      '@tanstack/query-core': 5.104.1
+      react: 19.3.0
 
   '@tybys/wasm-util@0.10.4':
     dependencies:
@@ -3768,6 +3893,8 @@ snapshots:
       '@esbuild/win32-x64': 0.28.2
 
   escalade@3.2.0: {}
+
+  esm-env@1.2.2: {}
 
   eventemitter3@5.0.4: {}
 
@@ -4381,6 +4508,8 @@ snapshots:
 
   undici@8.10.2: {}
 
+  unicode-segmenter@0.17.3: {}
+
   unified@11.0.5:
     dependencies:
       '@types/unist': 3.0.3
@@ -4432,6 +4561,10 @@ snapshots:
       ufo: 1.6.4
 
   util-deprecate@1.0.2: {}
+
+  valibot@1.5.0(@typescript/typescript6@6.0.2):
+    optionalDependencies:
+      typescript: '@typescript/typescript6@6.0.2'
 
   verkit@0.4.1: {}
 

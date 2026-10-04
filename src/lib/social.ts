@@ -1,8 +1,9 @@
 import { BlueskyIcon, GithubIcon, LinkedinIcon } from '~/components/SocialIcons'
+import { BLUESKY_PROFILE_URL } from '~/lib/bluesky'
 
 export const socialLinks = {
 	bluesky: {
-		href: 'https://bsky.app/profile/tomasklingen.nl',
+		href: BLUESKY_PROFILE_URL,
 		title: 'Bluesky',
 		IconComponent: BlueskyIcon,
 		'aria-label': 'Visit Tomas Klingen on Bluesky',

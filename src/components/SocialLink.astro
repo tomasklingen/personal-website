@@ -8,15 +8,18 @@ interface Props {
 }
 
 const { social, class: className = '', iconClass = '' } = Astro.props
+// Visible slot text is the accessible name. An aria-label would hide it from screen readers.
+const hasLabel = Astro.slots.has('default')
 ---
 
 <a
 	href={social.href}
 	target="_blank"
 	rel="noreferrer"
-	title={social.title}
-	aria-label={social['aria-label']}
+	title={hasLabel ? undefined : social.title}
+	aria-label={hasLabel ? undefined : social['aria-label']}
 	class={className}
 >
-	<social.IconComponent className={iconClass} />
+	<social.IconComponent className={iconClass} aria-hidden="true" />
+	<slot />
 </a>

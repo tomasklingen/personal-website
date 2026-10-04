@@ -1,10 +1,11 @@
 import { BlueskyIcon, GithubIcon, LinkedinIcon } from '~/components/SocialIcons'
-import { BLUESKY_PROFILE_URL } from '~/lib/bluesky'
+import { BLUESKY_HANDLE, BLUESKY_PROFILE_URL } from '~/lib/bluesky'
 
 export const socialLinks = {
 	bluesky: {
 		href: BLUESKY_PROFILE_URL,
 		title: 'Bluesky',
+		handle: `@${BLUESKY_HANDLE}`,
 		IconComponent: BlueskyIcon,
 		'aria-label': 'Visit Tomas Klingen on Bluesky',
 		brandColor: {
@@ -15,6 +16,7 @@ export const socialLinks = {
 	linkedin: {
 		href: 'https://www.linkedin.com/in/tomasklingen',
 		title: 'LinkedIn',
+		handle: 'in/tomasklingen',
 		IconComponent: LinkedinIcon,
 		'aria-label': 'Visit Tomas Klingen on LinkedIn',
 		brandColor: {
@@ -25,6 +27,7 @@ export const socialLinks = {
 	github: {
 		href: 'https://github.com/tomasklingen',
 		title: 'GitHub',
+		handle: '@tomasklingen',
 		IconComponent: GithubIcon,
 		'aria-label': 'Visit Tomas Klingen on GitHub',
 		brandColor: {

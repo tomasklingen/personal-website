@@ -47,20 +47,13 @@ const canonicalUrl = new URL(canonicalPath, Astro.site)
 			></script>
 		)}
 		<script is:inline>
-			// Runs before first paint to prevent a flash. ThemeSwitch.astro applies
-			// the same rule when the visitor changes the preference.
-			// data-theme holds the preference, the dark class holds the result.
-			const preference =
-				localStorage.theme === 'light' || localStorage.theme === 'dark'
-					? localStorage.theme
+			// Runs before first paint to prevent a flash. The dark variant in
+			// global.css reads data-theme.
+			const storedTheme = localStorage.theme
+			document.documentElement.dataset.theme =
+				storedTheme === 'light' || storedTheme === 'dark'
+					? storedTheme
 					: 'system'
-			const isDark =
-				preference === 'dark' ||
-				(preference === 'system' &&
-					window.matchMedia('(prefers-color-scheme: dark)').matches)
-
-			document.documentElement.dataset.theme = preference
-			document.documentElement.classList.toggle('dark', isDark)
 		</script>
 	</head>
 	<body class="min-h-screen bg-neutral-100 dark:bg-neutral-900">

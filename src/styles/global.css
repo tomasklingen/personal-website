@@ -2,8 +2,21 @@
 
 @plugin '@tailwindcss/typography';
 
-/* Dark mode follows the .dark class on <html>, set by the theme switch. */
-@custom-variant dark (&:where(.dark, .dark *));
+/*
+ * data-theme on <html> holds the choice from the theme switch.
+ * For "system", and without JS (no data-theme), the browser setting decides.
+ */
+@custom-variant dark {
+	&:where([data-theme='dark'] *) {
+		@slot;
+	}
+
+	@media (prefers-color-scheme: dark) {
+		&:where(:root:not([data-theme='light']) *) {
+			@slot;
+		}
+	}
+}
 
 @theme {
 	--ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -32,14 +45,16 @@
 	}
 }
 
-.dark .astro-code,
-.dark .astro-code span {
-	color: var(--shiki-dark) !important;
-	background-color: var(--shiki-dark-bg) !important;
-	/* Optional, if you also want font styles */
-	font-style: var(--shiki-dark-font-style) !important;
-	font-weight: var(--shiki-dark-font-weight) !important;
-	text-decoration: var(--shiki-dark-text-decoration) !important;
+.astro-code,
+.astro-code span {
+	@variant dark {
+		color: var(--shiki-dark) !important;
+		background-color: var(--shiki-dark-bg) !important;
+		/* Optional, if you also want font styles */
+		font-style: var(--shiki-dark-font-style) !important;
+		font-weight: var(--shiki-dark-font-weight) !important;
+		text-decoration: var(--shiki-dark-text-decoration) !important;
+	}
 }
 
 @view-transition {

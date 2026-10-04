@@ -1,6 +1,7 @@
 ---
 // Full class names stay literal so Tailwind can find them. The active state
 // reads the data-theme attribute that the inline script in Layout sets on <html>.
+// Without JS that attribute is missing, so the switch stays hidden.
 // Icons inherit the inactive color from the label. A color class on the icon
 // itself would beat the active-state classes in the dark variant.
 const options = [
@@ -25,7 +26,7 @@ const options = [
 ] as const
 ---
 
-<fieldset class="relative inline-flex rounded-full bg-neutral-200 p-1 ring-1 ring-neutral-300 dark:bg-neutral-800 dark:ring-neutral-700">
+<fieldset class="relative hidden in-data-theme:inline-flex rounded-full bg-neutral-200 p-1 ring-1 ring-neutral-300 dark:bg-neutral-800 dark:ring-neutral-700">
 	<legend class="sr-only">Color theme</legend>
 	<span
 		aria-hidden="true"
@@ -78,52 +79,22 @@ const options = [
 </fieldset>
 
 <script>
-	type ThemePreference = 'light' | 'system' | 'dark'
-
 	const storageKey = 'theme'
 	const root = document.documentElement
-	const prefersDark = window.matchMedia('(prefers-color-scheme: dark)')
 	const inputs = document.querySelectorAll<HTMLInputElement>(
 		'input[name="theme"]',
 	)
 
-	const isThemePreference = (value: unknown): value is ThemePreference =>
-		value === 'light' || value === 'system' || value === 'dark'
-
-	const readPreference = (): ThemePreference => {
-		const stored = localStorage.getItem(storageKey)
-		return isThemePreference(stored) ? stored : 'system'
-	}
-
-	const storePreference = (preference: ThemePreference) => {
-		if (preference === 'system') {
-			localStorage.removeItem(storageKey)
-		} else {
-			localStorage.setItem(storageKey, preference)
-		}
-	}
-
-	const applyPreference = (preference: ThemePreference) => {
-		const isDark =
-			preference === 'dark' || (preference === 'system' && prefersDark.matches)
-
-		root.dataset.theme = preference
-		root.classList.toggle('dark', isDark)
-	}
-
-	const initialPreference = readPreference()
 	for (const input of inputs) {
-		input.checked = input.value === initialPreference
+		input.checked = input.value === root.dataset.theme
 
 		input.addEventListener('change', () => {
-			if (!input.checked || !isThemePreference(input.value)) return
-
-			storePreference(input.value)
-			applyPreference(input.value)
+			root.dataset.theme = input.value
+			if (input.value === 'system') {
+				localStorage.removeItem(storageKey)
+			} else {
+				localStorage.setItem(storageKey, input.value)
+			}
 		})
 	}
-
-	prefersDark.addEventListener('change', () => {
-		if (readPreference() === 'system') applyPreference('system')
-	})
 </script>

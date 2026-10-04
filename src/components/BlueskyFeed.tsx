@@ -54,7 +54,10 @@ const PostTime: FC<{ date: Date }> = ({ date }) => {
 // nested scroll area traps touch swipes.
 const listClass =
 	'flex flex-col gap-4 md:max-h-[41rem] md:overflow-y-auto md:pr-1 md:pb-8 md:[scrollbar-width:thin] md:[scrollbar-color:var(--color-neutral-400)_transparent] md:dark:[scrollbar-color:var(--color-neutral-600)_transparent] md:[mask-image:linear-gradient(to_bottom,black_calc(100%-2rem),transparent)]'
-const hiddenOnMobileClass = 'hidden md:block'
+// The inline script in Layout sets data-theme on <html> before first paint, so
+// in-data-theme only applies when JS runs. Without JS the list cannot expand,
+// so every post shows and the expand button stays hidden.
+const hiddenOnMobileClass = 'max-md:in-data-theme:hidden'
 const cardClass =
 	'bg-neutral-100/90 dark:bg-neutral-800/80 p-4 rounded-md dark:border-l-4 border-sky-500/60'
 const mutedLinkClass =
@@ -197,7 +200,7 @@ const Feed: FC<BlueskyFeedProps> = ({ initialPosts }) => {
 						aria-expanded={isExpanded}
 						aria-controls={LIST_ID}
 						onClick={() => setIsExpanded((expanded) => !expanded)}
-						className="md:hidden mt-4 w-full rounded-md py-2 text-sm font-medium border border-neutral-300 dark:border-neutral-700 bg-neutral-100/90 dark:bg-neutral-800/80 dark:text-gray-200 hover:bg-white dark:hover:bg-neutral-700/80 transition-colors"
+						className="hidden max-md:in-data-theme:block mt-4 w-full rounded-md py-2 text-sm font-medium border border-neutral-300 dark:border-neutral-700 bg-neutral-100/90 dark:bg-neutral-800/80 dark:text-gray-200 hover:bg-white dark:hover:bg-neutral-700/80 transition-colors"
 					>
 						{isExpanded ? 'Show fewer posts' : `Show ${hiddenCount} more posts`}
 					</button>

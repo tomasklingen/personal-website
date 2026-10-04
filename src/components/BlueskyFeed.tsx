@@ -10,7 +10,7 @@ import {
 	type BlueskyPost,
 	fetchLatestBlueskyPosts,
 } from '~/lib/bluesky'
-import { formatDateTime, SITE_TIME_ZONE } from '~/lib/date'
+import { formatDateTime, SITE_LOCALE, SITE_TIME_ZONE } from '~/lib/date'
 
 const SKELETON_COUNT = 5
 // Mobile shows this many posts until the visitor expands the list.
@@ -32,8 +32,9 @@ const useIsHydrated = () =>
 	)
 
 /**
- * The prerendered HTML cannot know the visitor's time zone. It shows the site
- * time zone, dimmed, and fades to the visitor's local time after hydration.
+ * The prerendered HTML cannot know the visitor's locale or time zone. It shows
+ * the site locale and time zone, dimmed. After hydration it fades to the
+ * visitor's own format and local time.
  * Browser engines format dates differently from Node, for example WebKit
  * writes "Oct 2, 2026 at 07:19 PM". So the text can differ during hydration.
  */
@@ -46,7 +47,12 @@ const PostTime: FC<{ date: Date }> = ({ date }) => {
 			suppressHydrationWarning
 			className={`transition-opacity duration-500 motion-reduce:transition-none ${isHydrated ? 'opacity-100' : 'opacity-60'}`}
 		>
-			{formatDateTime(date, isHydrated ? undefined : SITE_TIME_ZONE)}
+			{isHydrated
+				? formatDateTime(date)
+				: formatDateTime(date, {
+						locale: SITE_LOCALE,
+						timeZone: SITE_TIME_ZONE,
+					})}
 		</time>
 	)
 }

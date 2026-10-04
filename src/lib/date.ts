@@ -1,4 +1,5 @@
 export const SITE_TIME_ZONE = 'Europe/Amsterdam'
+export const SITE_LOCALE = 'en-US'
 
 export function formatDate(
 	date: Date,
@@ -12,12 +13,23 @@ export function formatDate(
 		timeZone: SITE_TIME_ZONE,
 	}
 
-	return date.toLocaleDateString('en-US', options)
+	return date.toLocaleDateString(SITE_LOCALE, options)
 }
 
-/** Formats in the given IANA time zone, or in the runtime's local zone when omitted. */
-export function formatDateTime(date: Date, timeZone?: string): string {
-	return date.toLocaleString('en-US', {
+interface DateTimeZoneOptions {
+	locale?: string
+	timeZone?: string
+}
+
+/**
+ * Formats in the given locale and IANA time zone. Each option falls back to
+ * the runtime default when omitted.
+ */
+export function formatDateTime(
+	date: Date,
+	{ locale, timeZone }: DateTimeZoneOptions = {},
+): string {
+	return date.toLocaleString(locale, {
 		year: 'numeric',
 		month: 'short',
 		day: 'numeric',

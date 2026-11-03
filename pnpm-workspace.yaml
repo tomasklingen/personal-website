@@ -4,3 +4,5 @@ onlyBuiltDependencies:
   - '@tailwindcss/oxide'
   - esbuild
   - sharp
+overrides:
+  postcss-selector-parser@<6.1.5: ^6.1.5

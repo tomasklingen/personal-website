@@ -18,6 +18,19 @@
 	}
 }
 
+/* Keeps browser UI (scrollbars, form controls) in sync with the theme switch. */
+:root {
+	color-scheme: light dark;
+
+	&[data-theme='light'] {
+		color-scheme: light;
+	}
+
+	&[data-theme='dark'] {
+		color-scheme: dark;
+	}
+}
+
 @theme {
 	--ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
 

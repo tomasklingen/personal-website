@@ -85,16 +85,31 @@ const options = [
 		'input[name="theme"]',
 	)
 
-	for (const input of inputs) {
-		input.checked = input.value === root.dataset.theme
+	const applyTheme = (theme: string) => {
+		root.dataset.theme = theme
+		for (const input of inputs) input.checked = input.value === theme
+	}
 
+	applyTheme(root.dataset.theme ?? 'system')
+
+	for (const input of inputs) {
 		input.addEventListener('change', () => {
-			root.dataset.theme = input.value
-			if (input.value === 'system') {
-				localStorage.removeItem(storageKey)
-			} else {
-				localStorage.setItem(storageKey, input.value)
-			}
+			applyTheme(input.value)
+			// The theme still applies when storage is blocked. It just does not persist.
+			try {
+				if (input.value === 'system') {
+					localStorage.removeItem(storageKey)
+				} else {
+					localStorage.setItem(storageKey, input.value)
+				}
+			} catch {}
 		})
 	}
+
+	// Follows theme changes made in other tabs.
+	window.addEventListener('storage', (event) => {
+		if (event.key !== storageKey && event.key !== null) return
+		const theme = event.newValue
+		applyTheme(theme === 'light' || theme === 'dark' ? theme : 'system')
+	})
 </script>

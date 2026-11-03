@@ -48,8 +48,11 @@ const canonicalUrl = new URL(canonicalPath, Astro.site)
 		)}
 		<script is:inline>
 			// Runs before first paint to prevent a flash. The dark variant in
-			// global.css reads data-theme.
-			const storedTheme = localStorage.theme
+			// global.css reads data-theme. Blocked site data makes localStorage throw.
+			let storedTheme
+			try {
+				storedTheme = localStorage.theme
+			} catch {}
 			document.documentElement.dataset.theme =
 				storedTheme === 'light' || storedTheme === 'dark'
 					? storedTheme

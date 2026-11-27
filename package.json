@@ -14,6 +14,7 @@
     "url": "https://github.com/tomasklingen/tomasklingen.github.io"
   },
   "type": "module",
+  "packageManager": "pnpm@12.15.0",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",

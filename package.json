@@ -1,17 +1,17 @@
 {
-  "name": "tomasklingen.github.io",
+  "name": "personal-website",
   "version": "1.0.0",
   "private": true,
   "description": "Portfolio website Tomas Klingen",
-  "homepage": "https://github.com/tomasklingen/tomasklingen.github.io",
+  "homepage": "https://github.com/tomasklingen/personal-website",
   "bugs": {
-    "url": "https://github.com/tomasklingen/tomasklingen.github.io/issues"
+    "url": "https://github.com/tomasklingen/personal-website/issues"
   },
   "license": "SEE LICENSE IN LICENSE",
   "author": "Tomas Klingen",
   "repository": {
     "type": "git",
-    "url": "https://github.com/tomasklingen/tomasklingen.github.io"
+    "url": "https://github.com/tomasklingen/personal-website"
   },
   "type": "module",
   "packageManager": "pnpm@12.15.0",
